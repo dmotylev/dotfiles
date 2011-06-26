@@ -1,0 +1,18 @@
+syn on
+set wrap
+set ts=4
+set gfn=Droid\ Sans\ Mono:h18
+"set guioptions=cegmtT
+set guioptions=cegmt
+set guioptions+=LlRrb
+set guioptions-=LlRrb
+set gcr=n:blinkon0
+set lines=50
+set columns=90
+set fuoptions=maxvert,maxhorz
+set wildignore+=*.o,*.obj,.git,*.6,*.a
+set background=dark
+" colorscheme solarized
+colorscheme twilight
+set fillchars=vert:⏐
+"highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020

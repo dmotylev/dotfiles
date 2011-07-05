@@ -1,14 +1,11 @@
 #!/bin/bash
-# USAGE:
-# 1. put shell snippet in ~/.bash/rc.d/ 
-# 2. create symlink to it in ~/.bash/rc.enabled
 if [ -d ~/.bash/modules.enabled ]; then
     for f in $(ls ~/.bash/modules.enabled/); do
         . ~/.bash/modules.enabled/$f
     done
 fi
 
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:${PATH}
+export PATH=~/bin:~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:${PATH}
 
 if [ -f `brew --prefix`/etc/bash_completion ]; then
   . `brew --prefix`/etc/bash_completion

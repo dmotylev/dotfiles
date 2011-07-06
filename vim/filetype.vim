@@ -35,4 +35,4 @@ au BufNewFile,BufRead *.txtfmt              setf txtfmt
 
 " Go
 au BufRead,BufNewFile *.go             setf go
-au BufRead,BufNewFile *.go             compiler gobuild
+au BufRead,BufNewFile *.go             compiler gb

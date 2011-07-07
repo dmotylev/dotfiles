@@ -10,5 +10,7 @@ endif
 
 CompilerSet makeprg=gb\ $*
 
-CompilerSet errorformat=%f:%l:%m
+CompilerSet errorformat=%D(in\ %f)\ building\ pkg%*[^:],
+      \%f:%l:%m,
+      \%X%*[0-9]\ broken\ target
 " vim: nowrap sw=2 sts=2 ts=8:

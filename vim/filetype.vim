@@ -36,3 +36,5 @@ au BufNewFile,BufRead *.txtfmt              setf txtfmt
 " Go
 au BufRead,BufNewFile *.go             setf go
 au BufRead,BufNewFile *.go             compiler gb
+au BufRead,BufNewFile *.go             map <D-Bslash> :Fmt<CR>
+au BufRead,BufNewFile *.go             imap <D-Bslash> <C-o>:Fmt<CR>

@@ -5,7 +5,8 @@ set ts=4
 set title
 set shortmess=atI
 set visualbell
-"colorscheme textmate16
+set t_Co=256
+colorscheme gardener
 set fillchars=vert:⏐
 highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020
 " Allow move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.

@@ -15,5 +15,5 @@ set background=dark
 " colorscheme solarized
 colorscheme twilight
 set fillchars=vert:⏐
-"set fullscreen
+set fullscreen
 "highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020

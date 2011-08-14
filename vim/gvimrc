@@ -11,9 +11,14 @@ set lines=50
 set columns=90
 set fuoptions=maxvert,maxhorz
 set wildignore+=*.o,*.obj,.git,*.6,*.a
+" set background=light
 set background=dark
-" colorscheme solarized
-colorscheme twilight
+" colorscheme twilight
+colorscheme moria
 set fillchars=vert:⏐
 set fullscreen
 "highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020
+highlight PmenuSel guifg=White guibg=DarkGreen
+highlight LineNr guifg=#404040
+set numberwidth=7
+set number

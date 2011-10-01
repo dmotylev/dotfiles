@@ -1,3 +1,6 @@
+if has("gui_macvim")
+	macmenu &File.New\ Tab key=<nop>
+endif
 syn on
 set wrap
 set ts=4
@@ -14,11 +17,11 @@ set wildignore+=*.o,*.obj,.git,*.6,*.a
 " set background=light
 set background=dark
 " colorscheme twilight
-colorscheme moria
+colorscheme zenburn
 set fillchars=vert:⏐
 set fullscreen
 "highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020
 highlight PmenuSel guifg=White guibg=DarkGreen
-highlight LineNr guifg=#404040
+highlight LineNr guifg=#9c9c8c guibg=#3b3b3b
 set numberwidth=7
 set number

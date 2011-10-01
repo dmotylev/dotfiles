@@ -28,7 +28,6 @@ _history() {
 	history | egrep $*
 }
 alias ?=_history
-alias h=history
 
 alias ll='ls -ltrhp'
 alias la='ls -trhAp'

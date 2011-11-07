@@ -54,3 +54,8 @@ set grepprg=ack\ --column
 set grepformat=%f:%l:%c:%m
 " enable pathogen
 call pathogen#infect()
+" fix CommandT key mapping
+silent! nmap <unique> <silent> <D-t> :CommandT<CR>
+silent! imap <unique> <silent> <D-t> <C-o>:CommandT<CR>
+silent! nmap <unique> <silent> <D-/> :CommandTBuffer<CR>
+silent! imap <unique> <silent> <D-/> <C-o>:CommandTBuffer<CR>

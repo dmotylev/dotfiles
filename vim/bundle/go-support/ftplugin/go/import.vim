@@ -198,4 +198,26 @@ function! s:Error(s)
     echohl Error | echo a:s | echohl None
 endfunction
 
+function! s:Import(enabled,...)
+    let word = join(a:000, ' ')
+    if !len(word)
+        let word = expand('<cword>')
+    endif
+    let word = substitute(word, '[^a-zA-Z0-9\/]', '', 'g')
+    if !len(word)
+        return
+    endif
+    if a:enabled
+        call s:SwitchImport(1,'',word)
+    else
+        call s:SwitchImport(0,'',word)
+    endif
+endfunction
+
+command! -buffer -nargs=* -range -complete=customlist,go#complete#Package ImportC call s:Import(1,<q-args>)
+command! -buffer -nargs=* -range -complete=customlist,go#complete#Package DropC call s:Import(0,<q-args>)
+map <D-i> :ImportC<CR>
+imap <D-i> <C-o>:ImportC<CR>
+map <D-I> :DropC<CR>
+imap <D-I> <C-o>:DropC<CR>
 " vim:ts=4:sw=4:et

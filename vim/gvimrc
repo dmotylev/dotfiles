@@ -4,13 +4,13 @@ endif
 syn on
 set wrap
 set ts=4
-set gfn=Droid\ Sans\ Mono:h18
+set gfn=Droid\ Sans\ Mono:h21
 "set guioptions=cegmtT
 set guioptions=cegmt
 set guioptions+=LlRrb
 set guioptions-=LlRrb
 set gcr=n:blinkon0
-set lines=50
+set lines=40
 set columns=90
 set fuoptions=maxvert,maxhorz
 set wildignore+=*.o,*.obj,.git,*.6,*.a

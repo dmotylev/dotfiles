@@ -4,7 +4,7 @@ endif
 syn on
 set wrap
 set ts=4
-set gfn=Droid\ Sans\ Mono:h21
+set gfn=Droid\ Sans\ Mono:h14
 "set guioptions=cegmtT
 set guioptions=cegmt
 set guioptions+=LlRrb
@@ -23,5 +23,6 @@ set fullscreen
 "highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020
 highlight PmenuSel guifg=White guibg=DarkGreen
 highlight LineNr guifg=#9c9c8c guibg=#3b3b3b
+highlight Visual term=reverse cterm=reverse guibg=#009000
 set numberwidth=7
 set number

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>KeepAlive</key>
+	<false/>
+	<key>Label</key>
+	<string>com.google.godoc</string>
+	<key>ProgramArguments</key>
+	<array>
+		<string>/usr/local/share/go/bin/godoc</string>
+		<string>-http</string>
+		<string>:6060</string>
+	</array>
+	<key>RunAtLoad</key>
+	<false/>
+	<key>UserName</key>
+	<string>dmotylev</string>
+	<key>WorkingDirectory</key>
+	<string>/usr/local/var</string>
+	<key>StandardErrorPath</key>
+	<string>/usr/local/var/log/godoc.log</string>
+	<key>StandardOutPath</key>
+	<string>/usr/local/var/log/godoc.log</string>
+</dict>
+</plist>

@@ -4,7 +4,7 @@ endif
 syn on
 set wrap
 set ts=4
-set gfn=Droid\ Sans\ Mono:h14
+set gfn=Droid\ Sans\ Mono:h18
 "set guioptions=cegmtT
 set guioptions=cegmt
 set guioptions+=LlRrb
@@ -26,3 +26,4 @@ highlight LineNr guifg=#9c9c8c guibg=#3b3b3b
 highlight Visual term=reverse cterm=reverse guibg=#009000
 set numberwidth=7
 set number
+filetype plugin on

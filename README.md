@@ -1,6 +1,6 @@
 # That's my $HOME, folks...
 
-Next command is the *key* for easy entering.
+Next command is the *key* for easy entering:
 
 	curl -s https://bitbucket.org/dmotylev/dotfiles/raw/master/install.sh | bash
 

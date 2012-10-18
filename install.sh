@@ -1,14 +1,18 @@
 #!/bin/sh
-DOTFILES=.dotfiles
-cd $HOME
 
-ln -s $DOTFILES/gitconfig .gitconfig
+echo "Not implemented yet..."
+exit 1
 
-ln -s $DOTFILES/vim .vim
-ln -s $DOTFILES/vim/vimrc .vimrc
-ln -s $DOTFILES/vim/gvimrc .gvimrc
+#DOTFILES=.dotfiles
+#cd $HOME
 
-ln -s $DOTFILES/bash .bash
-ln -s $DOTFILES/bash/profile .bash_profile
+#ln -s $DOTFILES/gitconfig .gitconfig
 
-cd $DOTFILES
+#ln -s $DOTFILES/vim .vim
+#ln -s $DOTFILES/vim/vimrc .vimrc
+#ln -s $DOTFILES/vim/gvimrc .gvimrc
+
+#ln -s $DOTFILES/bash .bash
+#ln -s $DOTFILES/bash/profile .bash_profile
+
+#cd $DOTFILES

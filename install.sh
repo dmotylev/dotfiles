@@ -13,8 +13,6 @@ DOTFILES=${HOME}/.dotfiles2
 unpack_dotfiles ${DOTFILES}
 
 . $DOTFILES/bash/install_dotfiles.sh ${DOTFILES}
-ln -s $DOTFILES/bash .bash
-ln -s $DOTFILES/bash/profile .bash_profile
 
 
 #####

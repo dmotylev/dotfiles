@@ -1,41 +1,8 @@
 #!/bin/bash
-if [ -d ~/.bash/modules.enabled ]; then
-    for f in $(ls ~/.bash/modules.enabled/); do
-        . ~/.bash/modules.enabled/$f
+if [ -d ~/.bash/bash.d ]; then
+    for f in $(ls ~/.bash/bash.d/); do
+        . ~/.bash/bash.d/$f
     done
 fi
 
 export PATH=~/bin:~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:${PATH}
-
-if [ -f `brew --prefix`/etc/bash_completion ]; then
-  . `brew --prefix`/etc/bash_completion
-fi
-
-export PS1='\[\e[0;33m\][\[\e[1;30m\]\w\[\e[0;33m\]]\n\[\e[36m\]\$\[\e[0m\] '
-export PS2='> '
-export PS4='+ '
-
-export HISTCONTROL=erasedups:ignoreboth
-export HISTSIZE=30000
-export HISTIGNORE="rm ~/.bash_history:ls:l:la:ll:h:ls -l:ls -la:history:cd .:cd:cd ..:?:..:g:-:h"
-export HISTTIMEFORMAT="%d.%m %H:%M  "
-shopt -s histappend
-_history() {
-	if [ $# -eq 0 ]; then
-		history
-		return
-	fi
-	history | egrep $*
-}
-alias ?=_history
-
-alias ll='ls -ltrhp'
-alias la='ls -trhAp'
-alias l='ls -p'
-export CLICOLOR=true
-export LSCOLORS=hxAxdxdxcxDeHeBxbxHcHb
-export GREP_OPTIONS="--color=auto"
-
-alias ..='cd ..'
-alias -- -="cd -"
-alias g='egrep'

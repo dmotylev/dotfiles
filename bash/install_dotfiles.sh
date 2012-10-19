@@ -1,4 +1,5 @@
-#!/bin/bash
 [ $# -ne 1] && return
-ln -s $1/bash .bash1
-ln -s $1/bash/profile .bash_profile1
+mv $HOME/.bash $HOME/.bash.backup
+mv $HOME/.bash_profile $HOME/.bash_profile.backup
+ln -s $1/bash $HOME/.bash
+ln -s $1/bash/profile $HOME/.bash_profile

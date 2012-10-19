@@ -12,3 +12,10 @@ _history() {
 	history | egrep $*
 }
 alias ?=_history
+
+alias no_history='history -d $((HISTCMD-1))'
+alias no_history_last='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
+
+no_history_range() {
+	for n in $(seq $1 $2); do history -d $n; done
+}

@@ -5,10 +5,10 @@
 	<key>KeepAlive</key>
 	<false/>
 	<key>Label</key>
-	<string>com.google.godoc</string>
+	<string>local.godoc</string>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/share/go/bin/godoc</string>
+		<string>/usr/local/go/bin/godoc</string>
 		<string>-http</string>
 		<string>:6060</string>
 	</array>

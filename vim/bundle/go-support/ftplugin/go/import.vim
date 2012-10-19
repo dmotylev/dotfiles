@@ -12,7 +12,7 @@
 "       in the current Go buffer, using proper style and ordering.
 "       If {path} is already being imported, an error will be
 "       displayed and the buffer will be untouched.
-" 
+"
 "   :ImportAs {localname} {path}
 "
 "       Same as Import, but uses a custom local name for the package.
@@ -58,6 +58,12 @@ function! s:SwitchImport(enabled, localname, path)
         return
     endif
 
+    " Extract any site prefix (e.g. github.com/).
+    " If other imports with the same prefix are grouped separately,
+    " we will add this new import with them.
+    " Only up to and including the first slash is used.
+    let siteprefix = matchstr(path, "^[^/]*/")
+
     let qpath = '"' . path . '"'
     if a:localname != ''
         let qlocalpath = a:localname . ' ' . qpath
@@ -83,16 +89,31 @@ function! s:SwitchImport(enabled, localname, path)
             let appendstr = qlocalpath
             let indentstr = 1
             let appendline = line
+            let firstblank = -1
+            let lastprefix = ""
             while line <= line("$")
                 let line = line + 1
                 let linestr = getline(line)
                 let m = matchlist(getline(line), '^\()\|\(\s\+\)\(\S*\s*\)"\(.\+\)"\)')
                 if empty(m)
+                    if siteprefix == ""
+                        " must be in the first group
+                        break
+                    endif
+                    " record this position, but keep looking
+                    if firstblank < 0
+                        let firstblank = line
+                    endif
                     continue
                 endif
                 if m[1] == ')'
+                    " if there's no match, add it to the first group
+                    if appendline < 0 && firstblank >= 0
+                        let appendline = firstblank
+                    endif
                     break
                 endif
+                let lastprefix = matchstr(m[4], "^[^/]*/")
                 if a:localname != '' && m[3] != ''
                     let qlocalpath = printf('%-' . (len(m[3])-1) . 's %s', a:localname, qpath)
                 endif
@@ -103,7 +124,16 @@ function! s:SwitchImport(enabled, localname, path)
                     let deleteline = line
                     break
                 elseif m[4] < path
-                    let appendline = line
+                    " don't set candidate position if we have a site prefix,
+                    " we've passed a blank line, and this doesn't share the same
+                    " site prefix.
+                    if siteprefix == "" || firstblank < 0 || match(m[4], "^" . siteprefix) >= 0
+                        let appendline = line
+                    endif
+                elseif siteprefix != "" && match(m[4], "^" . siteprefix) >= 0
+                    " first entry of site group
+                    let appendline = line - 1
+                    break
                 endif
             endwhile
             break
@@ -198,26 +228,4 @@ function! s:Error(s)
     echohl Error | echo a:s | echohl None
 endfunction
 
-function! s:Import(enabled,...)
-    let word = join(a:000, ' ')
-    if !len(word)
-        let word = expand('<cword>')
-    endif
-    let word = substitute(word, '[^a-zA-Z0-9\/]', '', 'g')
-    if !len(word)
-        return
-    endif
-    if a:enabled
-        call s:SwitchImport(1,'',word)
-    else
-        call s:SwitchImport(0,'',word)
-    endif
-endfunction
-
-command! -buffer -nargs=* -range -complete=customlist,go#complete#Package ImportC call s:Import(1,<q-args>)
-command! -buffer -nargs=* -range -complete=customlist,go#complete#Package DropC call s:Import(0,<q-args>)
-map <D-i> :ImportC<CR>
-imap <D-i> <C-o>:ImportC<CR>
-map <D-I> :DropC<CR>
-imap <D-I> <C-o>:DropC<CR>
 " vim:ts=4:sw=4:et

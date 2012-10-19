@@ -9,29 +9,14 @@ unpack_dotfiles() {
 }
 
 DOTFILES=${HOME}/.dotfiles2
-
+#
+# try to backup current setup
+#
 mv ${DOTFILES} ${DOTFILES}.backup
+
 unpack_dotfiles ${DOTFILES}
 
-. $DOTFILES/bash/install_dotfiles.sh ${DOTFILES}
-
-
-#####
-# cleaning up...
-#
-#cd -
-#rm -fr $TMPDIR
-
-#DOTFILES=.dotfiles
-#cd $HOME
-
-#ln -s $DOTFILES/gitconfig .gitconfig
-
-#ln -s $DOTFILES/vim .vim
-#ln -s $DOTFILES/vim/vimrc .vimrc
-#ln -s $DOTFILES/vim/gvimrc .gvimrc
-
-#ln -s $DOTFILES/bash .bash
-#ln -s $DOTFILES/bash/profile .bash_profile
-
-#cd $DOTFILES
+MODULES="bash git vim LaunchAgents"
+for m in ${MODULES}; do
+	. $DOTFILES/$m/install_dotfiles.sh ${DOTFILES}
+done

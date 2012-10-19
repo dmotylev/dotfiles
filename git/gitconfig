@@ -1,0 +1,7 @@
+[user]
+    name = Dmitry Motylev
+    email = dmotylev@gmail.com
+[color]
+    ui = auto
+[mergetool]
+    keepBackup = true

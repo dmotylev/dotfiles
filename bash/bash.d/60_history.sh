@@ -18,8 +18,6 @@ alias no_history_last='history -d $((HISTCMD-2)) && history -d $((HISTCMD-1))'
 
 no_history_range() {
 	for i in $(seq $1 $2); do
-		[ $i -ne $1 ] && $i = $(($i - 1))
-		echo $i
-		history -d $i
+		history -d $1
 	done
 }

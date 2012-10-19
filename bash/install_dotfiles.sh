@@ -1,6 +1,6 @@
 [ $# -ne 1 ] && return
 
-echo Install bash profile...
+log_dotfiles "${CL_ERROR}Install bash profile..."
 
 backup_dotfiles $HOME/.bash
 backup_dotfiles $HOME/.bash_profile

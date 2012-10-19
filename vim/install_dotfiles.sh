@@ -1,6 +1,6 @@
 [ $# -ne 1 ] && return
 
-echo Install Vim configuration...
+log_dotfiles "${CL_ERROR}Install Vim configuration..."
 
 backup_dotfiles $HOME/.vim
 backup_dotfiles $HOME/.vimrc

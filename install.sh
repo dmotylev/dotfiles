@@ -1,7 +1,27 @@
 #!/bin/sh
+unpack_dotfiles() {
+	if which git &> /dev/null; then
+		git clone https://bitbucket.org/dmotylev/dotfiles.git $1	
+	else
+		mkdir -p $1
+		curl -s https://bitbucket.org/dmotylev/dotfiles/get/master.tar.gz | tar zxo --strip-components 1 -C $1 -
+	fi
+}
 
-echo "Not implemented yet..."
-exit 1
+DOTFILES=${HOME}/.dotfiles2
+
+unpack_dotfiles ${DOTFILES}
+
+. $DOTFILES/bash/install_dotfiles.sh ${DOTFILES}
+ln -s $DOTFILES/bash .bash
+ln -s $DOTFILES/bash/profile .bash_profile
+
+
+#####
+# cleaning up...
+#
+#cd -
+#rm -fr $TMPDIR
 
 #DOTFILES=.dotfiles
 #cd $HOME

@@ -1,1 +1,0 @@
-../modules.available/postgresql.sh

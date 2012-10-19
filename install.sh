@@ -8,7 +8,7 @@ unpack_dotfiles() {
 	fi
 }
 
-DOTFILES=${HOME}/.dotfiles2
+DOTFILES=${HOME}/.dotfiles
 #
 # try to backup current setup
 #

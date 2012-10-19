@@ -1,10 +1,19 @@
 #!/bin/sh
+
+CL_ERROR=$(tput setaf 1)
+CL_INFO=$(tput setaf 4)
+CL_RESET=$(tput sgr0)
+
 backup_dotfiles() {
 	if [ -d $1.backup ]; then
-		echo "Error: $1.backup exist"
+		log_dotfiles "${CL_ERROR}Error: $1.backup exist"
 		exit 1
 	fi
 	test -e $1 && mv $1 $1.backup
+}
+
+log_dotfiles() {
+	echo -e "$*${CL_RESET}"
 }
 
 unpack_dotfiles() {

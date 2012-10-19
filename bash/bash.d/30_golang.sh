@@ -1,2 +1,2 @@
 export GOROOT=/usr/local/share/go
-PATH=$PATH:$GOROOT/bin
+PATH=${PATH}:${GOROOT}/bin

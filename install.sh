@@ -10,6 +10,7 @@ unpack_dotfiles() {
 
 DOTFILES=${HOME}/.dotfiles2
 
+mv ${DOTFILES} ${DOTFILES}.backup
 unpack_dotfiles ${DOTFILES}
 
 . $DOTFILES/bash/install_dotfiles.sh ${DOTFILES}

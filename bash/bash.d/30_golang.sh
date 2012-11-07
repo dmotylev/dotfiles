@@ -32,6 +32,5 @@ gopath() {
 }
 
 set_gopath
-export GOROOT=/usr/local/share/go
+export GOROOT=/usr/local/go
 PATH=${PATH}:${GOROOT}/bin
-

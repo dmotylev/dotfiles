@@ -16,3 +16,5 @@
 	tool = diffmerge
 [difftool "diffmerge"]
 	cmd = diffmerge $LOCAL $REMOTE
+[difftool]
+	prompt = false

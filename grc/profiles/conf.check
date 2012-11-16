@@ -1,11 +1,11 @@
 # Testsuite: com.clickozavr.ads.dao.ConfigurationJdbcDaoTest
 regexp=(Testsuite:)\s(.*)
-colours=unchanged,"\033[38;5;97m","\033[38;5;100m"
+colours=unchanged,"\033[38;5;97m","\033[38;5;248m"
 count=stop
 =======
 # Tests run: 5, Failures: 0, Errors: 5, Time elapsed: 5,149 sec
 regexp=(Tests run):\s([0-9]+),\s(Failures):\s([0-9]+),\s(Errors):\s([0-9]+),\s(Time elapsed):\s([0-9,]+\ssec)
-colours=unchanged,"\033[38;5;97m","\033[38;5;100m","\033[38;5;97m","\033[38;5;100m","\033[38;5;97m","\033[38;5;100m","\033[38;5;97m","\033[38;5;100m"
+colours=unchanged,"\033[38;5;97m","\033[38;5;248m","\033[38;5;97m","\033[38;5;248m","\033[38;5;97m","\033[38;5;248m","\033[38;5;97m","\033[38;5;248m"
 count=stop
 =======
 # ------------- Standard Output ---------------
@@ -20,7 +20,7 @@ count=unblock
 =======
 # Testcase: testGetBannersFromConfig took 5,123 sec
 regexp=(Testcase:)\s(.*)\s(took)\s([0-9,]+\ssec)
-colours=unchanged,"\033[38;5;97m","\033[38;5;100m","\033[38;5;97m","\033[38;5;100m"
+colours=unchanged,"\033[38;5;97m","\033[38;5;248m","\033[38;5;237m","\033[38;5;238m"
 count=stop
 =======
 #        Caused an ERROR
@@ -39,8 +39,20 @@ colours=default,"\033[38;5;237m","\033[38;5;243m"
 =======
 # (ConnectionHandle.java:820)
 regexp=\w(\()(.*)(:)([0-9]+)(\))
-colours=unchanged,"\033[38;5;237m","\033[38;5;101m","\033[38;5;237m","\033[38;5;107m","\033[38;5;237m"
+colours=unchanged,"\033[38;5;237m","\033[38;5;239m","\033[38;5;237m","\033[38;5;240m","\033[38;5;237m"
 =======
 # (Unknown Source)
 regexp=[\w>](\(Unknown Source\))
 colours=unchanged,"\033[38;5;237m"
+=======
+# Expected: is not null
+regexp=Expected:
+colours="\033[38;5;28m"
+=======
+#     got: null
+regexp=got:
+colours="\033[38;5;196m"
+=======
+# FAILED
+regexp=\sFAILED$
+colours="\033[38;5;196m"

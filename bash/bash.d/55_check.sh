@@ -11,7 +11,7 @@ check() {
 
 _check ()
 {
-	COMPREPLY=( $(compgen -W "$(ls target/reports/junit | sed -e 's#TEST-\(.*\)\.txt#\1#')" -- ${COMP_WORDS[COMP_CWORD]}) )
+	COMPREPLY=( $(compgen -W "$(ls target/reports/junit 2> /dev/null | sed -e 's#TEST-\(.*\)\.txt#\1#')" -- ${COMP_WORDS[COMP_CWORD]}) )
 }
 
 complete -F _check check

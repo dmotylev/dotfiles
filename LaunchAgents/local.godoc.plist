@@ -6,13 +6,16 @@
 	<false/>
 	<key>Label</key>
 	<string>local.godoc</string>
+	<key>EnvironmentVariables</key>
+	<dict>
+    	<key>GOPATH</key>
+		<string>/Users/dmotylev/Workshop/go/mine:/Users/dmotylev/Workshop/go/theirs</string>
+	</dict>
 	<key>ProgramArguments</key>
 	<array>
 		<string>/usr/local/go/bin/godoc</string>
 		<string>-http</string>
 		<string>:6060</string>
-		<string>-path</string>
-		<string>/Users/dmotylev/Workshop/go/library</string>
 	</array>
 	<key>RunAtLoad</key>
 	<false/>

@@ -1,20 +1,26 @@
 [user]
-    name = Dmitry Motylev
-    email = dmotylev@gmail.com
+	name = Dmitry Motylev
+	email = dmotylev@gmail.com
 [color]
     ui = auto
 [mergetool]
 	keepBackup = false
+	prompt = false
 [push]
 	default = simple
 [merge]
-	tool = diffmerge
+	tool = Kaleidoscope
 [mergetool "diffmerge"]
 	cmd = diffmerge --merge --result=$MERGED $LOCAL $BASE $REMOTE
 	trustExitCode = true
 [diff]
-	tool = diffmerge
+	tool = Kaleidoscope
 [difftool "diffmerge"]
 	cmd = diffmerge $LOCAL $REMOTE
 [difftool]
 	prompt = false
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true

@@ -5,4 +5,6 @@ if [ -d ~/.bash/bash.d ]; then
     done
 fi
 
-export PATH=~/bin:~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:${PATH}
+export PATH=~/bin:~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:${PATH}:/usr/local/share/npm/bin
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

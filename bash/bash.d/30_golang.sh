@@ -1,5 +1,6 @@
-export GOROOT_MINE=${HOME}/Workshop/go/mine
-export GOROOT_THEIRS=${HOME}/Workshop/go/theirs
-export GOPATH=${GOROOT_MINE}:${GOROOT_THEIRS}
-export GOROOT=/usr/local/go
-PATH=${PATH}:${GOROOT}/bin:${GOROOT_MINE}/bin:${GOROOT_THEIRS}/bin
+GOROOT=/usr/local/go
+GOPATH_MINE=${HOME}/Workshop/go/mine
+GOPATH_THEIRS=${HOME}/Workshop/go/theirs
+export GOPATH=${GOPATH_MINE}:${GOPATH_THEIRS}
+PATH=${PATH}:${GOROOT}/bin:${GOPATH_MINE}/bin:${GOPATH_THEIRS}/bin
+unset GOROOT GOPATH_MINE GOPATH_THEIRS

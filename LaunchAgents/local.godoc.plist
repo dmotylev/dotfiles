@@ -9,7 +9,7 @@
 	<key>EnvironmentVariables</key>
 	<dict>
     	<key>GOPATH</key>
-		<string>/Users/dmotylev/Workshop/go/mine:/Users/dmotylev/Workshop/go/theirs</string>
+		<string>/Users/dmotylev/Workshop/go</string>
 	</dict>
 	<key>ProgramArguments</key>
 	<array>

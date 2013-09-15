@@ -1,11 +1,7 @@
-if has("gui_macvim")
-	macmenu &File.New\ Tab key=<nop>
-endif
 syn on
 set wrap
 set ts=4
-set gfn=Droid\ Sans\ Mono:h18
-"set guioptions=cegmtT
+set gfn=Essential\ PragmataPro\ for\ Powerline:h14
 set guioptions=cegmt
 set guioptions+=LlRrb
 set guioptions-=LlRrb
@@ -16,14 +12,8 @@ set fuoptions=maxvert,maxhorz
 set wildignore+=*.o,*.obj,.git,*.6,*.a
 " set background=light
 set background=dark
-" colorscheme twilight
-colorscheme zenburn
 set fillchars=vert:⏐
 set fullscreen
-"highlight VertSplit term=reverse guifg=#5f5f60 guibg=#202020
-highlight PmenuSel guifg=White guibg=DarkGreen
-highlight LineNr guifg=#9c9c8c guibg=#3b3b3b
-highlight Visual term=reverse cterm=reverse guibg=#009000
 set numberwidth=7
-set number
-filetype plugin on
+colorscheme base16-eighties
+set background=dark

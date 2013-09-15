@@ -35,6 +35,9 @@ au BufNewFile,BufRead *.txtfmt              setf txtfmt
 
 " Go
 au BufRead,BufNewFile *.go             setf go
-au BufRead,BufNewFile *.go             compiler gb
-au BufRead,BufNewFile *.go             map <D-'> :Fmt<CR>
-au BufRead,BufNewFile *.go             imap <D-'> <C-o>:Fmt<CR>
+au FileType go autocmd BufWritePre <buffer> Fmt
+au Filetype go set makeprg=go\ build
+"au BufRead,BufNewFile *.go             setf go
+"au BufRead,BufNewFile *.go             compiler gb
+"au BufRead,BufNewFile *.go             map <D-'> :Fmt<CR>
+"au BufRead,BufNewFile *.go             imap <D-'> <C-o>:Fmt<CR>

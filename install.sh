@@ -25,11 +25,16 @@ unpack_dotfiles() {
 		else
 			backup_dotfiles $1
 			git clone https://bitbucket.org/dmotylev/dotfiles.git $1	
+			cd $1
+			git submodule init
+			git submodule update
+			cd -
 		fi
 	else
 		backup_dotfiles $1
 		mkdir -p $1
 		curl -s https://bitbucket.org/dmotylev/dotfiles/get/master.tar.gz | tar zxo --strip-components 1 -C $1 -
+		echo "CAVEAT: submodules are not initialized"
 	fi
 }
 

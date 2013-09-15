@@ -45,6 +45,9 @@ set wildmode=list:longest
 " These two options, when set together, will make /-style searches case-sensitive only if there is a capital letter in the search expression. *-style searches continue to be consistently case-sensitive.
 set ignorecase
 set smartcase
+nnoremap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
+nnoremap <Leader>s :%s/\C\<<C-R>=expand('<cword>')<CR>\>//g<Left><Left>
 " Setting the option below will start the scrolling three lines before the border, keeping more context around where you’re working.
 set scrolloff=3
 " Swap files and backups are annoying but can save you a lot of trouble. Rather than spread them all around your filesystem, isolate them to a single directory

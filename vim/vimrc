@@ -75,6 +75,7 @@ Bundle 'mhinz/vim-signify'
 Bundle 'jnwhiteh/vim-golang'
 Bundle 'majutsushi/tagbar'
 Bundle 'mhinz/vim-startify'
+Bundle 'cakebaker/scss-syntax.vim'
 
 " point grep command to ack
 set grepprg=ack\ --column

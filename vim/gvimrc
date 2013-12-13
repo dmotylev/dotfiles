@@ -17,3 +17,4 @@ set fullscreen
 set numberwidth=7
 colorscheme base16-eighties
 set background=dark
+highlight VertSplit term=reverse guifg=#3f2f3f guibg=#2d2d2d

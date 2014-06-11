@@ -1,12 +1,29 @@
 set nocompatible               " be iMproved
 filetype off                   " required!
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 " let Vundle manage Vundle
 " required! 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
+" load bundles from ~/.vim/bundle
+Plugin 'fatih/vim-go'
+Plugin 'rizzatti/dash.vim'
+Plugin 'ervandew/supertab'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'mattn/emmet-vim'
+Plugin 'chriskempson/base16-vim'
+Plugin 'bling/vim-airline'
+Plugin 'tpope/vim-fugitive'
+Plugin 'mhinz/vim-signify'
+Plugin 'majutsushi/tagbar'
+Plugin 'mhinz/vim-startify'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'scrooloose/syntastic'
+" All of your Plugins must be added before the following line
+call vundle#end()
 
 " generic options
 syn on
@@ -58,28 +75,9 @@ set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,longest
 set pumheight=15
 
-let g:gofmt_command = "goimports"
 
-" load bundles from ~/.vim/bundle
-Bundle 'rizzatti/funcoo.vim'
-Bundle 'rizzatti/dash.vim'
-Bundle 'Blackrush/vim-gocode'
-Bundle 'jnwhiteh/vim-golang'
-Bundle 'ervandew/supertab'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/nerdtree'
-Bundle 'mattn/emmet-vim'
-Bundle 'chriskempson/base16-vim'
-Bundle 'bling/vim-airline'
-Bundle 'tpope/vim-fugitive'
-Bundle 'mhinz/vim-signify'
-Bundle 'majutsushi/tagbar'
-Bundle 'mhinz/vim-startify'
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'scrooloose/syntastic'
-
-" point grep command to ack
-set grepprg=ack\ --column
+" point grep command to ag
+set grepprg=ag\ --nogroup\ --nocolor
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
 
@@ -119,7 +117,7 @@ let g:ctrlp_user_command = {
 	\ 'types': {
 		\ 1:['.git', 'cd %s && git ls-files']
 	\ },
-	\ 'fallback': '/usr/bin/find %s -depth 3 -type f -exec file --mime-type {} \; | grep -Ev "^\./\." | grep -E "\Wtext/.$" | cut -d: -f1'
+	\ 'fallback': 'ag %s -l --nocolor -g ""'
 	\}
 
 " set up NERDtree
@@ -131,6 +129,7 @@ let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#branch#empty_message = ''
 let g:airline#extensions#syntastic#enabled = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme='kolor'
 set noshowmode
 
 let g:signify_sign_overwrite = 0
@@ -139,10 +138,13 @@ let g:syntastic_error_symbol='Er'
 let g:syntastic_style_error_symbol='Es'
 let g:syntastic_warning_symbol='Wr'
 let g:syntastic_style_warning_symbol='Ws'
+" configure syntastic syntax checking to check on open as well as save
+let g:syntastic_check_on_open=1
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 
 map <silent> <C-h> <Plug>DashSearch
 
-colorscheme base16-eighties
+colorscheme base16-tomorrow
 set background=dark
 
 map <silent> <C-\> :TagbarToggle<CR>
@@ -176,3 +178,8 @@ let g:tagbar_type_go = {
 \ }
 
 highlight VertSplit term=standout ctermfg=10 ctermbg=0 guifg=#3f2f3f guibg=#2d2d2d
+
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+

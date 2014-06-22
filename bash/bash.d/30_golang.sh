@@ -1,4 +1,4 @@
-GOROOT=/usr/local/go
+GOROOT=$(brew --prefix go)
 export GOPATH=${HOME}/Workshop/go
-PATH=${PATH}:${GOROOT}/bin:${GOPATH}/bin
+PATH=${PATH}:${GOROOT}/libexec/bin:${GOPATH}/bin
 unset GOROOT

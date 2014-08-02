@@ -1,7 +1,7 @@
 syn on
 set wrap
 set ts=4
-set gfn=Essential\ PragmataPro\ for\ Powerline:h14
+set gfn=Essential\ PragmataPro\ for\ Powerline:h11
 set guioptions=cegmt
 set guioptions+=LlRrb
 set guioptions-=LlRrb

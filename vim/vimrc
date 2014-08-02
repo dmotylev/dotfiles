@@ -110,7 +110,7 @@ let g:startify_custom_header = [
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " setup CtrlP
-let g:ctrlp_cmd='CtrlPBuffer'
+" let g:ctrlp_cmd='CtrlPBuffer'
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_user_command = {
@@ -183,3 +183,4 @@ highlight VertSplit term=standout ctermfg=10 ctermbg=0 guifg=#3f2f3f guibg=#2d2d
 set splitbelow
 set splitright
 
+au BufRead,BufNewFile Vagrantfile set filetype=ruby

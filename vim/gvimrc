@@ -6,14 +6,14 @@ set guioptions=cegmt
 set guioptions+=LlRrb
 set guioptions-=LlRrb
 set gcr=n:blinkon0
-set lines=40
-set columns=90
+set lines=60
+set columns=120
 set fuoptions=maxvert,maxhorz
 set wildignore+=*.o,*.obj,.git,*.6,*.a
 " set background=light
 set background=dark
 set fillchars=vert:⏐
-set fullscreen
+" set fullscreen
 set numberwidth=7
 colorscheme base16-tomorrow
 set background=dark

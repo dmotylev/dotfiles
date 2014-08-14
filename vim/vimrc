@@ -22,6 +22,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'mhinz/vim-startify'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
+Plugin 'chase/vim-ansible-yaml'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -110,7 +111,10 @@ let g:startify_custom_header = [
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " setup CtrlP
-" let g:ctrlp_cmd='CtrlPBuffer'
+let g:ctrlp_cmd='CtrlPMixed'
+let g:ctrlp_mruf_max = 3
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_working_path_mode = 'r'
 let g:ctrlp_switch_buffer = 'Et'
 let g:ctrlp_lazy_update = 1
 let g:ctrlp_user_command = {

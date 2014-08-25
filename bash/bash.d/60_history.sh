@@ -7,10 +7,11 @@ shopt -s histappend
 
 _history_last10() {
 	if [ $# -eq 0 ]; then
-		history
+		history | tail -n 10
 		return
 	fi
-	history | egrep $* | tail -n 10
+	local p="$@"
+	history | egrep "$p" | tail -n 10
 }
 
 _history_all() {
@@ -18,7 +19,8 @@ _history_all() {
 		history
 		return
 	fi
-	history | egrep $*
+	local p="$@"
+	history | egrep "$p"
 }
 alias ??=_history_all
 alias ?=_history_last10

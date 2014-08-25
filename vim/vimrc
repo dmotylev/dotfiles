@@ -144,7 +144,7 @@ let g:syntastic_warning_symbol='Wr'
 let g:syntastic_style_warning_symbol='Ws'
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"st-"]
 
 map <silent> <C-h> <Plug>DashSearch
 
@@ -180,6 +180,10 @@ let g:tagbar_type_go = {
 	\ 'ctagsbin' : 'gotags',
 	\ 'ctagsargs' : '-sort -silent'
 \ }
+
+let g:user_emmet_settings = {
+	\ 'indentation' : '    '
+\}
 
 highlight VertSplit term=standout ctermfg=10 ctermbg=0 guifg=#3f2f3f guibg=#2d2d2d
 

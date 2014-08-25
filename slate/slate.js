@@ -44,6 +44,19 @@ var centerExt = S.operation("move", {
 	"height" : "screenSizeY",
 	"screen" : dExtW
 });
+var middleRightExt = S.operation("push", {
+	"direction" : "right",
+	"style" : "bar-resize:(screenSizeX/3)*2",
+	"screen" : dExtW
+});
+var left = S.operation("push", {
+	"direction" : "left",
+	"style" : "bar-resize:screenSizeX/2"
+});
+var right = S.operation("push", {
+	"direction" : "right",
+	"style" : "bar-resize:screenSizeX/2"
+});
 
 // Binding on keystrokes
 
@@ -65,6 +78,18 @@ S.bind("3:ctrl,`", function(win) {
 
 S.bind("4:ctrl,`", function(win) {
     win.doOperation(fullscreenInt);
+});
+
+S.bind("5:ctrl,`", function(win) {
+    win.doOperation(middleRightExt);
+});
+
+S.bind("[:ctrl,`", function(win) {
+    win.doOperation(left);
+});
+
+S.bind("]:ctrl,`", function(win) {
+    win.doOperation(right);
 });
 
 // Binding on events

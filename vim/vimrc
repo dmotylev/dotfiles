@@ -23,6 +23,7 @@ Plugin 'mhinz/vim-startify'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'chase/vim-ansible-yaml'
+Plugin 'groenewege/vim-less'
 " All of your Plugins must be added before the following line
 call vundle#end()
 

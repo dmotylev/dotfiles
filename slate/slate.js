@@ -60,35 +60,35 @@ var right = S.operation("push", {
 
 // Binding on keystrokes
 
-S.bind("c:ctrl,`", function(win) {
+S.bind("c:cmd,delete", function(win) {
     win.doOperation(centerExt);
 });
 
-S.bind("1:ctrl,`", function(win) {
+S.bind("1:cmd,delete", function(win) {
     win.doOperation(leftExt);
 });
 
-S.bind("2:ctrl,`", function(win) {
+S.bind("2:cmd,delete", function(win) {
     win.doOperation(middleExt);
 });
 
-S.bind("3:ctrl,`", function(win) {
+S.bind("3:cmd,delete", function(win) {
     win.doOperation(rightExt);
 });
 
-S.bind("4:ctrl,`", function(win) {
+S.bind("4:cmd,delete", function(win) {
     win.doOperation(fullscreenInt);
 });
 
-S.bind("5:ctrl,`", function(win) {
+S.bind("5:cmd,delete", function(win) {
     win.doOperation(middleRightExt);
 });
 
-S.bind("[:ctrl,`", function(win) {
+S.bind("[:cmd,delete", function(win) {
     win.doOperation(left);
 });
 
-S.bind("]:ctrl,`", function(win) {
+S.bind("]:cmd,delete", function(win) {
     win.doOperation(right);
 });
 

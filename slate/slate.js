@@ -1,104 +1,109 @@
 // Displays
 
-var dInt = "1440x900";
-var dExtW = "2560x1080";
+var monLaptop = S.screenForRef("1440x900");
+var monDell = S.screenForRef("2560x1080");
 
-// Operations
-
-var rightExt = S.operation("push", {
-	"direction" : "right",
-	"style" : "bar-resize:screenSizeX/3",
-	"screen" : dExtW
-});
-var leftExt = S.operation("push", {
+// Generic ops
+var leftHalf = S.op("push", {
 	"direction" : "left",
-	"style" : "bar-resize:screenSizeX/3",
-	"screen" : dExtW
+	"style" : "bar-resize:screenSizeX/2"
 });
-var middleExt = S.operation("move", {
-	"x" : "screenOriginX+screenSizeX/3+1",
-	"y" : "screenOriginY",
+var rightHalf = S.op("push", {
+	"direction" : "right",
+	"style" : "bar-resize:screenSizeX/2"
+});
+var centerLeft = S.op("push", {
+	"direction" : "left",
+	"style" : "center"
+});
+var centerRight = S.op("push", {
+	"direction" : "right",
+	"style" : "center" 
+});
+var centerUp = S.op("push", {
+	"direction" : "up",
+	"style" : "center"
+});
+var centerDown = S.op("push", {
+	"direction" : "down",
+	"style" : "center"
+});
+var thirdOfScreen = S.op("move", {
+	"x" : "windowTopLeftX",
+	"y" : "windowTopLeftY",
 	"width" : "screenSizeX/3",
-	"height" : "screenSizeY",
-	"screen" : dExtW
+	"height" : "screenSizeY"
 });
-var fullscreenInt = S.operation("move", {
+
+
+// Throw ops
+var toggleScreen = function(win) {
+	var cScreen = win.screen();
+	var nScreen = S.screenForRef(cScreen.id()+1 === S.screenCount()? 0 : cScreen.id() + 1);
+	var cRect = cScreen.visibleRect();
+	var nRect = nScreen.visibleRect();
+
+	var p = win.topLeft();
+	var nX = Math.round((p.x-cRect.x)/cRect.width*nRect.width);
+	var nY = Math.round((p.y-cRect.y)/cRect.height*nRect.height);
+	var s = win.size();
+	var nW = Math.round(s.width/cRect.width*nRect.width);
+	var nH = Math.round(s.height/cRect.height*nRect.height);
+
+	win.doOperation("throw", {
+		"x" : nRect.x + nX,
+		"y" : nRect.y + nY,
+		"width" : nW,
+		"height" : nH,
+		"screen": nScreen.id()
+	});
+};
+
+// Fullscreen ops
+var maximize = S.op("move", {
 	"x" : "screenOriginX",
 	"y" : "screenOriginY",
 	"width" : "screenSizeX",
-	"height" : "screenSizeY",
-	"screen" : dInt
+	"height" : "screenSizeY"
 });
-var enableFullscreen = _.once(function (win) {
-	win.doOperation(fullscreenInt);
+var fullscreen = function (win) {
+	win.doOperation(S.operation("shell", {
+		"command" : "/usr/bin/osascript fullscreen.scpt "+win.app().name(),
+		"wait" : true,
+		"path" : "~/.dotfiles/bin"
+	}));
+};
+var laptopFullscreen = function (win) {
+	win.doOperation("throw",{"screen":monLaptop});
 	win.doOperation(S.operation("shell", {
 		"command" : "/usr/bin/osascript fullscreen.scpt "+win.app().name()+" true",
 		"wait" : true,
 		"path" : "~/.dotfiles/bin"
 	}));
-});
-var centerExt = S.operation("move", {
-	"x" : "screenOriginX+(screenSizeX-1280)/2",
-	"y" : "screenOriginY",
-	"width" : "1280",
-	"height" : "screenSizeY",
-	"screen" : dExtW
-});
-var middleRightExt = S.operation("push", {
-	"direction" : "right",
-	"style" : "bar-resize:(screenSizeX/3)*2",
-	"screen" : dExtW
-});
-var left = S.operation("push", {
-	"direction" : "left",
-	"style" : "bar-resize:screenSizeX/2"
-});
-var right = S.operation("push", {
-	"direction" : "right",
-	"style" : "bar-resize:screenSizeX/2"
+};
+
+// Binding on events
+S.on("windowOpened", function(event,win) {
+	if(win.app().name() === "HipChat" && win.isMain()) {
+		laptopFullscreen(win);
+	}
+	if(win.app().name() === "Skype" && win.isMain()) {
+		laptopFullscreen(win);
+	}
 });
 
 // Binding on keystrokes
-
-S.bind("c:cmd,delete", function(win) {
-    win.doOperation(centerExt);
+S.bnda({
+	"z:cmd,`" : S.op("undo"),
+	"[:cmd,`" : leftHalf,
+	"]:cmd,`" : rightHalf,
+	"left:cmd,`" : centerLeft,
+	"right:cmd,`" : centerRight,
+	"up:cmd,`" : centerUp,
+	"down:cmd,`" : centerDown,
+	"=:cmd,`" : maximize,
+	"=:alt,cmd,`" : fullscreen,
+	"space:cmd,`" : toggleScreen,
+	"3:cmd,`" : thirdOfScreen
 });
 
-S.bind("1:cmd,delete", function(win) {
-    win.doOperation(leftExt);
-});
-
-S.bind("2:cmd,delete", function(win) {
-    win.doOperation(middleExt);
-});
-
-S.bind("3:cmd,delete", function(win) {
-    win.doOperation(rightExt);
-});
-
-S.bind("4:cmd,delete", function(win) {
-    win.doOperation(fullscreenInt);
-});
-
-S.bind("5:cmd,delete", function(win) {
-    win.doOperation(middleRightExt);
-});
-
-S.bind("[:cmd,delete", function(win) {
-    win.doOperation(left);
-});
-
-S.bind("]:cmd,delete", function(win) {
-    win.doOperation(right);
-});
-
-// Binding on events
-
-S.on("windowOpened", function(event,win) {
-	if(win.app().name() === "HipChat") {
-		enableFullscreen(win);
-	}
-	if(win.app().name() === "Skype") {
-		enableFullscreen(win);
-	}
-});

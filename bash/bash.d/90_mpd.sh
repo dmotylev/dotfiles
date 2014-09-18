@@ -1,1 +1,1 @@
-export MPD_HOST=volumio.local
+export MPD_HOST=musicbox.local

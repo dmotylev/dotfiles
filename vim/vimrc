@@ -24,6 +24,7 @@ Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'groenewege/vim-less'
+Plugin 'Chiel92/vim-autoformat'
 " All of your Plugins must be added before the following line
 call vundle#end()
 

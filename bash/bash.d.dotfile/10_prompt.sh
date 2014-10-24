@@ -1,4 +1,3 @@
-#!/bin/bash
 _psc_rst=$(tput sgr0)
 _psc_path=$(tput setaf 238)
 _psc_git_dirty=$(tput setaf 1)
@@ -58,7 +57,7 @@ function __psc_postcmd_hook {
 
 trap '__psc_precmd_hook' DEBUG
 PROMPT_COMMAND=__psc_postcmd_hook
-#- 3s:6814:~/Workshop/go/library \[${_psc_cmd_id}\]  
+#- 3s:6814:~/Workshop/go/library \[${_psc_cmd_id}\]
 export PS1='\[${__psc_last_cmd_result}${_psc_path}\]\[${_psc_history_no}\!\] \[${_psc_path}\w\]$(__psc_git_branch)\n\[$_psc_prompt\]\$\[$_psc_rst\] '
 export PS2='> '
 export PS4='+ '

@@ -1,0 +1,197 @@
+#!/usr/bin/env bash
+#
+# bootstrap installs things.
+# based on https://github.com/holman/dotfiles/blob/master/script/bootstrap
+
+cd "$(dirname "$0")/.."
+readonly DOTFILES_ROOT=$(pwd)
+readonly DOTFILES_DST=/tmp/home
+
+set -e
+set -u
+trap "tput sgr0" EXIT
+
+readonly CBL=$(tput el1)
+readonly RST=$(tput sgr0)
+readonly BLD=$(tput bold)
+
+case $(tput colors) in
+    256)
+        readonly RED=$(tput setaf 1)
+        readonly YLW=$(tput setaf 184)
+        readonly GRN=$(tput setaf 154)
+        readonly BLU=$(tput setaf 45)
+        readonly BNR=$(tput setaf 119)
+    ;;
+    16)
+        readonly RED=$(tput setaf 1)
+        readonly YLW=$(tput setaf 3)
+        readonly GRN=$(tput setaf 2)
+        readonly BLU=$(tput setaf 4)
+        readonly BNR=$(tput setaf 2)
+    ;;
+    *)
+        readonly RED=""
+        readonly YLW=""
+        readonly GRN=""
+        readonly BLU=""
+    ;;
+esac
+
+info () {
+    printf "${BLU}${BLD}... ${RST} $*\n"
+}
+
+prompt () {
+    printf "${YLW}${BLD}??? ${RST} $* "
+}
+
+success () {
+    printf "\r${CBL}${GRN}${BLD}OK  ${RST} $*\n"
+}
+
+green () {
+    printf "\n${BNR}${BLD}$*${RST}\n"
+}
+
+fail () {
+    printf "\r${CBL}${RED}${BLD}FAIL${RST} $*\n"
+    exit
+}
+
+todo () {
+    printf "\r${CBL}${RED}${BLD}TODO${RST} $*\n"
+}
+
+header () {
+    printf "${BLU}$*${RST}"
+}
+
+link_file () {
+    local src=$1 dst=$2
+
+    local overwrite= backup= skip= action=
+
+    if [ -f "$dst" -o -d "$dst" -o -L "$dst" ]; then
+        if [ "$overwrite_all" == "false" -a "$backup_all" == "false" -a "$skip_all" == "false" ]; then
+            local currentSrc="$(readlink $dst)"
+            if [ "$currentSrc" == "$src" ]; then
+                skip=true;
+            else
+                user "File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                read -n 1 action
+
+                case "$action" in
+                o )
+                    overwrite=true;;
+                O )
+                    overwrite_all=true;;
+                b )
+                    backup=true;;
+                B )
+                    backup_all=true;;
+                s )
+                    skip=true;;
+                S )
+                    skip_all=true;;
+                * )
+                ;;
+                esac
+            fi
+        fi
+
+        overwrite=${overwrite:-$overwrite_all}
+        backup=${backup:-$backup_all}
+        skip=${skip:-$skip_all}
+
+        if [ "$overwrite" == "true" ]; then
+            rm -rf "$dst"
+            success "removed $dst"
+        fi
+
+        if [ "$backup" == "true" ]; then
+            mv "$dst" "${dst}.backup"
+            success "moved $dst to ${dst}.backup"
+        fi
+
+        if [ "$skip" == "true" ]; then
+            success "skipped $src"
+        fi
+    fi
+
+    if [ "$skip" != "true" ]  # "false" or empty
+    then
+        ln -s "$1" "$2"
+        success "linked $1 to $2"
+    fi
+}
+
+customize_dotfiles () {
+    info $(header 'customizing dotfiles')
+    for DOTFILE in $(find ${DOTFILES_ROOT} -type f -name 'customize-dotfile.sh'); do
+        local DOTFILE_NAME="$(dirname ${DOTFILE#$DOTFILES_ROOT/})"
+        source ${DOTFILE}
+    done
+}
+
+install_dotfiles () {
+    info $(header 'installing dotfiles')
+
+    local overwrite_all=false backup_all=false skip_all=false
+
+    for src in $(find "$DOTFILES_ROOT" -maxdepth 2 -name '*.dotfile'); do
+        dst="${DOTFILES_DST}/.$(basename "${src%.*}")"
+        link_file "$src" "$dst"
+    done
+}
+
+install_binfiles () {
+    info $(header 'installing binfiles')
+
+    local overwrite_all=false backup_all=false skip_all=false
+
+    mkdir -p ${DOTFILES_DST}/bin
+    for src in $(find "$DOTFILES_ROOT/bin" -maxdepth 1 -type f); do
+        dst="${DOTFILES_DST}/bin/$(basename "${src}")"
+        link_file "$src" "$dst"
+    done
+}
+
+install_LaunchAgents () {
+    [ "$(uname -s)" != "Darwin" ] && return
+
+    info $(header 'installing LaunchAgents')
+
+    mkdir -p ${DOTFILES_DST}/Library/LaunchAgents
+    for f in $(ls ${DOTFILES_ROOT}/LaunchAgents/*.plist); do
+        local agent=$(basename $f .plist)
+        launchctl unload -w ${DOTFILES_DST}/Library/LaunchAgents/$agent.plist 2> /dev/null
+        cp $f ${DOTFILES_DST}/Library/LaunchAgents/
+        launchctl load -w ${DOTFILES_DST}/Library/LaunchAgents/$agent.plist
+        success "loaded ${agent}"
+    done
+}
+
+banner () {
+    echo -e "${BNR}"
+    echo "   ·▄▄▄▄        ▄▄▄▄▄·▄▄▄▪  ▄▄▌  ▄▄▄ ..▄▄ · ";
+    echo "   ██▪ ██ ▪     •██  ▐▄▄·██ ██•  ▀▄.▀·▐█ ▀. ";
+    echo "   ▐█· ▐█▌ ▄█▀▄  ▐█.▪██▪ ▐█·██▪  ▐▀▀▪▄▄▀▀▀█▄";
+    echo "   ██. ██ ▐█▌.▐▌ ▐█▌·██▌.▐█▌▐█▌▐▌▐█▄▄▌▐█▄▪▐█";
+    echo " ▀ ▀▀▀▀▀•  ▀█▄▀▪ ▀▀▀ ▀▀▀ ▀▀▀.▀▀▀  ▀▀▀  ▀▀▀▀ ";
+    echo -e "${RST}"
+}
+
+banner
+customize_dotfiles
+install_binfiles
+install_dotfiles
+
+# If we're on a Mac, let's install and setup homebrew.
+if [ "$(uname -s)" == "Darwin" ]; then
+    info $(header "installing Mac specialities")
+
+    install_LaunchAgents
+fi
+
+green "All done! Happy hacking! :)"

@@ -1,0 +1,43 @@
+#!/bin/bash
+
+showUsageAndExit() {
+	echo "Usage:"
+	echo " $0 host [sequence_id]"
+	echo " sequence_id is \"open\" by default"
+	exit 1
+}
+
+HOST=$1
+SEQUENCE_ID=$2
+
+if [ "x$HOST" == "x" ]; then
+	showUsageAndExit
+fi
+
+if [ "x$SEQUENCE_ID" == "x" ]; then
+	SEQUENCE_ID="open"
+fi
+
+CONFIG=~/.knockrc
+
+if [ ! -f $CONFIG ]; then
+	echo "error: file $CONFIG not found"
+	exit 1
+fi
+
+SEQUENCE=$(sort -r $CONFIG | awk -F: "/^($HOST|\*):$SEQUENCE_ID/ {print \$3}" | head -1)
+
+if [ "x$SEQUENCE" == "x" ]; then
+	echo "error: unknown host or sequence_id"
+	exit 1
+fi
+
+let i=0
+for PORT in $SEQUENCE; do
+	knocker $HOST $PORT
+	sleep 0.1
+	echo -en "\033[3$((i++%7))m➧\033[0m"
+done
+
+echo
+exit 0

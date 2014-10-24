@@ -1,0 +1,22 @@
+[user]
+	name = AUTHORNAME
+	email = AUTHOREMAIL
+[credential]
+	helper = GIT_CREDENTIAL_HELPER
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+  ui = true
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+[mergetool]
+	keepBackup = false
+	prompt = false
+[push]
+	default = simple

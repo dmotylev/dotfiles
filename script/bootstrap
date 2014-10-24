@@ -126,6 +126,16 @@ link_file () {
     fi
 }
 
+banner () {
+    echo -e "${BNR}"
+    echo "   ·▄▄▄▄        ▄▄▄▄▄·▄▄▄▪  ▄▄▌  ▄▄▄ ..▄▄ · ";
+    echo "   ██▪ ██ ▪     •██  ▐▄▄·██ ██•  ▀▄.▀·▐█ ▀. ";
+    echo "   ▐█· ▐█▌ ▄█▀▄  ▐█.▪██▪ ▐█·██▪  ▐▀▀▪▄▄▀▀▀█▄";
+    echo "   ██. ██ ▐█▌.▐▌ ▐█▌·██▌.▐█▌▐█▌▐▌▐█▄▄▌▐█▄▪▐█";
+    echo " ▀ ▀▀▀▀▀•  ▀█▄▀▪ ▀▀▀ ▀▀▀ ▀▀▀.▀▀▀  ▀▀▀  ▀▀▀▀ ";
+    echo -e "${RST}"
+}
+
 customize_dotfiles () {
     info $(header 'customizing dotfiles')
     for DOTFILE in $(find ${DOTFILES_ROOT} -type f -name 'customize-dotfile.sh'); do
@@ -172,14 +182,13 @@ install_LaunchAgents () {
     done
 }
 
-banner () {
-    echo -e "${BNR}"
-    echo "   ·▄▄▄▄        ▄▄▄▄▄·▄▄▄▪  ▄▄▌  ▄▄▄ ..▄▄ · ";
-    echo "   ██▪ ██ ▪     •██  ▐▄▄·██ ██•  ▀▄.▀·▐█ ▀. ";
-    echo "   ▐█· ▐█▌ ▄█▀▄  ▐█.▪██▪ ▐█·██▪  ▐▀▀▪▄▄▀▀▀█▄";
-    echo "   ██. ██ ▐█▌.▐▌ ▐█▌·██▌.▐█▌▐█▌▐▌▐█▄▄▌▐█▄▪▐█";
-    echo " ▀ ▀▀▀▀▀•  ▀█▄▀▪ ▀▀▀ ▀▀▀ ▀▀▀.▀▀▀  ▀▀▀  ▀▀▀▀ ";
-    echo -e "${RST}"
+install_Homebrew () {
+    if [ ! $(which brew) ]; then
+        info 'installing Homebrew'
+        ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    fi
+    success 'installed Homebrew'
+    todo "install Xcode by typing 'xcode-select --install'"
 }
 
 banner
@@ -190,8 +199,10 @@ install_dotfiles
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]; then
     info $(header "installing Mac specialities")
-
     install_LaunchAgents
+    install_Homebrew
+    todo "Brewfile"
+    todo "Caskfile"
 fi
 
 green "All done! Happy hacking! :)"

@@ -5,7 +5,7 @@
 
 cd "$(dirname "$0")/.."
 readonly DOTFILES_ROOT=$(pwd)
-readonly DOTFILES_DST=/tmp/home
+readonly DOTFILES_DST=$HOME
 
 set -e
 set -u
@@ -78,8 +78,8 @@ link_file () {
             if [ "$currentSrc" == "$src" ]; then
                 skip=true;
             else
-                user "File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
-                read -n 1 action
+                local prompt_text="File already exists: $(basename "$src"), what do you want to do? [s]kip, [S]kip all, [o]verwrite, [O]verwrite all, [b]ackup, [B]ackup all?"
+                read -p "$(prompt $prompt_text)" -n 1 action
 
                 case "$action" in
                 o )
@@ -183,12 +183,25 @@ install_LaunchAgents () {
 }
 
 install_Homebrew () {
-    if [ ! $(which brew) ]; then
+    if [ "$(type -t brew)" != "file" ]; then
         info 'installing Homebrew'
         ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
     fi
-    success 'installed Homebrew'
+    success 'Homebrew installed'
     todo "install Xcode by typing 'xcode-select --install'"
+}
+
+install_Homebrew_Bundle () {
+    if [ -f Brewfile -a "$(type -p brew)" == "/usr/local/bin/brew" ]; then
+        sed -e 's/#.*$//' -e '/^$/d' Brewfile | while read cmd; do
+            info $(header "brew $cmd")
+            /usr/local/bin/brew $cmd
+            success "done brew $cmd"
+        done
+    fi
+    if [ ! $(grep -q '/usr/local/bin/bash' /etc/shells) ]; then
+        todo 'Add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`'
+    fi
 }
 
 banner
@@ -201,8 +214,10 @@ if [ "$(uname -s)" == "Darwin" ]; then
     info $(header "installing Mac specialities")
     install_LaunchAgents
     install_Homebrew
-    todo "Brewfile"
+    install_Homebrew_Bundle
     todo "Caskfile"
 fi
+
+todo "Restore your secrets (ssh keys, aws credentials and etc) from vault"
 
 green "All done! Happy hacking! :)"

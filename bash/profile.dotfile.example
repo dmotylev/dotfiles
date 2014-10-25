@@ -1,0 +1,15 @@
+#!/bin/bash
+
+export DOTFILES_ROOT=__DOTFILES_ROOT__
+
+if [ -d ~/.bash.d ]; then
+    for f in $(ls ~/.bash.d/*.sh); do
+        . ~/.bash.d/$f
+    done
+fi
+
+if [[ "$(type -t brew)" != "file" -a "$(type -t brew)" != "function" ]]; then
+    brew () { return; }
+fi
+
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:${PATH}

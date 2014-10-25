@@ -1,8 +1,8 @@
 [user]
-	name = AUTHORNAME
-	email = AUTHOREMAIL
+	name = __GIT_USER_NAME__
+	email = __GIT_USER_EMAIL__
 [credential]
-	helper = GIT_CREDENTIAL_HELPER
+	helper = __GIT_CREDENTIAL_HELPER__
 [alias]
 	st = status
 	ci = commit

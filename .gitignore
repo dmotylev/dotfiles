@@ -1,5 +1,6 @@
 *.DS_Store
-/vim.dotfile/tmp/
-/vim.dotfile/.netrwhist
-/vim.dotfile/bundle/*
+/vim/vim.dotfile/tmp/
+/vim/vim.dotfile/.netrwhist
+/vim/vim.dotfile/bundle/*
 /git/gitconfig.dotfile
+/bash/profile.dotfile

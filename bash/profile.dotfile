@@ -1,8 +1,0 @@
-#!/bin/bash
-if [ -d ~/.bash.d ]; then
-    for f in $(ls ~/.bash.d/); do
-        . ~/.bash.d/$f
-    done
-fi
-
-export PATH=~/bin:~/.dotfiles/bin:/usr/local/bin:/usr/local/sbin:${PATH}

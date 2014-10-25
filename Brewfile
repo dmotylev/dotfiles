@@ -39,6 +39,9 @@ install gnupg
 install oath-toolkit
 install ag
 install tmux
+install git
+install hub
+install ec2-api-tools
 
 # Remove outdated versions from the cellar
 cleanup

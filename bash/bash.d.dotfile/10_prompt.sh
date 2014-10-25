@@ -4,12 +4,10 @@ _psc_git_dirty=$(tput setaf 1)
 _psc_git_ready=$(tput setaf 130)
 _psc_git_clean=$(tput setaf 4)
 _psc_prompt=$(tput setaf 6)
-_psc_history_no=$(tput setaf 240)
 _psc_smiley=$(tput setaf 4)
 _psc_frowny=$(tput setaf 1)
 
-__psc_git_branch()
-{
+__psc_git_branch () {
   _git_branch=$(git branch -q 2> /dev/null)
   if [ $? -ne 0 ]; then
     return 0
@@ -27,11 +25,11 @@ __psc_git_branch()
   printf " $_git_color($_git_branch)"
 }
 
-function __psc_precmd_hook {
+__psc_precmd_hook () {
   timer=${timer:-$SECONDS}
 }
 
-function __psc_postcmd_hook {
+__psc_postcmd_hook () {
   _cmd_code=$?
   if [ $_cmd_code -eq 0 ]; then
     _cmd_color=$_psc_smiley
@@ -57,7 +55,6 @@ function __psc_postcmd_hook {
 
 trap '__psc_precmd_hook' DEBUG
 PROMPT_COMMAND=__psc_postcmd_hook
-#- 3s:6814:~/Workshop/go/library \[${_psc_cmd_id}\]
-export PS1='\[${__psc_last_cmd_result}${_psc_path}\]\[${_psc_history_no}\!\] \[${_psc_path}\w\]$(__psc_git_branch)\n\[$_psc_prompt\]\$\[$_psc_rst\] '
+export PS1='\[${__psc_last_cmd_result}${_psc_path}\]\[${_psc_path}\w\]$(__psc_git_branch)\n\[$_psc_prompt\]\$\[$_psc_rst\] '
 export PS2='> '
 export PS4='+ '

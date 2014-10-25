@@ -199,7 +199,7 @@ install_Homebrew_Bundle () {
             success "done brew $cmd"
         done
     fi
-    if [ ! $(grep -q '/usr/local/bin/bash' /etc/shells) ]; then
+    if [ $(grep -q '/usr/local/bin/bash' /etc/shells) ]; then
         todo 'Add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`'
     fi
 }

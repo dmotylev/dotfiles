@@ -20,3 +20,4 @@ cask install virtualbox
 cask install spotify
 cask install evernote
 cask install kaleidoscope
+cask install vagrant

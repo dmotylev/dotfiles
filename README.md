@@ -10,6 +10,6 @@ To install these dotfiles without Git:
 
 or even shorter
 
-  eval $(curl -Ls bit.ly/install_dots)
+	eval $(curl -Ls bit.ly/install_dots)
 
 To update later on, just run that command again.

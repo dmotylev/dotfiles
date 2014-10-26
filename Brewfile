@@ -44,6 +44,7 @@ install hub
 install ec2-api-tools
 install ansible
 install gist
+install reattach-to-user-namespace
 
 # Remove outdated versions from the cellar
 cleanup

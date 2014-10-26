@@ -21,3 +21,4 @@ cask install spotify
 cask install evernote
 cask install kaleidoscope
 cask install vagrant
+cask install tower

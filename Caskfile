@@ -1,0 +1,21 @@
+# based on https://github.com/mathiasbynens/dotfiles/blob/master/Caskfile
+#
+# Install native apps using Homebrew Cask
+# Usage: `sed -e 's/#.*$//' -e '/^$/d' Caskfile | while read cmd; do brew "$cmd"; done`
+
+install caskroom/cask/brew-cask
+tap caskroom/versions
+
+cask install dropbox
+cask install iterm2
+cask install atom
+cask install skype
+cask install hipchat
+cask install google-chrome
+cask install imagealpha
+cask install imageoptim
+cask install the-unarchiver
+cask install transmission
+cask install virtualbox
+cask install spotify
+cask install evernote

@@ -167,6 +167,12 @@ install_binfiles () {
     done
 }
 
+post-install_vim () {
+    info "installing vim"
+    vim +PluginInstall +qall
+    success "vim installed"
+}
+
 install_LaunchAgents () {
     [ "$(uname -s)" != "Darwin" ] && return
 
@@ -192,30 +198,40 @@ install_Homebrew () {
 }
 
 install_Homebrew_Bundle () {
-    if [ -f Brewfile -a "$(type -p brew)" == "/usr/local/bin/brew" ]; then
-        sed -e 's/#.*$//' -e '/^$/d' Brewfile | while read cmd; do
+    local bundle=$1
+    if [ -f $bundle -a "$(type -p brew)" == "/usr/local/bin/brew" ]; then
+        sed -e 's/#.*$//' -e '/^$/d' $bundle | while read cmd; do
             info $(header "brew $cmd")
             /usr/local/bin/brew $cmd
             success "done brew $cmd"
         done
     fi
+}
+
+install_Brewfile () {
+    install_Homebrew_Bundle Brewfile
     if [ $(grep -q '/usr/local/bin/bash' /etc/shells) ]; then
         todo 'Add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`'
     fi
+}
+
+install_Caskfile () {
+    install_Homebrew_Bundle Caskfile
 }
 
 banner
 customize_dotfiles
 install_binfiles
 install_dotfiles
+post-install_vim
 
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]; then
     info $(header "installing Mac specialities")
     install_LaunchAgents
     install_Homebrew
-    install_Homebrew_Bundle
-    todo "Caskfile"
+    install_Brewfile
+    install_Caskfile
 fi
 
 todo "Restore your secrets (ssh keys, aws credentials and etc) from vault"

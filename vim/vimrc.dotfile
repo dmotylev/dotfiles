@@ -5,7 +5,7 @@ filetype off                   " required!
 set rtp+=~/.vim/bundle/Vundle.vim/
 call vundle#begin()
 " let Vundle manage Vundle
-" required! 
+" required!
 Plugin 'gmarik/Vundle.vim'
 " load bundles from ~/.vim/bundle
 Plugin 'fatih/vim-go'
@@ -25,6 +25,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'groenewege/vim-less'
 Plugin 'Chiel92/vim-autoformat'
+Plugin 'altercation/vim-colors-solarized'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -50,7 +51,7 @@ nmap <silent> <Leader>n :silent :nohlsearch<CR>
 " The following will make tabs and trailing spaces visible when requested:
 set listchars=tab:•·,trail:·,eol:$,extends:❯,precedes:❮
 set fillchars=vert:⏐
-set showbreak=⎖\ 
+set showbreak=⎖\
 nmap <silent> <Leader>S :set nolist!<CR>
 " The current buffer can be put to the background without writing to disk;
 " When a background buffer becomes current again, marks and undo-history are remembered.
@@ -150,8 +151,8 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " propr
 
 map <silent> <C-h> <Plug>DashSearch
 
-colorscheme base16-tomorrow
 set background=dark
+colorscheme solarized
 
 map <silent> <C-\> :TagbarToggle<CR>
 let g:tagbar_width=40

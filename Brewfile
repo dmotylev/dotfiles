@@ -42,6 +42,8 @@ install tmux
 install git
 install hub
 install ec2-api-tools
+install ansible
+install gist
 
 # Remove outdated versions from the cellar
 cleanup

@@ -1,3 +1,11 @@
-# That's my $HOME, folks...
+# Dmitry's dotfiles
 
-	curl -s https://bitbucket.org/dmotylev/dotfiles/raw/master/install.sh | bash
+## Installation
+
+### Git-free install
+
+To install these dotfiles without Git:
+
+	curl -Ls http://git.io/... | tar xzs '/dmotylev-dotfiles-[a-f[:digit:]]*/dotfiles/' && dotfiles/bootstrap
+
+To update later on, just run that command again.

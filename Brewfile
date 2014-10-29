@@ -26,6 +26,7 @@ install bash
 install bash-completion
 
 # Install wget with IRI support
+install libidn
 install wget --with-iri
 
 # Install more recent versions of some OS X tools
@@ -45,6 +46,7 @@ install ec2-api-tools
 install ansible
 install gist
 install reattach-to-user-namespace
+install postgresql --no-tcl --no-perl
 
 # Remove outdated versions from the cellar
 cleanup

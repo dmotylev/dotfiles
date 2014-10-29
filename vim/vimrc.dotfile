@@ -26,6 +26,7 @@ Plugin 'chase/vim-ansible-yaml'
 Plugin 'groenewege/vim-less'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'dagwieers/asciidoc-vim'
 " All of your Plugins must be added before the following line
 call vundle#end()
 

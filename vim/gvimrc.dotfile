@@ -1,7 +1,7 @@
 syn on
 set wrap
 set ts=4
-set gfn=Essential\ PragmataPro\ for\ Powerline:h11
+set gfn=Essential\ PragmataPro:h13
 set guioptions=cegmt
 set guioptions+=LlRrb
 set guioptions-=LlRrb
@@ -18,3 +18,4 @@ set numberwidth=7
 colorscheme solarized
 set background=dark
 highlight VertSplit term=reverse guifg=#3f2f3f guibg=#2d2d2d
+set noantialias

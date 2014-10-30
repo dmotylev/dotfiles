@@ -47,6 +47,9 @@ install ansible
 install gist
 install reattach-to-user-namespace
 install postgresql --no-tcl --no-perl
+install pgtap
+install ruby
+install npm
 
 # Remove outdated versions from the cellar
 cleanup

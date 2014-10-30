@@ -14,7 +14,7 @@ Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
-Plugin 'chriskempson/base16-vim'
+"Plugin 'chriskempson/base16-vim'
 Plugin 'bling/vim-airline'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
@@ -196,3 +196,5 @@ set splitbelow
 set splitright
 
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
+
+highlight SignColumn ctermbg=0

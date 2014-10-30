@@ -19,3 +19,4 @@ colorscheme solarized
 set background=dark
 highlight VertSplit term=reverse guifg=#3f2f3f guibg=#2d2d2d
 set noantialias
+highlight SignColumn guibg=#002b36

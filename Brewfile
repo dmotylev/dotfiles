@@ -50,6 +50,7 @@ install postgresql --no-tcl --no-perl
 install pgtap
 install ruby
 install npm
+install s3cmd
 
 # Remove outdated versions from the cellar
 cleanup

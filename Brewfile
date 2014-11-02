@@ -51,6 +51,7 @@ install pgtap
 install ruby
 install npm
 install s3cmd
+install jq
 
 # Remove outdated versions from the cellar
 cleanup

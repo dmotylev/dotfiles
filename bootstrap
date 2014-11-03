@@ -8,7 +8,6 @@ readonly DOTFILES_ROOT=$(pwd)
 readonly DOTFILES_DST=$HOME
 
 set -e
-set -u
 trap "tput sgr0" EXIT
 
 readonly CBL=$(tput el1)
@@ -173,6 +172,15 @@ post-install_vim () {
     success "vim installed"
 }
 
+set_defaults () {
+    [ "$(uname -s)" != "Darwin" -o ! -f Defaultsfile ] && return
+
+    info $(header 'set defaults')
+	info 'some tweaks will ask Administrator password'
+	source Defaultsfile
+    success "set defaults"
+}
+
 install_LaunchAgents () {
     [ "$(uname -s)" != "Darwin" ] && return
 
@@ -199,12 +207,20 @@ install_Homebrew () {
 
 install_Homebrew_Bundle () {
     local bundle=$1
+	local bundle_timestamp_file=${bundle}.installed_timestamp
+	local bundle_installed_time=$(date +%s)
+	[ -f $bundle_timestamp_file ] && bundle_installed_time=$(( $bundle_installed_time - $(cat $bundle_timestamp_file) )) 
+	if [ $bundle_installed_time -lt 1800 ]; then
+			info "skip $bundle (installed ${bundle_installed_time}s ago)"
+		return
+	fi
     if [ -f $bundle -a "$(type -p brew)" == "/usr/local/bin/brew" ]; then
         sed -e 's/#.*$//' -e '/^$/d' $bundle | while read cmd; do
             info $(header "brew $cmd")
             /usr/local/bin/brew $cmd
             success "done brew $cmd"
         done
+		date +%s > $bundle_timestamp_file
     fi
 }
 
@@ -228,6 +244,7 @@ post-install_vim
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]; then
     info $(header "installing Mac specialities")
+	set_defaults
     install_LaunchAgents
     install_Homebrew
     install_Brewfile

@@ -6,6 +6,8 @@
 install caskroom/cask/brew-cask
 tap caskroom/versions
 
+cask update
+
 cask install dropbox
 cask install iterm2
 cask install atom

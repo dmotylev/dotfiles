@@ -52,6 +52,8 @@ install ruby
 install npm
 install s3cmd
 install jq
+install fleetctl
+install ctags
 
 # Remove outdated versions from the cellar
 cleanup

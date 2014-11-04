@@ -207,7 +207,7 @@ install_Homebrew () {
 
 install_Homebrew_Bundle () {
     local bundle=$1
-	local bundle_timestamp_file=${bundle}.installed_timestamp
+	local bundle_timestamp_file=.${bundle}.installed_timestamp
 	local bundle_installed_time=$(date +%s)
 	[ -f $bundle_timestamp_file ] && bundle_installed_time=$(( $bundle_installed_time - $(cat $bundle_timestamp_file) )) 
 	if [ $bundle_installed_time -lt 1800 ]; then

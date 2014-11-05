@@ -54,6 +54,7 @@ install s3cmd
 install jq
 install fleetctl
 install ctags
+install docker
 
 # Remove outdated versions from the cellar
 cleanup

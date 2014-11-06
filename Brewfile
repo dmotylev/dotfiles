@@ -55,6 +55,7 @@ install jq
 install fleetctl
 install ctags
 install docker
+install boot2docker
 
 # Remove outdated versions from the cellar
 cleanup

@@ -35,7 +35,7 @@ install homebrew/dupes/grep
 install homebrew/dupes/screen
 
 # Install other useful binaries
-install go
+install go --cross-compile-common
 install gnupg
 install oath-toolkit
 install ag

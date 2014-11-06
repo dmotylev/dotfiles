@@ -28,3 +28,4 @@ cask install github
 cask install google-drive
 cask install seil
 cask install spotify-notifications
+cask install little-snitch

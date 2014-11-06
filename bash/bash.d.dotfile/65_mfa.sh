@@ -37,8 +37,7 @@ function mfa {
 		echo "usage: mfa <profile>"
 		return 1
 	}
-	read -s -p Password: passwd
-	local totpkey=$(gpg --passphrase $passwd --batch --quiet -d $MFA_HOME/$1.mfa.asc 2> /dev/null)
+	local totpkey=$(read -s -p Password: passwd; gpg --passphrase $passwd --batch --quiet -d $MFA_HOME/$1.mfa.asc 2> /dev/null; unset passwd)
 	[[ -z "$totpkey" ]] && {
 		echo $(tput dl1)$(tput hpa 0)"no totp key"
 		return 1

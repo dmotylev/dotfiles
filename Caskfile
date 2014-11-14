@@ -30,3 +30,4 @@ cask install seil
 cask install karabiner
 cask install spotify-notifications
 cask install little-snitch
+cask install anki

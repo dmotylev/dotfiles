@@ -31,3 +31,4 @@ cask install karabiner
 cask install spotify-notifications
 cask install little-snitch
 cask install anki
+cask install apache-directory-studio

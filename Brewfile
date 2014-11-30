@@ -56,6 +56,7 @@ install fleetctl
 install ctags
 install docker
 install boot2docker
+install imagesnap
 
 # Remove outdated versions from the cellar
 cleanup

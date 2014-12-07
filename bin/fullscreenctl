@@ -1,0 +1,32 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function run(argv) {
+	var appname = argv[0]
+	var enableFullScreen = argv[1] === 'true'
+	// TODO check arguments
+
+	var systemEvents = Application('System Events')
+	var app = Application(appname)
+
+	// TODO discover why the osascript drop a core time to time
+	var numWindows = systemEvents.processes.byName(appname).windows.length
+	
+	if ( numWindows === 0 ) {
+		console.log("TODO: find way to detect application in fullscreen mode in JAX")
+		return
+	}
+	var isFullScreenMode = systemEvents.processes.byName(appname).windows.at(0).attributes.byName('AXFullScreen').value
+
+	if ( isFullScreenMode && enableFullScreen ) {
+		return
+	}
+	if ( !isFullScreenMode && !enableFullScreen ) {
+		return
+	}
+	
+	app.activate()
+	// TODO test next line
+	systemEvents.keystroke('f', {using: ['command down','control down']})
+}
+
+// vim: ft=javascript

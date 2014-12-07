@@ -8,6 +8,7 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 " load bundles from ~/.vim/bundle
+Plugin 'SirVer/ultisnips'
 Plugin 'fatih/vim-go'
 Plugin 'rizzatti/dash.vim'
 Plugin 'ervandew/supertab'
@@ -113,6 +114,21 @@ let g:startify_custom_header = [
 
 " setup supertab completion
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" setup vim-go
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_auto_type_info = 1
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>e <Plug>(go-rename)
 
 " setup CtrlP
 let g:ctrlp_cmd='CtrlPMixed'

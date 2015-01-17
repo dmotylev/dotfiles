@@ -35,3 +35,4 @@ cask install apache-directory-studio
 cask install flashlight
 cask install pgweb
 cask install tunnelblick
+cask install testflight

@@ -57,6 +57,7 @@ install ctags
 install docker
 install boot2docker
 install imagesnap
+install libopendkim
 
 # Remove outdated versions from the cellar
 cleanup

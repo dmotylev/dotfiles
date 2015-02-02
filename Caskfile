@@ -37,3 +37,4 @@ cask install pgweb
 cask install tunnelblick
 cask install testflight
 cask install qlstephen
+cask install slate

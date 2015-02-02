@@ -56,7 +56,10 @@ slate.bindAll({
                 $('center', 'top', 3, 3)],
             n: [$('center', 'bottom'),
                 $('center', 'bottom', 3, 3)],
-            'return': $('center', 'center', 3, 3)
+            'return': [
+                $('center', 'center', 3, 1),
+                $('center', 'center', 3, 2),
+                $('center', 'center', 3, 3)]
         },
         // bars
         h: [$('barResize', 'left',  2),
@@ -89,7 +92,6 @@ slate.bindAll({
         f: $.focus('Finder'),
         p: $.focus('Spotify'),
         // utility functions
-        f1: 'relaunch',
         z: 'undo',
         tab: 'hint'
     }

@@ -28,6 +28,7 @@ Plugin 'groenewege/vim-less'
 Plugin 'Chiel92/vim-autoformat'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'dagwieers/asciidoc-vim'
+Plugin 'Glench/Vim-Jinja2-Syntax'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -165,6 +166,8 @@ let g:syntastic_style_warning_symbol='Ws'
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"st-"]
+
+let g:ansible_options = {'ignore_blank_lines': 0}
 
 map <silent> <C-h> <Plug>DashSearch
 

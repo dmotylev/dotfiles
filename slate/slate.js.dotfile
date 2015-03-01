@@ -88,6 +88,7 @@ slate.bindAll({
         '2': $('toss', '1', 'resize'),
         '3': $('toss', '2', 'resize'),
         // direct focus 
+        v: $.focus('MacVim'),
         t: $.focus('iTerm'),
         f: $.focus('Finder'),
         p: $.focus('Spotify'),

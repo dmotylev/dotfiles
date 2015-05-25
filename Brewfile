@@ -31,6 +31,7 @@ install wget --with-iri
 
 # Install more recent versions of some OS X tools
 install vim --override-system-vi
+install macvim --override-system-vim --with-python3
 install homebrew/dupes/grep
 install homebrew/dupes/screen
 
@@ -46,16 +47,12 @@ install ec2-api-tools
 install ansible
 install gist
 install reattach-to-user-namespace
-install postgresql --no-tcl --no-perl
-install pgtap
 install ruby
 install npm
 install s3cmd
 install jq
 install fleetctl
 install ctags
-install docker
-install boot2docker
 install imagesnap
 install libopendkim
 

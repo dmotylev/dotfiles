@@ -10,7 +10,6 @@ cask update
 
 cask install dropbox
 cask install iterm2
-cask install atom
 cask install skype
 cask install hipchat
 cask install google-chrome
@@ -30,11 +29,6 @@ cask install seil
 cask install karabiner
 cask install spotify-notifications
 cask install little-snitch
-cask install anki
 cask install apache-directory-studio
-cask install flashlight
-cask install pgweb
-cask install tunnelblick
-cask install testflight
 cask install qlstephen
 cask install slate

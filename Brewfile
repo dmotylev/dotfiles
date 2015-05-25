@@ -30,7 +30,6 @@ install libidn
 install wget --with-iri
 
 # Install more recent versions of some OS X tools
-install vim --override-system-vi
 install macvim --override-system-vim --with-python3
 install homebrew/dupes/grep
 install homebrew/dupes/screen

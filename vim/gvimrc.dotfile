@@ -7,16 +7,11 @@ set guioptions+=LlRrb
 set guioptions-=LlRrb
 set gcr=n:blinkon0
 set lines=60
-set columns=120
+set columns=160
 set fuoptions=maxvert,maxhorz
 set wildignore+=*.o,*.obj,.git,*.6,*.a
-" set background=light
-set background=dark
 set fillchars=vert:⏐
 " set fullscreen
 set numberwidth=7
-colorscheme solarized
-set background=dark
-highlight VertSplit term=reverse guifg=#3f2f3f guibg=#2d2d2d
+highlight VertSplit guifg=#3f2f3f guibg=#151515
 set noantialias
-highlight SignColumn guibg=#002b36

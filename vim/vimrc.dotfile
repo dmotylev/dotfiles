@@ -10,13 +10,11 @@ Plugin 'gmarik/Vundle.vim'
 " load bundles from ~/.vim/bundle
 Plugin 'SirVer/ultisnips'
 Plugin 'fatih/vim-go'
-Plugin 'rizzatti/dash.vim'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'mattn/emmet-vim'
-"Plugin 'chriskempson/base16-vim'
-Plugin 'bling/vim-airline'
+Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
 Plugin 'majutsushi/tagbar'
@@ -26,9 +24,9 @@ Plugin 'scrooloose/syntastic'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'groenewege/vim-less'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'altercation/vim-colors-solarized'
 Plugin 'dagwieers/asciidoc-vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
+Plugin 'nanotech/jellybeans.vim'
 " All of your Plugins must be added before the following line
 call vundle#end()
 
@@ -95,23 +93,6 @@ let g:startify_session_dir='~/Dropbox/Vim/Sessions'
 let g:startify_change_to_vcs_root = 1
 let g:startify_session_persistence = 1
 let g:startify_restore_position = 1
-let g:startify_custom_header = [
-						\ '      ..      .                                                                                .                        ',
-						\ '   x88f` `..x88. .>                  ..                 ..                                    @88>                      ',
-						\ ' :8888   xf`*8888%     u.    u.     888>         u.    @L                   ...     ..        %8P      ..    .     :    ',
-						\ ':8888f .888  `"`     x@88k u@88c.   "8P    ...ue888b  9888i   .dL        :~""888h.:^"888:      .     .888: x888  x888.  ',
-						\ '88888'' X8888. >"8x  ^"8888""8888"    .     888R Y888r `Y888k:*888.      8X   `8888X  8888>   .@88u  ~`8888~''888X`?888f` ',
-						\ '88888  ?88888< 888>   8888  888R   u888u.  888R I888>   888E  888I     X888n. 8888X  ?888>  ''888E`   X888  888X ''888>  ',
-						\ '88888   "88888 "8%    8888  888R  `''888E   888R I888>   888E  888I     ''88888 8888X   ?**h.   888E    X888  888X ''888>  ',
-						\ '88888 ''  `8888>       8888  888R    888E   888R I888>   888E  888I       `*88 8888~ x88x.     888E    X888  888X ''888>  ',
-						\ '`8888> %  X88!        8888  888R    888E  u8888cJ888    888E  888I      ..<"  88*`  88888X    888E    X888  888X ''888>  ',
-						\ ' `888X  `~""`   :    "*88*" 8888"   888E   "*888*P"    x888N><888''         ..XC.    `*8888k   888&   "*88%""*88" ''888!` ',
-						\ '   "88k.      .~       ""   ''Y"     888E     ''Y"        "88"  888        :888888H.    `%88>   R888"    `~    "    `"`   ',
-						\ '     `""*==~~`                      888E                      88F       <  `"888888:    X"     ""                       ',
-						\ '                                    888E                     98"              %888888x.-`                               ',
-						\ '                                    888P                   ./"                  ""**""                                  ',
-						\ '                                  .J88" "                 ~`                                                            ',
-						\ ]
 
 " setup supertab completion
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
@@ -150,11 +131,25 @@ map <silent> <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize=40
 
 set laststatus=2
-let g:airline#extensions#branch#enabled = 1
-let g:airline#extensions#branch#empty_message = ''
-let g:airline#extensions#syntastic#enabled = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme='kolor'
+let g:lightline = {
+      \ 'colorscheme': 'wombat',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component': {
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
+      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
+      \ },
+      \ 'component_visible_condition': {
+      \   'readonly': '(&filetype!="help"&& &readonly)',
+      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
+      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
+      \ },
+      \ 'separator': { 'left': '⮀', 'right': '⮂' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 set noshowmode
 
 let g:signify_sign_overwrite = 0
@@ -169,10 +164,7 @@ let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " propr
 
 let g:ansible_options = {'ignore_blank_lines': 0}
 
-map <silent> <C-h> <Plug>DashSearch
-
-set background=dark
-colorscheme solarized
+colorscheme jellybeans
 
 map <silent> <C-\> :TagbarToggle<CR>
 let g:tagbar_width=40
@@ -208,7 +200,7 @@ let g:user_emmet_settings = {
 	\ 'indentation' : '    '
 \}
 
-highlight VertSplit term=standout ctermfg=10 ctermbg=0 guifg=#3f2f3f guibg=#2d2d2d
+highlight VertSplit term=standout ctermfg=234 ctermbg=233
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -216,4 +208,8 @@ set splitright
 
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 
-highlight SignColumn ctermbg=0
+highlight SignColumn ctermbg=234
+
+set relativenumber
+set number
+

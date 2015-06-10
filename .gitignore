@@ -5,3 +5,6 @@
 /git/gitconfig.dotfile
 /bash/profile.dotfile
 .*.installed_timestamp
+Session.vim
+/tmux/tmux.dotfile/plugins
+/tmux/tmux.dotfile/resurrect

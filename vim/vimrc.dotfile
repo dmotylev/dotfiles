@@ -8,6 +8,7 @@ call vundle#begin()
 " required!
 Plugin 'gmarik/Vundle.vim'
 " load bundles from ~/.vim/bundle
+Plugin 'tpope/vim-obsession'
 Plugin 'SirVer/ultisnips'
 Plugin 'fatih/vim-go'
 Plugin 'ervandew/supertab'
@@ -18,7 +19,6 @@ Plugin 'itchyny/lightline.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'mhinz/vim-signify'
 Plugin 'majutsushi/tagbar'
-Plugin 'mhinz/vim-startify'
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'scrooloose/syntastic'
 Plugin 'chase/vim-ansible-yaml'
@@ -86,14 +86,6 @@ set pumheight=15
 set grepprg=ag\ --nogroup\ --nocolor
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
-
-" setup startify
-highlight default StartifyHeader ctermfg=156 guifg=#90e060
-let g:startify_list_order = ['sessions', 'files', 'bookmarks']
-let g:startify_session_dir='~/Dropbox/Vim/Sessions'
-let g:startify_change_to_vcs_root = 1
-let g:startify_session_persistence = 1
-let g:startify_restore_position = 1
 
 " setup supertab completion
 let g:SuperTabDefaultCompletionType = "<c-x><c-o>"

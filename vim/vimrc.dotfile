@@ -28,6 +28,8 @@ Plugin 'dagwieers/asciidoc-vim'
 Plugin 'Glench/Vim-Jinja2-Syntax'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'edkolev/tmuxline.vim'
+Plugin 'tmux-plugins/vim-tmux'
+Plugin 'tmux-plugins/vim-tmux-focus-events'
 " All of your Plugins must be added before the following line
 call vundle#end()
 

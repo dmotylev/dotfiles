@@ -44,6 +44,7 @@ set t_Co=256
 set fillchars=vert:⏐
 " Allow move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
 set ww=<,>,[,]
+set mouse=a
 
 filetype plugin indent on     " required!
 

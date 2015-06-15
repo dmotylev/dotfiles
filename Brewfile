@@ -54,6 +54,7 @@ install fleetctl
 install ctags
 install imagesnap
 install libopendkim
+install entr
 
 # Remove outdated versions from the cellar
 cleanup

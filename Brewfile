@@ -55,6 +55,7 @@ install ctags
 install imagesnap
 install libopendkim
 install entr
+install stash-cli
 
 # Remove outdated versions from the cellar
 cleanup

@@ -8,6 +8,7 @@ set -g escape-time 0
 
 set-option -g prefix C-a
 unbind C-b
+bind a send-prefix
 
 set -g base-index 1
 setw -g pane-base-index 1
@@ -16,6 +17,10 @@ bind-key C-a last-window
 bind-key "|" split-window -h -c "#{pane_current_path}"
 bind-key "-" split-window -v -c "#{pane_current_path}"
 
+set -g bell-action none
+set -g visual-bell off
+setw -g monitor-activity off
+setw -g mode-keys vi
 setw -g alternate-screen on
 set -g focus-events on
 set -g mode-mouse on

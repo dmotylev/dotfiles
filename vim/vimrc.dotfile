@@ -209,3 +209,8 @@ highlight SignColumn ctermbg=234
 set relativenumber
 set number
 
+" habit breaking, habit making
+noremap <Up> <NOP>
+noremap <Down> <NOP>
+noremap <Left> <NOP>
+noremap <Right> <NOP>

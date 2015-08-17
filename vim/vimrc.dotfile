@@ -38,13 +38,14 @@ syn on
 set wrap
 set ts=4
 set title
-set shortmess=atI
+set shortmess=atIO
 set visualbell
 set t_Co=256
 set fillchars=vert:⏐
 " Allow move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
 set ww=<,>,[,]
 set mouse=a
+set backspace=indent,eol,start
 
 filetype plugin indent on     " required!
 
@@ -86,7 +87,7 @@ set pumheight=15
 
 
 " point grep command to ag
-set grepprg=ag\ --nogroup\ --nocolor
+set grepprg=ag\ --vimgrep\ $*
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
 
@@ -197,6 +198,7 @@ let g:user_emmet_settings = {
 \}
 
 highlight VertSplit term=standout ctermfg=234 ctermbg=233
+highlight Search cterm=none gui=none ctermbg=6 ctermfg=17
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow

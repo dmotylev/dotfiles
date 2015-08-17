@@ -168,7 +168,7 @@ install_binfiles () {
 
 post-install_vim () {
     info "installing vim"
-    vim +PluginInstall +qall
+    vim +PlugInstall +qall
     success "vim installed"
 }
 

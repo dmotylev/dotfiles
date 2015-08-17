@@ -1,11 +1,8 @@
 (
-    readonly vim_bundles_dir="${DOTFILE_NAME}/vim.dotfile/bundle"
-    readonly vundle_dir="${vim_bundles_dir}/Vundle.vim"
-    [ -z "$(type -p git)" ] && fail "git required for customizing ${DOTFILE_NAME}"
-    if [ -z "$(find ${vundle_dir} -type f -maxdepth 1 2> /dev/null)" ]; then
-        info "customizing ${DOTFILE_NAME}"
-        mkdir -p ${vim_bundles_dir}
-        git clone https://github.com/gmarik/Vundle.vim.git ${vundle_dir}
+    readonly plug_vim_file="${DOTFILE_NAME}/vim.dotfile/autoload/plug.vim"
+    if [[ ! -f "${plug_vim_file}" ]]; then
+    	info "customizing ${DOTFILE_NAME}"
+		curl -fLo ${DOTFILE_NAME}/vim.dotfile/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
     fi
     success "${DOTFILE_NAME} customized"
 )

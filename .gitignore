@@ -1,7 +1,6 @@
 *.DS_Store
-/vim/vim.dotfile/tmp/
-/vim/vim.dotfile/.netrwhist
-/vim/vim.dotfile/bundle/*
+/vim/vim.dotfile/autoload/
+/vim/vim.dotfile/plugged/
 /git/gitconfig.dotfile
 /bash/profile.dotfile
 .*.installed_timestamp

@@ -26,6 +26,7 @@ Plug 'nanotech/jellybeans.vim'
 Plug 'edkolev/tmuxline.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'freitass/todo.txt-vim'
 " All of your Plugins must be added before the following line
 call plug#end()
 

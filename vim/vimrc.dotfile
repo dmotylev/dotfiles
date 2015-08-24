@@ -7,7 +7,7 @@ call plug#begin()
 Plug 'tpope/vim-obsession'
 Plug 'SirVer/ultisnips'
 Plug 'fatih/vim-go'
-Plug 'ervandew/supertab'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.sh --gocode-completer' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'mattn/emmet-vim'

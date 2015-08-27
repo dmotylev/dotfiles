@@ -27,24 +27,8 @@ set -g mode-mouse on
 set -g mouse-resize-pane on
 set -g mouse-select-pane on
 set -g mouse-select-window on
+set -g detach-on-destroy off
 
 bind r source-file ~/.tmux.conf
 
-set -g @resurrect-strategy-vim 'session'
-set -g @resurrect-processes 'vim man less tail "~Vim->vim"'
-set -g @resurrect-save-bash-history 'on'
-set -g @resurrect-capture-pane-contents 'on'
-
-set -g @continuum-restore on
-set -g @continuum-boot on
-set -g @continuum-boot-options 'iterm,fullscreen'
-
 if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
-
-set -g @tpm_plugins '              \
-  tmux-plugins/tpm                 \
-  tmux-plugins/tmux-continuum      \
-  dmotylev/tmux-resurrect          \
-'
-
-run-shell ~/.tmux/plugins/tpm/tpm

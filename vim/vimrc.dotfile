@@ -27,6 +27,7 @@ Plug 'edkolev/tmuxline.vim'
 Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'freitass/todo.txt-vim'
+Plug 'jszakmeister/vim-togglecursor'
 " All of your Plugins must be added before the following line
 call plug#end()
 

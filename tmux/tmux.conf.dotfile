@@ -6,14 +6,14 @@ set -g status-utf8 on
 
 set -g escape-time 0
 
-set-option -g prefix C-a
+set-option -g prefix C-s
 unbind C-b
 bind a send-prefix
 
 set -g base-index 1
-setw -g pane-base-index 1
+setw -g pane-base-index 2
 
-bind-key C-a last-window
+bind-key C-s last-window
 bind-key "|" split-window -h -c "#{pane_current_path}"
 bind-key "-" split-window -v -c "#{pane_current_path}"
 

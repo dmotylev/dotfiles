@@ -29,7 +29,7 @@ root: ~/Workshop/tmp
 
 windows:
   - Console:
-      layout: "f15b,204x58,0,0[204x39,0,0,0,204x18,0,40,1]"
+      layout: "9a68,204x58,0,0[204x42,0,0,5,204x15,0,43,6]"
       panes:
         - " clear"
         - " echo ~/Dropbox/todo/todo.txt | entr sh -c 'clear; todo.sh view project'"

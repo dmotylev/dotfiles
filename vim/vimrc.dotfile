@@ -28,6 +28,8 @@ Plug 'tmux-plugins/vim-tmux'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'freitass/todo.txt-vim'
 Plug 'jszakmeister/vim-togglecursor'
+Plug 'cespare/vim-toml'
+Plug 'tfnico/vim-gradle'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -39,8 +41,8 @@ set title
 set shortmess=atIO
 set visualbell
 set t_Co=256
-set fillchars=vert:⏐
-" Allow move the cursor left/right to move to the previous/next line when the cursor is on the first/last character in the line.
+" Allow move the cursor left/right to move to the previous/next line when the
+" cursor is on the first/last character in the line.
 set ww=<,>,[,]
 set mouse=a
 set backspace=indent,eol,start
@@ -50,31 +52,43 @@ filetype plugin indent on     " required!
 " Highlight search terms
 set hlsearch
 set incsearch " ...dynamically as they are typed.
-" If the search term highlighting gets annoying, set a key to switch it off temporarily:
+" If the search term highlighting gets annoying, 
+" set a key to switch it off temporarily:
 nmap <silent> <Leader>n :silent :nohlsearch<CR>
 " The following will make tabs and trailing spaces visible when requested:
 set listchars=tab:•·,trail:·,eol:$,extends:❯,precedes:❮
-set fillchars=vert:⏐
-set showbreak=⎖\
+set fillchars=vert:│
+let &showbreak='↳ '
 nmap <silent> <Leader>S :set nolist!<CR>
 " The current buffer can be put to the background without writing to disk;
-" When a background buffer becomes current again, marks and undo-history are remembered.
+" When a background buffer becomes current again, 
+" marks and undo-history are remembered.
 set hidden
-" By default, Vim only remembers the last 20 commands and search patterns entered. It’s nice to boost this up:
+" By default, Vim only remembers the last 20 commands and search patterns
+" entered. It’s nice to boost this up:
 set history=1000
-" By default, pressing <TAB> in command mode will choose the first possible completion with no indication of how many others there might be. The following configuration lets you see what your other options are:
+" By default, pressing <TAB> in command mode will choose the first possible
+" completion with no indication of how many others there might be.
+" The following configuration lets you see what your other options are:
 set wildmenu
-" To have the completion behave similarly to a shell, i.e. complete only up to the point of ambiguity (while still showing you what your options are)
+" To have the completion behave similarly to a shell, 
+" i.e. complete only up to the point of ambiguity (while still showing you 
+" what your options are)
 set wildmode=list:longest
-" These two options, when set together, will make /-style searches case-sensitive only if there is a capital letter in the search expression. *-style searches continue to be consistently case-sensitive.
+" These two options, when set together, will make /-style searches
+" case-sensitive only if there is a capital letter in the search expression.
+" *-style searches continue to be consistently case-sensitive.
 set ignorecase
 set smartcase
 nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
 nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
 nmap <Leader>s :%s/\C\<<C-R>=expand('<cword>')<CR>\>//g<Left><Left>
-" Setting the option below will start the scrolling three lines before the border, keeping more context around where you’re working.
+" Setting the option below will start the scrolling three lines before
+" the border, keeping more context around where you’re working.
 set scrolloff=3
-" Swap files and backups are annoying but can save you a lot of trouble. Rather than spread them all around your filesystem, isolate them to a single directory
+" Swap files and backups are annoying but can save you a lot of trouble.
+" Rather than spread them all around your filesystem,
+" isolate them to a single directory
 set backupdir=~/.vim/tmp//,/var/tmp//,/tmp//
 set directory=~/.vim/tmp//,/var/tmp//,/tmp//
 set wildignore+=*.o,*.obj,.git,*.6,*.out,*.a,_testmain.go
@@ -127,7 +141,7 @@ let g:NERDTreeWinSize=40
 
 set laststatus=2
 let g:lightline = {
-      \ 'colorscheme': 'wombat',
+      \ 'colorscheme': 'jellybeans',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
@@ -155,7 +169,10 @@ let g:syntastic_warning_symbol='Wr'
 let g:syntastic_style_warning_symbol='Ws'
 " configure syntastic syntax checking to check on open as well as save
 let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-", " proprietary attribute \"st-"]
+let g:syntastic_html_tidy_ignore_errors=[
+						\ " proprietary attribute \"ng-", 
+						\ " proprietary attribute \"st-"
+						\ ]
 
 let g:ansible_options = {'ignore_blank_lines': 0}
 
@@ -195,8 +212,7 @@ let g:user_emmet_settings = {
 	\ 'indentation' : '    '
 \}
 
-highlight VertSplit term=standout ctermfg=234 ctermbg=233
-highlight Search cterm=none gui=none ctermbg=6 ctermfg=17
+let g:UltiSnipsExpandTrigger="<c-j>"
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -204,10 +220,18 @@ set splitright
 
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 
-highlight SignColumn ctermbg=234
+highlight VertSplit term=standout ctermfg=236 ctermbg=233
+highlight Search cterm=none gui=none ctermbg=31 ctermfg=17
+highlight SignColumn ctermbg=233
+highlight ColorColumn ctermbg=233 ctermfg=196
+highlight LineNr term=none ctermfg=234 ctermbg=233
+highlight CursorLineNr term=none ctermfg=236 ctermbg=233
+highlight! link NonText LineNr
 
 set relativenumber
 set number
+set autoread
+set colorcolumn=80
 
 " habit breaking, habit making
 noremap <Up> <NOP>

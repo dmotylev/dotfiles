@@ -1,33 +1,33 @@
 # vim: syntax=tmux
 set-option -g default-command "reattach-to-user-namespace -l bash"
 
-set -g default-terminal "screen-256color" 
-set -g status-utf8 on
+set-option -g default-terminal "screen-256color" 
+set-option -g status-utf8 on
 
-set -g escape-time 0
+set-option -g escape-time 0
 
 set-option -g prefix C-s
 unbind C-b
 bind a send-prefix
 
-set -g base-index 1
-setw -g pane-base-index 2
+set-option -g base-index 1
+set-window-option -g pane-base-index 1
 
 bind-key C-s last-window
 bind-key "|" split-window -h -c "#{pane_current_path}"
 bind-key "-" split-window -v -c "#{pane_current_path}"
 
-set -g bell-action none
-set -g visual-bell off
-setw -g monitor-activity off
-setw -g mode-keys vi
-setw -g alternate-screen on
-set -g focus-events on
-set -g mode-mouse on
-set -g mouse-resize-pane on
-set -g mouse-select-pane on
-set -g mouse-select-window on
-set -g detach-on-destroy off
+set-option -g bell-action none
+set-option -g visual-bell off
+set-window-option -g monitor-activity off
+set-window-option -g mode-keys vi
+set-window-option -g alternate-screen on
+set-option -g focus-events on
+set-option -g mode-mouse on
+set-option -g mouse-resize-pane on
+set-option -g mouse-select-pane on
+set-option -g mouse-select-window on
+set-option -g detach-on-destroy off
 
 bind r source-file ~/.tmux.conf
 

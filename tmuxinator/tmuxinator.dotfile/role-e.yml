@@ -30,10 +30,8 @@ pre_window: " export TODO_FILE=~/Dropbox/todo/role-e.todo.txt;export DONE_FILE=~
 
 windows:
   - Console:
-      layout: "0c02,204x58,0,0[204x49,0,0,33,204x8,0,50,38]"
       panes:
         - " clear"
-        - " echo ${TODO_FILE} | entr sh -c 'clear; todo.sh view project'"
   - role-e:
       layout: "f492,204x58,0,0[204x44,0,0,34,204x13,0,45{102x13,0,45,39,101x13,103,45,40}]"
       root: "~/Workshop/role-e/role-e.com"
@@ -50,8 +48,10 @@ windows:
       panes:
         - " clear"
   - capsulesapp:
+      layout: "b47a,204x58,0,0[204x44,0,0,6,204x13,0,45,10]"
       root: "~/Workshop/role-e/capsulesapp/ng-app"
       panes:
-        - " clear"
+        - " vim -S"
+        - " grunt"
 
 startup_window: Console

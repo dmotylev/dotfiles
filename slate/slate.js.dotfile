@@ -32,7 +32,7 @@ slate.bindAll({
     hyper: {
         shift: {
             // edges
-            h: [$('barResize', 'left',   3),
+            h: [$('barResize', 'left',   2),
                 $('center',    'left',   3, 3)],
             j: [$('barResize', 'bottom', 2),
                 $('center',    'bottom', 3, 3)],
@@ -42,19 +42,25 @@ slate.bindAll({
                 $('center',    'right',  3, 3)],
 
             // corners
-            y: [$('corner', 'top-left',     3, 2),
+            y: [$('corner', 'top-left',     3, 1.5),
+                $('corner', 'top-left',     3, 2),
                 $('corner', 'top-left',     3, 3)],
-            i: [$('corner', 'top-right',    3, 2),
+            i: [$('corner', 'top-right',    3, 1.5),
+                $('corner', 'top-right',    3, 2),
                 $('corner', 'top-right',    3, 3)],
-            b: [$('corner', 'bottom-left',  3, 2),
+            b: [$('corner', 'bottom-left',  3, 1.5),
+                $('corner', 'bottom-left',  3, 2),
                 $('corner', 'bottom-left',  3, 3)],
-            m: [$('corner', 'bottom-right', 3, 2),
+            m: [$('corner', 'bottom-right', 3, 1.5),
+                $('corner', 'bottom-right', 3, 2),
                 $('corner', 'bottom-right', 3, 3)],
 
             // centers
-            u: [$('center', 'top'),
+            u: [$('center', 'top', 3, 1.5),
+                $('center', 'top', 3, 2),
                 $('center', 'top', 3, 3)],
-            n: [$('center', 'bottom'),
+            n: [$('center', 'bottom', 3, 1.5),
+                $('center', 'bottom', 3, 2),
                 $('center', 'bottom', 3, 3)],
             'return': [
                 $('center', 'center', 3, 1),
@@ -62,20 +68,30 @@ slate.bindAll({
                 $('center', 'center', 3, 3)]
         },
         // bars
-        h: [$('barResize', 'left',  2),
+        h: [$('barResize', 'left',  3),
+            $('barResize', 'left',  2),
             $('barResize', 'left',  1.5)],
-        j: $('barResize', 'bottom', 2),
-        k: $('barResize', 'top',    2),
-        l: [$('barResize', 'right', 2),
+        j: [$('barResize', 'bottom', 3),
+            $('barResize', 'bottom', 2),
+            $('barResize', 'bottom', 1.5)],
+        k: [$('barResize', 'top',   3),
+            $('barResize', 'top',   2),
+            $('barResize', 'top',   1.5)],
+        l: [$('barResize', 'right', 3),
+            $('barResize', 'right', 2),
             $('barResize', 'right', 1.5)],
         // corners
-        y: [$('corner', 'top-left'),
+        y: [$('corner', 'top-left', 3),
+            $('corner', 'top-left', 2),
             $('corner', 'top-left', 1.5)],
-        i: [$('corner', 'top-right'),
+        i: [$('corner', 'top-right', 3),
+            $('corner', 'top-right', 2),
             $('corner', 'top-right', 1.5)],
-        b: [$('corner', 'bottom-left'),
+        b: [$('corner', 'bottom-left', 3),
+            $('corner', 'bottom-left', 2),
             $('corner', 'bottom-left', 1.5)],
-        m: [$('corner', 'bottom-right'),
+        m: [$('corner', 'bottom-right', 3),
+            $('corner', 'bottom-right', 2),
             $('corner', 'bottom-right', 1.5)],
         // centers
         u: $('center', 'top'),
@@ -88,12 +104,12 @@ slate.bindAll({
         '2': $('toss', '1', 'resize'),
         '3': $('toss', '2', 'resize'),
         // direct focus 
-        v: $.focus('MacVim'),
         t: $.focus('iTerm'),
         f: $.focus('Finder'),
-        p: $.focus('Spotify'),
         // utility functions
         z: 'undo',
         tab: 'hint'
     }
 });
+
+// vim: ft=javascript

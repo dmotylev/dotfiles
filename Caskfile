@@ -8,27 +8,23 @@ tap caskroom/versions
 
 cask update
 
+cask install seil
+cask install karabiner
+cask install slate
+cask install qlstephen
+cask install the-unarchiver
+cask install little-snitch
 cask install dropbox
-cask install iterm2
+cask install google-drive
 cask install skype
 cask install hipchat
 cask install google-chrome
 cask install imagealpha
 cask install imageoptim
-cask install the-unarchiver
 cask install transmission
 cask install virtualbox
-cask install spotify
 cask install evernote
 cask install kaleidoscope
 cask install vagrant
 cask install tower
-cask install github
-cask install google-drive
-cask install seil
-cask install karabiner
-cask install spotify-notifications
-cask install little-snitch
 cask install apache-directory-studio
-cask install qlstephen
-cask install slate

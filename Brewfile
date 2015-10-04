@@ -32,7 +32,6 @@ install wget --with-iri
 # Install more recent versions of some OS X tools
 install macvim --override-system-vim --with-python3
 install homebrew/dupes/grep
-install homebrew/dupes/screen
 
 # Install other useful binaries
 install go --cross-compile-common
@@ -50,7 +49,6 @@ install ruby
 install npm
 install s3cmd
 install jq
-install fleetctl
 install ctags
 install imagesnap
 install libopendkim

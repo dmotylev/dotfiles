@@ -8,6 +8,14 @@
 #
 # Run ./set-defaults.sh and you'll be good to go.
 
+# Set computer name 
+my_hostname="myba2"
+sudo scutil --set ComputerName "${my_hostname}"
+sudo scutil --set HostName "${my_hostname}"
+sudo scutil --set LocalHostName "${my_hostname}"
+sudo defaults write /Library/Preferences/SystemConfiguration/com.apple.smb.server NetBIOSName -string "${my_hostname}"
+unset my_hostname
+
 # Restart automatically if the computer freezes
 sudo systemsetup -setrestartfreeze on
 
@@ -25,6 +33,9 @@ defaults write NSGlobalDomain KeyRepeat -int 0
 
 # Disable auto-correct
 defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+# Enable subpixel font rendering on non-Apple LCDs
+defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
 # Avoid creating .DS_Store files on network volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
@@ -85,6 +96,14 @@ defaults write com.googlecode.iterm2 PromptOnQuit -bool false
 # Prevent Time Machine from prompting to use new hard drives as backup volume
 defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
+# Delete the hiding Dock Delay
+defaults write com.apple.dock autohide-delay -float 0; killall Dock
+
+# Change Caps Lock modifier to 'No Action' (Logout/Login required)
+# find correct ProductId and VendorId for your keyboard
+# ioreg -n IOHIDKeyboard -r | grep -e \"VendorID\" -e \"Product\" -e \"ProductID\"
+defaults -currentHost write -g com.apple.keyboard.modifiermapping.1452-588-0 -array-add '<dict><key>HIDKeyboardModifierMappingDst</key><integer>-1</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>'
+
 ###############################################################################
 # Activity Monitor                                                            #
 ###############################################################################
@@ -120,6 +139,13 @@ defaults write org.m0k.transmission WarningDonate -bool false
 
 # Hide the legal disclaimer
 defaults write org.m0k.transmission WarningLegal -bool false
+
+if [ -f /Applications/Seil.app/Contents/Library/bin/seil ]; then
+	seil="/Applications/Seil.app/Contents/Library/bin/seil"
+	$seil set keycode_capslock 80
+	$seil set enable_capslock 1
+	unset seil
+fi
 
 if [ -f /Applications/Karabiner.app/Contents/Library/bin/karabiner ]; then
 	ln --symbolic --force "${DOTFILES_ROOT}/Karabiner/private.xml" "${HOME}/Library/Application Support/Karabiner/private.xml"

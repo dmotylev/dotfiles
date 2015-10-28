@@ -38,13 +38,13 @@ install go --cross-compile-common
 install gnupg
 install oath-toolkit
 install ag
-install tmux
+install tmux --HEAD
 install git
 install hub
 install ec2-api-tools
 install ansible
 install gist
-install reattach-to-user-namespace
+install reattach-to-user-namespace ---with-wrap-pbcopy-and-pbpaste
 install ruby
 install npm
 install s3cmd

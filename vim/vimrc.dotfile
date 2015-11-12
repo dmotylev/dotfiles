@@ -1,13 +1,21 @@
+﻿set encoding=utf-8
 set nocompatible               " be iMproved
 filetype off                   " required!
+
+if version >= 702
+	autocmd BufWinLeave * call clearmatches()
+endif
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim/
 call plug#begin()
+" Plug 'vim-scripts/listmaps.vim'
+Plug 'nanotech/jellybeans.vim'
 Plug 'tpope/vim-obsession'
+Plug 'rking/ag.vim'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
 Plug 'SirVer/ultisnips'
 Plug 'fatih/vim-go'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'mattn/emmet-vim'
@@ -15,19 +23,16 @@ Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'mhinz/vim-signify'
 Plug 'majutsushi/tagbar'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'scrooloose/syntastic'
+Plug 'jszakmeister/vim-togglecursor'
+Plug 'tmux-plugins/vim-tmux-focus-events'
+Plug 'cakebaker/scss-syntax.vim'
 Plug 'chase/vim-ansible-yaml'
 Plug 'groenewege/vim-less'
-Plug 'Chiel92/vim-autoformat'
 Plug 'dagwieers/asciidoc-vim'
 Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'nanotech/jellybeans.vim'
-Plug 'edkolev/tmuxline.vim'
 Plug 'tmux-plugins/vim-tmux'
-Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'freitass/todo.txt-vim'
-Plug 'jszakmeister/vim-togglecursor'
 Plug 'cespare/vim-toml'
 Plug 'tfnico/vim-gradle'
 " All of your Plugins must be added before the following line
@@ -47,7 +52,7 @@ set ww=<,>,[,]
 set mouse=a
 set backspace=indent,eol,start
 
-filetype plugin indent on     " required!
+filetype plugin indent on " required!
 
 " Highlight search terms
 set hlsearch
@@ -56,7 +61,7 @@ set incsearch " ...dynamically as they are typed.
 " set a key to switch it off temporarily:
 nmap <silent> <Leader>n :silent :nohlsearch<CR>
 " The following will make tabs and trailing spaces visible when requested:
-set listchars=tab:•·,trail:·,eol:$,extends:❯,precedes:❮
+set listchars=tab:◦·,trail:·,eol:$
 set fillchars=vert:│
 let &showbreak='↳ '
 nmap <silent> <Leader>S :set nolist!<CR>
@@ -97,14 +102,10 @@ set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,longest
 set pumheight=15
 
-
 " point grep command to ag
 set grepprg=ag\ --vimgrep\ $*
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
-
-" setup supertab completion
-let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " setup vim-go
 let g:go_fmt_command = "goimports"
@@ -155,9 +156,7 @@ let g:lightline = {
       \   'readonly': '(&filetype!="help"&& &readonly)',
       \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '⮀', 'right': '⮂' },
-      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
       \ }
 set noshowmode
 
@@ -227,6 +226,7 @@ highlight ColorColumn ctermbg=233 ctermfg=196
 highlight LineNr term=none ctermfg=234 ctermbg=233
 highlight CursorLineNr term=none ctermfg=236 ctermbg=233
 highlight! link NonText LineNr
+highlight! link SpecialKey LineNr
 
 set relativenumber
 set number

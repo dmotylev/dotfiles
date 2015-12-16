@@ -6,35 +6,34 @@ if version >= 702
 	autocmd BufWinLeave * call clearmatches()
 endif
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim/
 call plug#begin()
-" Plug 'vim-scripts/listmaps.vim'
+" general
 Plug 'nanotech/jellybeans.vim'
+Plug 'itchyny/lightline.vim'
+Plug 'wikitopian/hardmode'
 Plug 'tpope/vim-obsession'
 Plug 'rking/ag.vim'
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --gocode-completer' }
-Plug 'SirVer/ultisnips'
-Plug 'fatih/vim-go'
 Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/nerdtree'
-Plug 'mattn/emmet-vim'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
 Plug 'majutsushi/tagbar'
-Plug 'scrooloose/syntastic'
+Plug 'SirVer/ultisnips'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
 Plug 'jszakmeister/vim-togglecursor'
 Plug 'tmux-plugins/vim-tmux-focus-events'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'chase/vim-ansible-yaml'
-Plug 'groenewege/vim-less'
-Plug 'dagwieers/asciidoc-vim'
-Plug 'Glench/Vim-Jinja2-Syntax'
-Plug 'tmux-plugins/vim-tmux'
-Plug 'freitass/todo.txt-vim'
-Plug 'cespare/vim-toml'
-Plug 'tfnico/vim-gradle'
+" Plug 'scrooloose/syntastic'
+" language specific
+Plug 'fatih/vim-go'
+" Plug 'garyburd/go-explorer', { 'do': 'go get -u github.com/garyburd/go-explorer/src/getool' }
+" Plug 'mattn/emmet-vim'
+" Plug 'cakebaker/scss-syntax.vim'
+" Plug 'chase/vim-ansible-yaml'
+" Plug 'groenewege/vim-less'
+" Plug 'dagwieers/asciidoc-vim'
+" Plug 'Glench/Vim-Jinja2-Syntax'
+" Plug 'tmux-plugins/vim-tmux'
+" Plug 'cespare/vim-toml'
+" Plug 'tfnico/vim-gradle'
 " All of your Plugins must be added before the following line
 call plug#end()
 
@@ -97,6 +96,10 @@ set scrolloff=3
 set backupdir=~/.vim/tmp//,/var/tmp//,/tmp//
 set directory=~/.vim/tmp//,/var/tmp//,/tmp//
 set wildignore+=*.o,*.obj,.git,*.6,*.out,*.a,_testmain.go
+set undofile
+set undodir=~/.vim/undo
+set undolevels=1000
+set undoreload=10000
 " setup omnicomplete
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,longest
@@ -111,9 +114,11 @@ set grepformat=%f:%l:%c:%m
 let g:go_fmt_command = "goimports"
 let g:go_fmt_autosave = 1
 let g:go_fmt_fail_silently = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
+" let g:go_highlight_structs = 1
+" let g:go_highlight_operators = 1
+" let g:go_highlight_build_constraints = 1
 let g:go_auto_type_info = 1
 
 au FileType go nmap <leader>r <Plug>(go-run)
@@ -121,6 +126,8 @@ au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
 au FileType go nmap <leader>c <Plug>(go-coverage)
 au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <Leader>d <Plug>(go-doc)
+au FileType go nmap <Leader>l :GoMetaLinter<CR>
 
 " setup CtrlP
 let g:ctrlp_cmd='CtrlPMixed'
@@ -172,6 +179,8 @@ let g:syntastic_html_tidy_ignore_errors=[
 						\ " proprietary attribute \"ng-", 
 						\ " proprietary attribute \"st-"
 						\ ]
+let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
+let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
 
 let g:ansible_options = {'ignore_blank_lines': 0}
 
@@ -211,7 +220,9 @@ let g:user_emmet_settings = {
 	\ 'indentation' : '    '
 \}
 
-let g:UltiSnipsExpandTrigger="<c-j>"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -234,7 +245,5 @@ set autoread
 set colorcolumn=80
 
 " habit breaking, habit making
-noremap <Up> <NOP>
-noremap <Down> <NOP>
-noremap <Left> <NOP>
-noremap <Right> <NOP>
+autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
+let g:HardMode_level='wannabe'

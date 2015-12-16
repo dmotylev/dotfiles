@@ -7,3 +7,4 @@ alias ldapsearch='ldapsearch -y ~/.ldapsearch -H ldaps://ldap.2reallife.net:636 
 alias rfm='mpc clear && mpc add "http://mp3lg4.tdf-cdn.com/9915/rfm_122021.mp3" && mpc play'
 alias t='todo.sh'
 complete -F _todo t
+alias e='$EDITOR'

@@ -1,35 +1,31 @@
 # vim: syntax=tmux
 
 set-option -g default-terminal "screen-256color" 
-set-option -g status-utf8 on
 
-set-option -g escape-time 10
-
-set-option -g prefix C-s
-unbind-key C-b
+set-option -g escape-time 0
 
 set-option -g base-index 1
 set-window-option -g pane-base-index 1
 
-bind-key C-s last-window
+bind-key C-b last-window
 bind-key "|" split-window -h -c "#{pane_current_path}"
 bind-key "-" split-window -v -c "#{pane_current_path}"
 
 set-window-option -g monitor-activity off
 set-window-option -g mode-keys vi
 set-window-option -g alternate-screen on
-set-window-option -g utf8 on
 
 set-option -g bell-action none
 set-option -g visual-bell off
 
 set-option -g focus-events on
 set-option -g mouse on
-set-option -g mouse-utf8 on
 set-option -g detach-on-destroy on
 
 bind-key -t vi-copy y copy-pipe "pbcopy"
 
 bind-key r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
+
+bind-key c new-window -n Shell
 
 if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"

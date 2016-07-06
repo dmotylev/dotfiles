@@ -5,3 +5,5 @@ fi
 if [ -f ${brew_prefix}/share/bash-completion/bash_completion ]; then
 	. ${brew_prefix}/share/bash-completion/bash_completion
 fi
+
+complete -C aws_completer aws

@@ -23,7 +23,10 @@ Plug 'jszakmeister/vim-togglecursor'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 " Plug 'scrooloose/syntastic'
 " language specific
+Plug 'pearofducks/ansible-vim'
+Plug 'hashivim/vim-terraform'
 Plug 'fatih/vim-go'
+Plug 'sourcegraph/sourcegraph-vim', {'for': ['go'], 'do': 'go get -u github.com/sqs/godefinfo'}
 " Plug 'garyburd/go-explorer', { 'do': 'go get -u github.com/garyburd/go-explorer/src/getool' }
 " Plug 'mattn/emmet-vim'
 " Plug 'cakebaker/scss-syntax.vim'
@@ -40,7 +43,13 @@ call plug#end()
 " generic options
 syn on
 set wrap
-set ts=4
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+set autoindent
+set smartindent
+
 set title
 set shortmess=atIO
 set visualbell
@@ -230,11 +239,11 @@ set splitright
 
 au BufRead,BufNewFile Vagrantfile set filetype=ruby
 
-highlight VertSplit term=standout ctermfg=236 ctermbg=233
+highlight VertSplit term=standout ctermfg=237 ctermbg=233
 highlight Search cterm=none gui=none ctermbg=31 ctermfg=17
 highlight SignColumn ctermbg=233
 highlight ColorColumn ctermbg=233 ctermfg=196
-highlight LineNr term=none ctermfg=234 ctermbg=233
+highlight LineNr term=none ctermfg=235 ctermbg=233
 highlight CursorLineNr term=none ctermfg=236 ctermbg=233
 highlight! link NonText LineNr
 highlight! link SpecialKey LineNr
@@ -247,3 +256,6 @@ set colorcolumn=80
 " habit breaking, habit making
 autocmd VimEnter,BufNewFile,BufReadPost * silent! call HardMode()
 let g:HardMode_level='wannabe'
+
+autocmd BufNewFile,BufRead *.json.tpl set ft=json
+autocmd BufNewFile,BufRead *.tfstate set ft=json

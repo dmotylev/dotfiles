@@ -26,6 +26,9 @@ bind-key -t vi-copy y copy-pipe "pbcopy"
 
 bind-key r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
 
-bind-key c new-window -n Shell
+bind-key c new-window -n Console
 
 if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
+
+if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
+

@@ -40,7 +40,6 @@ install oath-toolkit
 install ag
 install tmux --HEAD
 install git
-install hub
 install ec2-api-tools
 install ansible
 install gist

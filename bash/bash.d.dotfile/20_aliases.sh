@@ -1,4 +1,3 @@
-alias ..='cd ..'
 alias -- -="cd -"
 alias g='egrep'
 alias gam='python /usr/local/gam/gam.py'

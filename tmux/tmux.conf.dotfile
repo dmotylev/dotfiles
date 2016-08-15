@@ -1,15 +1,12 @@
 # vim: syntax=tmux
 
 set-option -g default-terminal "screen-256color" 
-
 set-option -g escape-time 0
+set-option -g default-shell "/usr/local/bin/bash"
 
+set-option -g renumber-windows on
 set-option -g base-index 1
 set-window-option -g pane-base-index 1
-
-bind-key C-b last-window
-bind-key "|" split-window -h -c "#{pane_current_path}"
-bind-key "-" split-window -v -c "#{pane_current_path}"
 
 set-window-option -g monitor-activity off
 set-window-option -g mode-keys vi
@@ -19,10 +16,30 @@ set-option -g bell-action none
 set-option -g visual-bell off
 
 set-option -g focus-events on
+set-option -g terminal-overrides 'xterm*:smcup@:rmcup@'
 set-option -g mouse on
 set-option -g detach-on-destroy on
 
+set-option -g set-titles on
+set-option -g set-titles-string "#T"
+
+bind-key C-b last-window
+
+bind-key s split-window -h -c "#{pane_current_path}"
+bind-key v split-window -v -c "#{pane_current_path}"
+
+bind-key | select-layout even-horizontal
+bind-key = select-layout even-vertical
+
 bind-key -t vi-copy y copy-pipe "pbcopy"
+bind-key -t vi-copy v begin-selection
+
+bind-key J resize-pane -D 5
+bind-key K resize-pane -U 5
+bind-key H resize-pane -L 5
+bind-key L resize-pane -R 5
+
+bind-key x kill-pane
 
 bind-key r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
 

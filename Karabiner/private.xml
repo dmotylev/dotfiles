@@ -15,6 +15,33 @@
     </autogen>
 </item>
 <item>
+    <name>Swap § with ` on Apple Keyboard</name>
+    <identifier>private.swap_tilde</identifier>
+    <device_only>DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256</identifier>
+    <autogen>__KeyToKey__ KeyCode::DANISH_DOLLAR,   KeyCode::BACKQUOTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::BACKQUOTE,       KeyCode::DANISH_DOLLAR</autogen>
+</item>
+<item>
+    <name>Functional Keys to F1..F12 (Apple Keyboard Only)</name>
+    <identifier>private.disable_functionals_on_apple_keyboard</identifier>
+    <device_only>DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256</identifier>
+    <autogen>__KeyToKey__ ConsumerKeyCode::BRIGHTNESS_DOWN,     KeyCode::F1</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRIGHTNESS_DOWN,             KeyCode::F1</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::BRIGHTNESS_UP,       KeyCode::F2</autogen>
+    <autogen>__KeyToKey__ KeyCode::BRIGHTNESS_UP,               KeyCode::F2</autogen>
+    <autogen>__KeyToKey__ KeyCode::EXPOSE_ALL,                  KeyCode::F3</autogen>
+    <autogen>__KeyToKey__ KeyCode::DASHBOARD,                   KeyCode::F4</autogen>
+    <autogen>__KeyToKey__ KeyCode::LAUNCHPAD,                   KeyCode::F4</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::KEYBOARDLIGHT_LOW,   KeyCode::F5</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::KEYBOARDLIGHT_HIGH,  KeyCode::F6</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::MUSIC_PREV,          KeyCode::F7</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::MUSIC_PLAY,          KeyCode::F8</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::MUSIC_NEXT,          KeyCode::F9</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::VOLUME_MUTE,         KeyCode::F10</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::VOLUME_DOWN,         KeyCode::F11</autogen>
+    <autogen>__KeyToKey__ ConsumerKeyCode::VOLUME_UP,           KeyCode::F12</autogen>
+</item>
+<item>
     <name>Use the correct shift keys.</name>
     <identifier>private.correct_shift_keys</identifier>
 

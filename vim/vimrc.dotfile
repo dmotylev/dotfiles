@@ -1,85 +1,9 @@
-﻿set encoding=utf-8
-set nocompatible               " be iMproved
-filetype off                   " required!
-
-if version >= 702
-	autocmd BufWinLeave * call clearmatches()
-endif
-
-call plug#begin()
-" general
-Plug 'nanotech/jellybeans.vim'
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-obsession'
-Plug 'rking/ag.vim'
-Plug 'kien/ctrlp.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-Plug 'majutsushi/tagbar', { 'on': 'TagbarToggle' }
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
-Plug 'jszakmeister/vim-togglecursor'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-" language specific
-Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
-Plug 'hashivim/vim-terraform'
-Plug 'fatih/vim-go', {'for': ['go']}
-Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
-" Plug 'garyburd/go-explorer', { 'do': 'go get -u github.com/garyburd/go-explorer/src/getool' }
-" Plug 'mattn/emmet-vim'
-" Plug 'cakebaker/scss-syntax.vim'
-" Plug 'chase/vim-ansible-yaml'
-" Plug 'groenewege/vim-less'
-" Plug 'dagwieers/asciidoc-vim'
-" Plug 'Glench/Vim-Jinja2-Syntax'
-" Plug 'cespare/vim-toml'
-" Plug 'tfnico/vim-gradle'
-" All of your Plugins must be added before the following line
-call plug#end()
-
-" generic options
-syn on
+﻿""" GENERAL CONFIG
 set wrap
+set colorcolumn=80
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set smarttab
-set autoindent
-set smartindent
-
-set title
-set shortmess=atIO
-set visualbell
-set t_Co=256
-" Allow move the cursor left/right to move to the previous/next line when the
-" cursor is on the first/last character in the line.
-set ww=<,>,[,]
-set mouse=a
-set backspace=indent,eol,start
-
-filetype plugin indent on " required!
-
-" Highlight search terms
-set hlsearch
-set incsearch " ...dynamically as they are typed.
-" If the search term highlighting gets annoying, 
-" set a key to switch it off temporarily:
-nmap <silent> <Leader>n :silent :nohlsearch<CR>
-" The following will make tabs and trailing spaces visible when requested:
-set listchars=tab:◦·,trail:·,eol:$
-set fillchars=vert:│
-let &showbreak='↳ '
-nmap <silent> <Leader>S :set nolist!<CR>
-" The current buffer can be put to the background without writing to disk;
-" When a background buffer becomes current again, 
-" marks and undo-history are remembered.
-set hidden
-" By default, Vim only remembers the last 20 commands and search patterns
-" entered. It’s nice to boost this up:
-set history=1000
-" By default, pressing <TAB> in command mode will choose the first possible
-" completion with no indication of how many others there might be.
-" The following configuration lets you see what your other options are:
-set wildmenu
 " To have the completion behave similarly to a shell, 
 " i.e. complete only up to the point of ambiguity (while still showing you 
 " what your options are)
@@ -89,12 +13,14 @@ set wildmode=list:longest
 " *-style searches continue to be consistently case-sensitive.
 set ignorecase
 set smartcase
-nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
-nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
-nmap <Leader>s :%s/\C\<<C-R>=expand('<cword>')<CR>\>//g<Left><Left>
-" Setting the option below will start the scrolling three lines before
-" the border, keeping more context around where you’re working.
-set scrolloff=3
+set title
+set shortmess=atIO
+set visualbell
+set t_Co=256
+" Allow move the cursor left/right to move to the previous/next line when the
+" cursor is on the first/last character in the line.
+set whichwrap=<,>,[,]
+set mouse=a
 " Swap files and backups are annoying but can save you a lot of trouble.
 " Rather than spread them all around your filesystem,
 " isolate them to a single directory
@@ -105,54 +31,82 @@ set undofile
 set undodir=~/.vim/undo
 set undolevels=1000
 set undoreload=10000
+set noshowmode
+" Open new split panes to right and bottom, which feels more natural
+set splitbelow
+set splitright
+" Automatically read file if it was changed outside
+set autoread
+
+nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
+nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
+nmap <Leader>s :%s/\C\<<C-R>=expand('<cword>')<CR>\>//g<Left><Left>
+
 " setup omnicomplete
 set omnifunc=syntaxcomplete#Complete
 set completeopt=menuone,longest
 set pumheight=15
 
+" Optimize rendering
+set nocursorline
+set nocursorcolumn
+syntax sync minlines=256
+syntax sync maxlines=256
+set synmaxcol=256
+" Warning: Line numbers in gutter make vim slow
+nmap <C-N><C-N> :set invrelativenumber<CR>
+
+""" Load plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+	autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-obsession'
+Plug 'kien/ctrlp.vim'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'roxma/vim-tmux-focus-events'
+"" language specific
+Plug 'fatih/vim-go', {'for': ['go']}
+Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
+"Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
+"Plug 'chase/vim-ansible-yaml'
+"Plug 'Glench/Vim-Jinja2-Syntax'
+"Plug 'hashivim/vim-terraform'
+"Plug 'mattn/emmet-vim'
+"Plug 'cakebaker/scss-syntax.vim'
+"Plug 'groenewege/vim-less'
+"Plug 'dagwieers/asciidoc-vim'
+"Plug 'cespare/vim-toml'
+"Plug 'tfnico/vim-gradle'
+call plug#end()
+
+""" PLUGINS' CONFIG
+if filereadable( expand("$HOME/.vim/plugged/jellybeans.vim/colors/jellybeans.vim") )
+	colorscheme jellybeans
+    if &t_Co == 256 && g:colors_name =~ "jellybeans"
+        highlight ColorColumn ctermfg=202 ctermbg=none
+        highlight CursorLineNr ctermfg=202 ctermbg=none
+        highlight LineNr ctermfg=235 ctermbg=none
+        highlight! link NonText LineNr
+        highlight! link SpecialKey LineNr
+        highlight VertSplit ctermfg=234 ctermbg=none
+        highlight SignColumn ctermbg=none
+        highlight Search cterm=underline ctermfg=172 ctermbg=236
+    endif
+endif
+
 " point grep command to ag
-set grepprg=ag\ --vimgrep\ $*
+set grepprg=ag\ --skip-vcs-ignores\ --vimgrep\ $*
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
 
-" setup vim-go
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
-let g:go_fmt_fail_silently = 1
-" let g:go_highlight_functions = 1
-" let g:go_highlight_methods = 1
-" let g:go_highlight_structs = 1
-" let g:go_highlight_operators = 1
-" let g:go_highlight_build_constraints = 1
-let g:go_auto_type_info = 1
-
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>c <Plug>(go-coverage)
-au FileType go nmap <Leader>e <Plug>(go-rename)
-au FileType go nmap <Leader>d <Plug>(go-doc)
-au FileType go nmap <Leader>l :GoMetaLinter<CR>
-
-" setup CtrlP
-let g:ctrlp_cmd='CtrlPMixed'
-let g:ctrlp_mruf_max = 3
-let g:ctrlp_mruf_relative = 1
-let g:ctrlp_working_path_mode = 'r'
-let g:ctrlp_switch_buffer = 'Et'
-let g:ctrlp_lazy_update = 1
-let g:ctrlp_user_command = {
-	\ 'types': {
-		\ 1:['.git', 'cd %s && git ls-files']
-	\ },
-	\ 'fallback': 'ag %s -l --nocolor -g ""'
-	\}
-
-" set up NERDtree
-map <silent> <C-n> :NERDTreeToggle<CR>
-let g:NERDTreeWinSize=40
-
-set laststatus=2
 let g:lightline = {
       \ 'colorscheme': 'jellybeans',
       \ 'active': {
@@ -170,86 +124,44 @@ let g:lightline = {
       \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
       \ }
       \ }
-set noshowmode
 
-let g:signify_sign_overwrite = 0
+" CtrlP
+let g:ctrlp_cmd='CtrlP'
+let g:ctrlp_working_path_mode = 'ra'
+let g:ctrlp_switch_buffer = 'Et'
+let g:ctrlp_user_command = {
+	\ 'types': {
+	\   1:['.git', 'cd %s && git ls-files -co --exclude-standard']
+	\ },
+	\ 'fallback': 'ag %s -l --nocolor -g ""'
+	\ }
 
-let g:syntastic_error_symbol='Er'
-let g:syntastic_style_error_symbol='Es'
-let g:syntastic_warning_symbol='Wr'
-let g:syntastic_style_warning_symbol='Ws'
-" configure syntastic syntax checking to check on open as well as save
-let g:syntastic_check_on_open=1
-let g:syntastic_html_tidy_ignore_errors=[
-						\ " proprietary attribute \"ng-", 
-						\ " proprietary attribute \"st-"
-						\ ]
-let g:syntastic_go_checkers = ['golint', 'govet', 'errcheck']
-let g:syntastic_mode_map = { 'mode': 'active', 'passive_filetypes': ['go'] }
+" setup vim-go
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
+let g:go_fmt_fail_silently = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+let g:go_auto_type_info = 1
+let g:go_def_reuse_buffer = 1
+
+au FileType go nmap <leader>r <Plug>(go-run)
+au FileType go nmap <leader>b <Plug>(go-build)
+au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>c <Plug>(go-coverage)
+au FileType go nmap <Leader>e <Plug>(go-rename)
+au FileType go nmap <Leader>d <Plug>(go-doc)
+au FileType go nmap <Leader>l :GoMetaLinter<CR>
+
+let g:SOURCEGRAPH_AUTO = "false"
+nnoremap <F2> :GRAPH<CR>
 
 let g:ansible_options = {'ignore_blank_lines': 0}
-
-colorscheme jellybeans
-
-map <silent> <C-\> :TagbarToggle<CR>
-let g:tagbar_width=40
-let g:tagbar_type_go = {
-	\ 'ctagstype': 'go',
-	\ 'kinds' : [
-		\ 'p:package',
-		\ 'i:imports:1',
-		\ 'c:constants',
-		\ 'v:variables',
-		\ 't:types',
-		\ 'n:interfaces',
-		\ 'w:fields',
-		\ 'e:embedded',
-		\ 'm:methods',
-		\ 'r:constructor',
-		\ 'f:functions'
-	\ ],
-	\ 'sro' : '.',
-	\ 'kind2scope' : {
-		\ 't' : 'ctype',
-		\ 'n' : 'ntype'
-	\ },
-	\ 'scope2kind' : {
-		\ 'ctype' : 't',
-		\ 'ntype' : 'n'
-	\ },
-	\ 'ctagsbin' : 'gotags',
-	\ 'ctagsargs' : '-sort -silent'
-\ }
-
-let g:user_emmet_settings = {
-	\ 'indentation' : '    '
-\}
-
-let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<tab>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-
 let g:terraform_fmt_on_save=1
 
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-
-au BufRead,BufNewFile Vagrantfile set filetype=ruby
-
-highlight VertSplit term=standout ctermfg=237 ctermbg=233
-highlight Search cterm=none gui=none ctermbg=31 ctermfg=17
-highlight SignColumn ctermbg=233
-highlight ColorColumn ctermbg=233 ctermfg=196
-highlight LineNr term=none ctermfg=235 ctermbg=233
-highlight CursorLineNr term=none ctermfg=236 ctermbg=233
-highlight! link NonText LineNr
-highlight! link SpecialKey LineNr
-
-set relativenumber
-set number
-set autoread
-set colorcolumn=80
-
+autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead *.json.tpl set ft=json
 autocmd BufNewFile,BufRead *.tfstate set ft=json

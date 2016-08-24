@@ -106,7 +106,7 @@ if globpath(&rtp, 'colors/jellybeans.vim') != ""
     \   'ColorColumn': { '256ctermfg': '202', '256ctermbg': '233' },
     \   'CursorLineNr': { '256ctermfg': '235', '256ctermbg': '233' },
     \   'SignColumn': { '256ctermbg': '233' },
-    \   'Search': { '256cterm': 'none', '256ctermfg': '172', '256ctermbg': '237' },
+    \   'Search': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
     \}
 	colorscheme jellybeans
     if &t_Co == 256 && g:colors_name =~ "jellybeans"

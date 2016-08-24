@@ -26,8 +26,8 @@ set-option -g set-titles-string "#T"
 bind-key C-b last-window
 
 unbind-key "\""
-bind-key s split-window -h -c "#{pane_current_path}"
-bind-key v split-window -v -c "#{pane_current_path}"
+bind-key s split-window -v -c "#{pane_current_path}"
+bind-key v split-window -h -c "#{pane_current_path}"
 
 bind-key | select-layout even-horizontal
 bind-key = select-layout even-vertical

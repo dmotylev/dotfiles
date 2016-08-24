@@ -42,6 +42,22 @@
     <autogen>__KeyToKey__ ConsumerKeyCode::VOLUME_UP,           KeyCode::F12</autogen>
 </item>
 <item>
+    <name>Fn + F1..F12 to Functional Keys (Apple Keyboard Only)</name>
+    <identifier>private.use_functional_on_apple_keyboard</identifier>
+    <device_only>DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256</identifier>
+    <autogen>__KeyToKey__ KeyCode::F1, ModifierFlag::FN,        ConsumerKeyCode::BRIGHTNESS_DOWN</autogen>
+    <autogen>__KeyToKey__ KeyCode::F2, ModifierFlag::FN,        ConsumerKeyCode::BRIGHTNESS_UP</autogen>
+    <autogen>__KeyToKey__ KeyCode::F2, ModifierFlag::FN,        KeyCode::BRIGHTNESS_UP</autogen>
+    <autogen>__KeyToKey__ KeyCode::F3, ModifierFlag::FN,        KeyCode::EXPOSE_ALL</autogen>
+    <autogen>__KeyToKey__ KeyCode::F4, ModifierFlag::FN,        KeyCode::LAUNCHPAD</autogen>
+    <autogen>__KeyToKey__ KeyCode::F7, ModifierFlag::FN,        ConsumerKeyCode::MUSIC_PREV</autogen>
+    <autogen>__KeyToKey__ KeyCode::F8, ModifierFlag::FN,        ConsumerKeyCode::MUSIC_PLAY</autogen>
+    <autogen>__KeyToKey__ KeyCode::F9, ModifierFlag::FN,        ConsumerKeyCode::MUSIC_NEXT</autogen>
+    <autogen>__KeyToKey__ KeyCode::F10, ModifierFlag::FN,       ConsumerKeyCode::VOLUME_MUTE</autogen>
+    <autogen>__KeyToKey__ KeyCode::F11, ModifierFlag::FN,       ConsumerKeyCode::VOLUME_DOWN</autogen>
+    <autogen>__KeyToKey__ KeyCode::F12, ModifierFlag::FN,       ConsumerKeyCode::VOLUME_UP</autogen>
+</item>
+<item>
     <name>Use the correct shift keys.</name>
     <identifier>private.correct_shift_keys</identifier>
 

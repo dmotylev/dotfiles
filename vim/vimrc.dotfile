@@ -76,6 +76,7 @@ Plug 'SirVer/ultisnips'
 "" language specific
 Plug 'fatih/vim-go', {'for': ['go']}
 Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
+Plug 'kannokanno/previm', {'for': ['markdown']}
 "Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
 "Plug 'chase/vim-ansible-yaml'
 "Plug 'Glench/Vim-Jinja2-Syntax'
@@ -202,6 +203,7 @@ au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsJumpBackwardTrigger . " 
 let g:UltiSnipsListSnippets = "<F12>"
 let g:ansible_options = {'ignore_blank_lines': 0}
 let g:terraform_fmt_on_save=1
+let g:previm_open_cmd = 'open -a Google\ Chrome'
 
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead *.json.tpl set ft=json

@@ -100,16 +100,18 @@ call plug#end()
 
 """ PLUGINS' CONFIG
 if globpath(&rtp, 'colors/jellybeans.vim') != ""
+    let g:jellybeans_overrides = {
+    \   'background': { '256ctermbg': '233' },
+    \   'VertSplit': { '256ctermfg': '234', '256ctermbg': '233' },
+    \   'ColorColumn': { '256ctermfg': '202', '256ctermbg': '233' },
+    \   'CursorLineNr': { '256ctermfg': '235', '256ctermbg': '233' },
+    \   'SignColumn': { '256ctermbg': '233' },
+    \   'Search': { '256cterm': 'none', '256ctermfg': '172', '256ctermbg': '237' },
+    \}
 	colorscheme jellybeans
     if &t_Co == 256 && g:colors_name =~ "jellybeans"
-        highlight ColorColumn ctermfg=202 ctermbg=none
-        highlight CursorLineNr ctermfg=202 ctermbg=none
-        highlight LineNr ctermfg=235 ctermbg=none
         highlight! link NonText LineNr
         highlight! link SpecialKey LineNr
-        highlight VertSplit ctermfg=234 ctermbg=none
-        highlight SignColumn ctermbg=none
-        highlight Search cterm=none ctermfg=172 ctermbg=237
     endif
 endif
 
@@ -176,7 +178,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
     autocmd FileType go nmap <leader>r <Plug>(go-run)
     autocmd FileType go nmap <leader>t <Plug>(go-test)
-    autocmd FileType go nmap <leader>c <Plug>(go-coverage)
+    autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
     autocmd FileType go nmap <Leader>e <Plug>(go-rename)
     autocmd FileType go nmap <Leader>d <Plug>(go-doc)
     autocmd FileType go nmap <Leader>l :GoMetaLinter<CR>

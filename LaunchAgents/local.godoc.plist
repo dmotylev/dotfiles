@@ -13,14 +13,16 @@
 	</dict>
 	<key>ProgramArguments</key>
 	<array>
-		<string>/usr/local/go/bin/godoc</string>
+		<string>/usr/local/bin/godoc</string>
 		<string>-http</string>
 		<string>:6060</string>
+		<string>-play</string>
+		<string>-index</string>
+		<string>-index_files</string>
+        <string>/Users/dmotylev/.cache/godoc/index</string>
 	</array>
 	<key>RunAtLoad</key>
 	<false/>
-	<key>UserName</key>
-	<string>dmotylev</string>
 	<key>WorkingDirectory</key>
 	<string>/usr/local/var</string>
 	<key>StandardErrorPath</key>

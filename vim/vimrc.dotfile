@@ -164,6 +164,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_highlight_fields = 1
     let g:go_highlight_interfaces = 1
     let g:go_list_type = "quickfix"
+    let g:go_auto_sameids = 0
 
     " run :GoBuild or :GoTestCompile based on the go file
     function! s:build_go_files()
@@ -182,6 +183,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     autocmd FileType go nmap <Leader>e <Plug>(go-rename)
     autocmd FileType go nmap <Leader>d <Plug>(go-doc)
     autocmd FileType go nmap <Leader>l :GoMetaLinter<CR>
+    autocmd Filetype go map <F1> :GoDoc<CR>
     augroup go
       autocmd!
       autocmd Filetype go
@@ -190,6 +192,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
         \| command! -bang AS call go#alternate#Switch(<bang>0, 'split')
     augroup END
 
+    highlight! link goSameId Search
 endif
 
 if !empty(glob('~/.vim/plugged/deoplete-go'))

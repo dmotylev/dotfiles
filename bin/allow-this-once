@@ -8,5 +8,9 @@ function afw {
 }
 readonly CMD=/private$1
 trap 'afw --remove $CMD; trap - SIGHUP SIGINT SIGTERM EXIT' SIGHUP SIGINT SIGTERM EXIT
+
+# keep sudo alive as long as CMD last
+while sleep 60; do sudo -n true; kill -0 "$$" || exit; done 2>/dev/null &
+
 afw --add $CMD && $CMD &
 wait -n $!

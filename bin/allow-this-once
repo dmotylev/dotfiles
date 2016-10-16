@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+function afw {
+    tput setaf 8
+    sudo -n /usr/libexec/ApplicationFirewall/socketfilterfw $@
+    local err=$?
+    tput sgr0
+    return $err
+}
+readonly CMD=/private$1
+trap 'afw --remove $CMD; trap - SIGHUP SIGINT SIGTERM EXIT' SIGHUP SIGINT SIGTERM EXIT
+afw --add $CMD && $CMD &
+wait -n $!

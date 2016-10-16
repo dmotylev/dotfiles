@@ -75,7 +75,8 @@ Plug 'tpope/vim-sensible'
 Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-obsession'
-Plug 'kien/ctrlp.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-focus-events'
@@ -86,10 +87,10 @@ Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go', {'for': ['go']}
 Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
 Plug 'kannokanno/previm', {'for': ['markdown']}
+Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
 "Plug 'chase/vim-ansible-yaml'
 "Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'hashivim/vim-terraform'
 "Plug 'mattn/emmet-vim'
 "Plug 'cakebaker/scss-syntax.vim'
 "Plug 'groenewege/vim-less'
@@ -153,11 +154,11 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_fmt_command = "goimports"
     let g:go_fmt_autosave = 1
     let g:go_fmt_fail_silently = 1
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 1
+    let g:go_highlight_functions = 0
+    let g:go_highlight_methods = 0
+    let g:go_highlight_structs = 0
+    let g:go_highlight_operators = 0
+    let g:go_highlight_build_constraints = 0
     let g:go_auto_type_info = 1
     let g:go_def_reuse_buffer = 1
     let g:go_highlight_types = 1
@@ -208,6 +209,7 @@ endif
 
 if !empty(glob('~/.vim/plugged/sourcegraph-vim-beta'))
     let g:SOURCEGRAPH_AUTO = "false"
+    let g:SOURCEGRAPH_LOG_FILE = "/tmp/sourcegraph-vim-beta.log"
     autocmd FileType go nnoremap <F11> :GRAPH<CR>
 endif
 

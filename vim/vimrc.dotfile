@@ -72,7 +72,8 @@ endif
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
-Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
+" Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
+Plug 'altercation/vim-colors-solarized', { 'do': ':colorscheme solarized' }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-obsession'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -85,7 +86,7 @@ Plug 'Shougo/deoplete.nvim'
 "" language specific
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go', {'for': ['go']}
-Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
+"Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
 Plug 'kannokanno/previm', {'for': ['markdown']}
 Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
@@ -97,9 +98,45 @@ Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'dagwieers/asciidoc-vim'
 "Plug 'cespare/vim-toml'
 "Plug 'tfnico/vim-gradle'
+"Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
 """ PLUGINS' CONFIG
+if !empty(glob('~/.vim/plugged/vim-go'))
+    let g:tmuxline_powerline_separators = 0
+    let g:tmuxline_separators = {
+    \ 'left' : '',
+    \ 'left_alt': '',
+    \ 'right' : '',
+    \ 'right_alt' : '',
+    \ 'space' : ' '}
+    let g:tmuxline_preset = {
+    \ 'a': '#S',
+    \ 'b': '#F',
+    \ 'win': '#I #W',
+    \ 'cwin': '#I #W',
+    \ 'y': '%R',
+    \ 'z': '#h',
+    \ 'options': {
+    \ 'status-justify': 'centre'}
+    \}
+endif
+
+if globpath(&rtp, 'colors/solarized.vim') != ""
+    let g:solarized_termtrans=1
+    let g:solarized_contrast='high'
+    set background=dark
+    colorscheme solarized
+    highlight VertSplit ctermbg=none ctermfg=0
+    highlight DiffAdd ctermbg=none
+    highlight DiffDelete ctermbg=none
+    highlight DiffChange ctermbg=none
+    highlight CursorLineNr ctermfg=7
+    highlight LineNr ctermbg=none
+    highlight! link SignColumn LineNr
+    highlight ColorColumn ctermbg=none ctermfg=133
+endif
+
 if globpath(&rtp, 'colors/jellybeans.vim') != ""
     let g:jellybeans_overrides = {
     \   'background': { '256ctermbg': '233' },
@@ -122,7 +159,7 @@ set grepprg=ag\ --skip-vcs-ignores\ --vimgrep\ $*
 set grepformat=%f:%l:%c:%m
 
 let g:lightline = {
-      \ 'colorscheme': 'jellybeans',
+      \ 'colorscheme': g:colors_name,
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]

@@ -23,28 +23,43 @@ set-option -g detach-on-destroy on
 set-option -g set-titles on
 set-option -g set-titles-string "#T"
 
-bind-key C-b last-window
+unbind-key -T prefix "\""
+unbind-key -T prefix M-Up
+unbind-key -T prefix M-Down
+unbind-key -T prefix M-Left
+unbind-key -T prefix M-Right
+unbind-key -T prefix C-Up
+unbind-key -T prefix C-Down
+unbind-key -T prefix C-Left
+unbind-key -T prefix C-Right
 
-unbind-key "\""
-bind-key s split-window -v -c "#{pane_current_path}"
-bind-key v split-window -h -c "#{pane_current_path}"
+bind-key -T prefix C-b last-window
 
-bind-key | select-layout even-horizontal
-bind-key = select-layout even-vertical
+bind-key -T prefix s split-window -v -c "#{pane_current_path}"
+bind-key -T prefix v split-window -h -c "#{pane_current_path}"
 
-bind-key -t vi-copy y copy-pipe "pbcopy"
-bind-key -t vi-copy v begin-selection
+bind-key -T prefix | select-layout even-horizontal
+bind-key -T prefix = select-layout even-vertical
 
-bind-key J resize-pane -D 5
-bind-key K resize-pane -U 5
-bind-key H resize-pane -L 5
-bind-key L resize-pane -R 5
+bind-key -T prefix -t vi-copy y copy-pipe "pbcopy"
+bind-key -T prefix -t vi-copy v begin-selection
 
-bind-key x kill-pane
+bind-key -T prefix -r j resize-pane -D
+bind-key -T prefix -r k resize-pane -U
+bind-key -T prefix -r h resize-pane -L
+bind-key -T prefix -r l resize-pane -R
+bind-key -T prefix -r J resize-pane -D 5
+bind-key -T prefix -r K resize-pane -U 5
+bind-key -T prefix -r H resize-pane -L 5
+bind-key -T prefix -r L resize-pane -R 5
 
-bind-key r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
+bind-key -T prefix x kill-pane
 
-bind-key c new-window -n Console
+bind-key -T prefix C-s choose-session
+
+bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
+
+bind-key -T prefix c new-window -n Console
 
 if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
 

@@ -1,6 +1,7 @@
 ﻿""" GENERAL CONFIG
 set wrap
-set colorcolumn=80
+set textwidth=80
+set colorcolumn=-5
 set tabstop=4
 set shiftwidth=4
 set expandtab
@@ -17,6 +18,7 @@ set title
 set shortmess=atIO
 set visualbell
 set t_Co=256
+set fillchars+=vert:│
 " Allow move the cursor left/right to move to the previous/next line when the
 " cursor is on the first/last character in the line.
 set whichwrap=<,>,[,]
@@ -59,7 +61,7 @@ set nocursorline
 set nocursorcolumn
 syntax sync minlines=256
 syntax sync maxlines=256
-set synmaxcol=256
+set synmaxcol=80
 " Warning: Line numbers in gutter make vim slow
 nmap <C-N><C-N> :set invrelativenumber<CR>
 
@@ -127,21 +129,25 @@ if globpath(&rtp, 'colors/solarized.vim') != ""
     let g:solarized_contrast='high'
     set background=dark
     colorscheme solarized
-    highlight VertSplit ctermbg=none ctermfg=0
-    highlight DiffAdd ctermbg=none
-    highlight DiffDelete ctermbg=none
-    highlight DiffChange ctermbg=none
-    highlight CursorLineNr ctermfg=7
-    highlight LineNr ctermbg=none
-    highlight! link SignColumn LineNr
-    highlight ColorColumn ctermbg=none ctermfg=133
+    if &t_Co == 256 && g:colors_name =~ "solarized"
+        highlight VertSplit ctermbg=none ctermfg=24
+        highlight DiffAdd ctermbg=none
+        highlight DiffDelete ctermbg=none
+        highlight DiffChange ctermbg=none
+        highlight CursorLineNr ctermfg=7
+        highlight LineNr ctermbg=none
+        highlight! link SignColumn LineNr
+        highlight ColorColumn ctermbg=none ctermfg=133
+        highlight OverLength ctermbg=none ctermfg=236 
+        match OverLength /\%81v.*/
+    endif
 endif
 
 if globpath(&rtp, 'colors/jellybeans.vim') != ""
     let g:jellybeans_overrides = {
     \   'background': { '256ctermbg': '233' },
     \   'VertSplit': { '256ctermfg': '234', '256ctermbg': '233' },
-    \   'ColorColumn': { '256ctermfg': '202', '256ctermbg': '233' },
+    \   'ColorColumn': { '256ctermfg': '202', '256ctermbg': '133' },
     \   'CursorLineNr': { '256ctermfg': '235', '256ctermbg': '233' },
     \   'SignColumn': { '256ctermbg': '233' },
     \   'Search': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
@@ -258,3 +264,13 @@ let g:previm_open_cmd = 'open -a Google\ Chrome'
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead *.json.tpl set ft=json
 autocmd BufNewFile,BufRead *.tfstate set ft=json
+
+function! RestoreSessionIfExist()
+    if filereadable(getcwd() . '/Session.vim')
+        execute 'source Session.vim'
+        " fix minor defect: no filetype for current buffer after 'execute...'
+        filetype detect
+    endif
+endfunction
+
+autocmd VimEnter * call RestoreSessionIfExist()

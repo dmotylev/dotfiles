@@ -1,4 +1,4 @@
-export EC2_HOME="$(brew --prefix ec2-api-tools)"
+export EC2_HOME="$(brew--prefix ec2-api-tools)"
 if [ -f ~/.ec2/env ]; then
 	source ~/.ec2/env
 fi

@@ -60,9 +60,11 @@ bind-key -T prefix C-n command-prompt -p "New session name?" -I "Pasta" "new-ses
 
 bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
 
-bind-key -T prefix c new-window -n Console
+bind-key -T prefix c new-window -c "#{pane_current_path}" -n Console
 
 if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
 
 if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
 
+# Uncomment next line after closing https://github.com/tmux/tmux/issues/572
+# set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'

@@ -138,8 +138,8 @@ if globpath(&rtp, 'colors/solarized.vim') != ""
         highlight LineNr ctermbg=none
         highlight! link SignColumn LineNr
         highlight ColorColumn ctermbg=none ctermfg=133
-        highlight OverLength ctermbg=none ctermfg=236 
-        match OverLength /\%81v.*/
+"        highlight OverLength ctermbg=none ctermfg=236 
+"        match OverLength /\%81v.*/
     endif
 endif
 

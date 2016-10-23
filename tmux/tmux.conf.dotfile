@@ -18,7 +18,7 @@ set-option -g visual-bell off
 set-option -g focus-events on
 set-option -g terminal-overrides 'xterm*:smcup@:rmcup@'
 set-option -g mouse on
-set-option -g detach-on-destroy on
+set-option -g detach-on-destroy off
 
 set-option -g set-titles on
 set-option -g set-titles-string "#T"
@@ -56,6 +56,7 @@ bind-key -T prefix -r L resize-pane -R 5
 bind-key -T prefix x kill-pane
 
 bind-key -T prefix C-s choose-session
+bind-key -T prefix C-n command-prompt -p "New session name?" -I "Pasta" "new-session -s '%%' -n Console"
 
 bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
 

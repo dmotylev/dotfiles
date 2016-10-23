@@ -2,7 +2,7 @@
 export HISTCONTROL=erasedups:ignoreboth
 export HISTSIZE=30000
 export HISTIGNORE="rm ~/.bash_history:ls:l:la:ll:h:ls -l:ls -la:history:cd .:cd:cd ..:?:..:g:-:h"
-export HISTTIMEFORMAT="%d.%m %H:%M  "
+export HISTTIMEFORMAT="%d.%m.%Y %H:%M:%S  "
 shopt -s histappend
 
 _history_last10() {

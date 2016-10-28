@@ -266,7 +266,7 @@ autocmd BufNewFile,BufRead *.json.tpl set ft=json
 autocmd BufNewFile,BufRead *.tfstate set ft=json
 
 function! RestoreSessionIfExist()
-    if filereadable(getcwd() . '/Session.vim')
+    if argc()==0 && filereadable(getcwd() . '/Session.vim')
         execute 'source Session.vim'
         " fix minor defect: no filetype for current buffer after 'execute...'
         filetype detect

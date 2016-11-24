@@ -1,26 +1,64 @@
-#!/bin/bash
+#!/usr/bin/env bash
+if [[ -z ${VSCODE_PID} && -n $(type -p tmux) ]]; then
+    # if no session is started, start a new session
+    test -z ${TMUX} && exec tmux new-session -A -D -s Pasta -n Console
+fi
 
 export DOTFILES_ROOT=__DOTFILES_ROOT__
 
 TODO () {
-    printf "$(tput setaf 1)TODO$(tput sgr0) $*\n"
+    echo -en "$(tput setaf 1)TODO$(tput sgr0) $*\n"
 }
 
 if [ "$(type -t brew)" != "file" -a "$(type -t brew)" != "function" ]; then
     brew () { return; }
 fi
 
+builtin_cat () { test -f $1 && echo -n "$(< $1)" || return 1; }
+
+brew--prefix () {
+    local formula=$1 cache=${1:-"brew--prefix"}
+    if ! builtin_cat ~/.cache/brew_prefix/$cache 2> /dev/null; then 
+        test -d ~/.cache/brew_prefix || mkdir -p ~/.cache/brew_prefix
+        brew --prefix $formula | tee ~/.cache/brew_prefix/$cache
+    fi
+}
+
+pprofile () {
+    case "$1" in
+    on)
+        pprofile_status="enabled"
+        PS4='+ \D{%s}\011 '
+        exec 3>&2 2>/tmp/bashstart.$$.log
+        set -x
+        ;;
+    off)
+        [[ -z "$pprofile_status" ]] && return
+        set +x
+        exec 2>&3 3>&-
+        unset pprofile_status pprofile
+        ;;
+    *)
+        return $(test -n "$pprofile_status")
+        ;;
+    esac
+}
+
+#pprofile on # uncomment this line if you want to profile 
+
 if [ -d ~/.bash.d ]; then
     for f in $(find -L ~/.bash.d -type f -name '*.sh' -maxdepth 1); do
-        source $f
+        if pprofile; then 
+            time source $f
+        else
+            source $f
+        fi
     done
 fi
 
-export MANPATH="$(brew --prefix coreutils)/libexec/gnuman:$MANPATH"
-export PATH=~/bin:/usr/local/bin:/usr/local/sbin:$(brew --prefix coreutils)/libexec/gnubin:${PATH}
+COREUTILS_ROOT=$(brew--prefix coreutils)
+export MANPATH="${COREUTILS_ROOT}/libexec/gnuman:${MANPATH}"
+export PATH=~/bin:/usr/local/bin:/usr/local/sbin:${COREUTILS_ROOT}/libexec/gnubin:${PATH}
+unset COREUTILS_ROOT
 
-# TMUX
-if which tmux >/dev/null 2>&1; then
-    # if no session is started, start a new session
-    test -z ${TMUX} && tmux new-session -A -D -s Pasta -n Console
-fi
+pprofile off

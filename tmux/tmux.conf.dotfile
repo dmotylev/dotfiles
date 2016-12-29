@@ -66,8 +66,8 @@ bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration 
 
 bind-key -T prefix c new-window -c "#{pane_current_path}" -n Console
 
-if-shell "test -f $DOTFILES_ROOT/tmux/tmux-os.conf" "source $DOTFILES_ROOT/tmux/tmux-os.conf"
-if-shell "test -f $DOTFILES_ROOT/tmux/tmuxline.conf" "source $DOTFILES_ROOT/tmux/tmuxline.conf"
+if-shell "test -f ~/Workshop/dotfiles/tmux/tmux-os.conf" "source ~/Workshop/dotfiles/tmux/tmux-os.conf"
+if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
 
 if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
 

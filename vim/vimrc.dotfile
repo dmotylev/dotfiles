@@ -85,6 +85,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-focus-events'
 Plug 'SirVer/ultisnips'
 Plug 'Shougo/deoplete.nvim'
+Plug 'scrooloose/nerdtree'
 "" language specific
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go', {'for': ['go']}
@@ -138,6 +139,7 @@ if globpath(&rtp, 'colors/solarized.vim') != ""
         highlight LineNr ctermbg=none
         highlight! link SignColumn LineNr
         highlight ColorColumn ctermbg=none ctermfg=133
+        highlight MatchParen cterm=none ctermbg=none ctermfg=5
 "        highlight OverLength ctermbg=none ctermfg=236 
 "        match OverLength /\%81v.*/
     endif
@@ -163,6 +165,13 @@ endif
 set grepprg=ag\ --skip-vcs-ignores\ --vimgrep\ $*
 " and adjust grep format
 set grepformat=%f:%l:%c:%m
+
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+
 
 let g:lightline = {
       \ 'colorscheme': g:colors_name,

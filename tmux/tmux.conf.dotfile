@@ -48,9 +48,6 @@ bind-key -T prefix v split-window -h -c "#{pane_current_path}"
 bind-key -T prefix | select-layout even-horizontal
 bind-key -T prefix = select-layout even-vertical
 
-bind-key -T prefix -t vi-copy y copy-pipe "xclip -in -selection clipboard"
-bind-key -T prefix -t vi-copy v begin-selection
-
 bind-key -T prefix -r j resize-pane -D
 bind-key -T prefix -r k resize-pane -U
 bind-key -T prefix -r h resize-pane -L
@@ -69,9 +66,9 @@ bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration 
 
 bind-key -T prefix c new-window -c "#{pane_current_path}" -n Console
 
-if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dotfiles/tmux/tmuxline.conf"
+if-shell "test -f $DOTFILES_ROOT/tmux/tmux-os.conf" "source $DOTFILES_ROOT/tmux/tmux-os.conf"
+if-shell "test -f $DOTFILES_ROOT/tmux/tmuxline.conf" "source $DOTFILES_ROOT/tmux/tmuxline.conf"
 
 if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
 
-# Uncomment next line after closing https://github.com/tmux/tmux/issues/572
-# set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'
+set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'

@@ -24,7 +24,10 @@
 <item>
     <name>Functional Keys to F1..F12 (Apple Keyboard Only)</name>
     <identifier>private.disable_functionals_on_apple_keyboard</identifier>
-    <device_only>DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256</identifier>
+    <device_only>
+    DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256,
+    DeviceVendor::RawValue::0x004c,DeviceProduct::RawValue::0x0267
+    </identifier>
     <autogen>__KeyToKey__ ConsumerKeyCode::BRIGHTNESS_DOWN,     KeyCode::F1</autogen>
     <autogen>__KeyToKey__ KeyCode::BRIGHTNESS_DOWN,             KeyCode::F1</autogen>
     <autogen>__KeyToKey__ ConsumerKeyCode::BRIGHTNESS_UP,       KeyCode::F2</autogen>
@@ -44,7 +47,10 @@
 <item>
     <name>Fn + F1..F12 to Functional Keys (Apple Keyboard Only)</name>
     <identifier>private.use_functional_on_apple_keyboard</identifier>
-    <device_only>DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256</identifier>
+    <device_only>
+    DeviceVendor::RawValue::0x05ac,DeviceProduct::RawValue::0x0256,
+    DeviceVendor::RawValue::0x004c,DeviceProduct::RawValue::0x0267
+    </identifier>
     <autogen>__KeyToKey__ KeyCode::F1, ModifierFlag::FN,        ConsumerKeyCode::BRIGHTNESS_DOWN</autogen>
     <autogen>__KeyToKey__ KeyCode::F2, ModifierFlag::FN,        ConsumerKeyCode::BRIGHTNESS_UP</autogen>
     <autogen>__KeyToKey__ KeyCode::F2, ModifierFlag::FN,        KeyCode::BRIGHTNESS_UP</autogen>

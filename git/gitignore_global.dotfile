@@ -4,3 +4,5 @@
 .vscode/
 .terraform/
 Session.vim
+.idea/
+vendor/

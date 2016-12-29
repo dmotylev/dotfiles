@@ -19,7 +19,7 @@ install moreutils
 # Install GNU `find`, `locate`, `updatedb`, and `xargs`, `g`-prefixed
 install findutils
 # Install GNU `sed`, overwriting the built-in `sed`
-install gnu-sed --default-names
+install gnu-sed --with-default-names
 # Install Bash 4
 # Note: don’t forget to add `/usr/local/bin/bash` to `/etc/shells` before running `chsh`.
 install bash
@@ -40,13 +40,11 @@ install oath-toolkit
 install ag
 install tmux --HEAD
 install git
-install ec2-api-tools
 install ansible
 install gist
 install reattach-to-user-namespace ---with-wrap-pbcopy-and-pbpaste
 install ruby
 install npm
-install s3cmd
 install jq
 install ctags
 install imagesnap

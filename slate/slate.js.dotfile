@@ -104,7 +104,7 @@ slate.bindAll({
         '2': $('toss', '1', 'resize'),
         '3': $('toss', '2', 'resize'),
         // direct focus 
-        t: $.focus('iTerm'),
+        t: $.focus('Terminal'),
         f: $.focus('Finder'),
         // utility functions
         z: 'undo',

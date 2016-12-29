@@ -3,7 +3,9 @@
 /vim/vim.dotfile/plugged/
 /vim/vim.dotfile/init.vim
 /vim/vim.dotfile/undo/
+/vim/vim.dotfile/.netrwhist
 /git/gitconfig.dotfile
 /bash/profile.dotfile
+/tmux/tmux-os.conf
 .*.installed_timestamp
 Session.vim

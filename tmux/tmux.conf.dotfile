@@ -1,6 +1,5 @@
 # vim: syntax=tmux
 
-set-option -g default-shell "/usr/bin/zsh"
 set-option -g default-terminal "screen-256color" 
 set-option -g escape-time 0
 
@@ -12,11 +11,6 @@ set-window-option -g monitor-activity off
 set-window-option -g mode-keys vi
 set-window-option -g alternate-screen on
 set-window-option -g aggressive-resize on
-
-# https://www.reddit.com/r/tmux/comments/3paqoi/tmux_21_has_been_released/
-bind-key -T root PPage if-shell -F "#{alternate_on}" "send-keys PPage" "copy-mode -e; send-keys PPage"
-bind-key -t vi-copy PPage page-up
-bind-key -t vi-copy NPage page-down
 
 set-option -g bell-action current
 set-option -g bell-on-alert on
@@ -71,4 +65,4 @@ if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dot
 
 if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
 
-set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'
+#set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'

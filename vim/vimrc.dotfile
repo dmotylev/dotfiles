@@ -74,8 +74,9 @@ endif
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
-" Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
-Plug 'altercation/vim-colors-solarized', { 'do': ':colorscheme solarized' }
+Plug 'tpope/vim-vinegar'
+Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
+"Plug 'altercation/vim-colors-solarized', { 'do': ':colorscheme solarized' }
 Plug 'itchyny/lightline.vim'
 Plug 'tpope/vim-obsession'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -83,11 +84,12 @@ Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-focus-events'
+Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips'
-Plug 'Shougo/deoplete.nvim'
-Plug 'scrooloose/nerdtree'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'scrooloose/nerdtree'
 "" language specific
-Plug 'zchee/deoplete-go', { 'do': 'make'}
+"Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go', {'for': ['go']}
 "Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
 Plug 'kannokanno/previm', {'for': ['markdown']}
@@ -101,30 +103,9 @@ Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'dagwieers/asciidoc-vim'
 "Plug 'cespare/vim-toml'
 "Plug 'tfnico/vim-gradle'
-"Plug 'edkolev/tmuxline.vim'
 call plug#end()
 
 """ PLUGINS' CONFIG
-if !empty(glob('~/.vim/plugged/vim-go'))
-    let g:tmuxline_powerline_separators = 0
-    let g:tmuxline_separators = {
-    \ 'left' : '',
-    \ 'left_alt': '',
-    \ 'right' : '',
-    \ 'right_alt' : '',
-    \ 'space' : ' '}
-    let g:tmuxline_preset = {
-    \ 'a': '#S',
-    \ 'b': '#F',
-    \ 'win': '#I #W',
-    \ 'cwin': '#I #W',
-    \ 'y': '%R',
-    \ 'z': '#h',
-    \ 'options': {
-    \ 'status-justify': 'centre'}
-    \}
-endif
-
 if globpath(&rtp, 'colors/solarized.vim') != ""
     let g:solarized_termtrans=1
     let g:solarized_contrast='high'
@@ -147,12 +128,17 @@ endif
 
 if globpath(&rtp, 'colors/jellybeans.vim') != ""
     let g:jellybeans_overrides = {
-    \   'background': { '256ctermbg': '233' },
-    \   'VertSplit': { '256ctermfg': '234', '256ctermbg': '233' },
-    \   'ColorColumn': { '256ctermfg': '202', '256ctermbg': '133' },
-    \   'CursorLineNr': { '256ctermfg': '235', '256ctermbg': '233' },
-    \   'SignColumn': { '256ctermbg': '233' },
+    \   'background': { '256ctermbg': 'none' },
+    \   'VertSplit': { '256ctermfg': '237', '256ctermbg': 'none' },
+    \   'ColorColumn': { '256ctermfg': '133', '256ctermbg': 'none' },
+    \   'CursorLineNr': { '256ctermfg': '244', '256ctermbg': 'none' },
+    \   'SignColumn': { '256ctermbg': 'none' },
+    \   'Visual': { '256ctermfg': '16', '256ctermbg': '133' },
+    \   'MatchParen': { 'attr': 'none', '256ctermfg': '5', '256ctermbg': 'none' },
     \   'Search': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
+    \   'DiffAdd': { 'attr': 'none', '256ctermfg': '34', '256ctermbg': '22' },
+    \   'DiffChange': { 'attr': 'none', '256ctermfg': '32', '256ctermbg': '24' },
+    \   'DiffDelete': { 'attr': 'none', '256ctermfg': '160', '256ctermbg': '088' },
     \}
 	colorscheme jellybeans
     if &t_Co == 256 && g:colors_name =~ "jellybeans"
@@ -171,7 +157,7 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
-
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
 
 let g:lightline = {
       \ 'colorscheme': g:colors_name,
@@ -246,6 +232,28 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     augroup END
 
     highlight! link goSameId Search
+endif
+
+if !empty(glob('~/.vim/plugged/neocomplete'))
+    let g:neocomplete#enable_at_startup = 1
+    let g:neocomplete#enable_smart_case = 1
+    let g:neocomplete#enable_camel_case = 1
+    "let g:neocomplete#enable_auto_select = 1
+    " Recommended key-mappings.
+    " " <CR>: close popup and save indent.
+    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+    function! s:my_cr_function()
+        return pumvisible() ? "\<C-y>" : "\<CR>"
+    endfunction
+    " Close popup by <.>.
+    inoremap <expr>. (pumvisible() ? "\<C-y>" : "") . "\."
+    " Close popup by <Space>.
+    inoremap <expr><Space> (pumvisible() ? "\<C-y>" : "") . "\<Space>"
+    " <TAB>: completion.
+    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+    " <C-h>, <BS>: close popup and delete backword char.
+    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
 endif
 
 if !empty(glob('~/.vim/plugged/deoplete-go'))

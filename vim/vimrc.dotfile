@@ -5,10 +5,10 @@ set colorcolumn=-5
 set tabstop=4
 set shiftwidth=4
 set expandtab
-" To have the completion behave similarly to a shell, 
-" i.e. complete only up to the point of ambiguity (while still showing you 
-" what your options are)
-set wildmode=list:longest
+set wildchar=<Tab> wildmenu wildmode=full
+" List buffers
+set wildcharm=<C-Z>
+nnoremap <F10> :b <C-Z>
 " These two options, when set together, will make /-style searches
 " case-sensitive only if there is a capital letter in the search expression.
 " *-style searches continue to be consistently case-sensitive.
@@ -96,6 +96,7 @@ Plug 'roxma/vim-tmux-focus-events'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips'
 Plug 'roxma/vim-paste-easy'
+Plug 'szw/vim-dict'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'scrooloose/nerdtree'
 "" language specific
@@ -152,6 +153,8 @@ if globpath(&rtp, 'colors/jellybeans.vim') != ""
     \   'DiffDelete': { 'attr': 'none', '256ctermfg': '160', '256ctermbg': '088' },
     \   'TODO': { 'attr': 'none', '256ctermfg': '226', '256ctermbg': '21' },
     \   'Folded': { 'attr': 'none', '256ctermfg': '237', '256ctermbg': 'none' },
+    \   'StatusLine': { 'attr': 'none', '256ctermfg': '237', '256ctermbg': 'none' },
+    \   'WildMenu': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
     \}
 	colorscheme jellybeans
     if &t_Co == 256 && g:colors_name =~ "jellybeans"

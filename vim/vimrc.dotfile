@@ -18,7 +18,6 @@ set title
 set shortmess=atIO
 set visualbell
 set t_Co=256
-set fillchars+=vert:│
 " Allow move the cursor left/right to move to the previous/next line when the
 " cursor is on the first/last character in the line.
 set whichwrap=<,>,[,]
@@ -41,6 +40,16 @@ set splitright
 set autoread
 " Automatically write the file on make
 set autowrite
+set hlsearch
+set foldlevel=0
+set foldminlines=5
+set foldnestmax=2
+set foldtext=MyFoldText()
+set fillchars+=fold:·,vert:│
+function MyFoldText()
+    let l = getline(v:foldstart)
+    return  '▹···' . l . '····+' . (v:foldend - v:foldstart) . ' lines'
+endfunction
 
 nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
 nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
@@ -86,12 +95,14 @@ Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-focus-events'
 Plug 'Shougo/neocomplete'
 Plug 'SirVer/ultisnips'
+Plug 'roxma/vim-paste-easy'
 "Plug 'Shougo/deoplete.nvim'
 "Plug 'scrooloose/nerdtree'
 "" language specific
 "Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug 'fatih/vim-go', {'for': ['go']}
-"Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
+Plug 'jodosha/vim-godebug', {'for': ['go']}
+" Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
 Plug 'kannokanno/previm', {'for': ['markdown']}
 Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
@@ -139,6 +150,8 @@ if globpath(&rtp, 'colors/jellybeans.vim') != ""
     \   'DiffAdd': { 'attr': 'none', '256ctermfg': '34', '256ctermbg': '22' },
     \   'DiffChange': { 'attr': 'none', '256ctermfg': '32', '256ctermbg': '24' },
     \   'DiffDelete': { 'attr': 'none', '256ctermfg': '160', '256ctermbg': '088' },
+    \   'TODO': { 'attr': 'none', '256ctermfg': '226', '256ctermbg': '21' },
+    \   'Folded': { 'attr': 'none', '256ctermfg': '237', '256ctermbg': 'none' },
     \}
 	colorscheme jellybeans
     if &t_Co == 256 && g:colors_name =~ "jellybeans"
@@ -189,6 +202,7 @@ let g:ctrlp_user_command = {
 	\ }
 
 if !empty(glob('~/.vim/plugged/vim-go'))
+    let g:go_fmt_experimental = 1
     let g:go_fmt_command = "goimports"
     let g:go_fmt_autosave = 1
     let g:go_fmt_fail_silently = 1
@@ -202,7 +216,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_highlight_types = 1
     let g:go_highlight_fields = 1
     let g:go_highlight_interfaces = 1
-    let g:go_list_type = "quickfix"
+    "let g:go_list_type = "quickfix"
     let g:go_auto_sameids = 0
 
     " run :GoBuild or :GoTestCompile based on the go file
@@ -215,20 +229,20 @@ if !empty(glob('~/.vim/plugged/vim-go'))
         endif
     endfunction
 
-    autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-    autocmd FileType go nmap <leader>r <Plug>(go-run)
-    autocmd FileType go nmap <leader>t <Plug>(go-test)
-    autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-    autocmd FileType go nmap <Leader>e <Plug>(go-rename)
-    autocmd FileType go nmap <Leader>d <Plug>(go-doc)
-    autocmd FileType go nmap <Leader>l :GoMetaLinter<CR>
-    autocmd Filetype go map <F1> :GoDoc<CR>
     augroup go
-      autocmd!
-      autocmd Filetype go
+        autocmd!
+        autocmd Filetype go
         \  command! -bang A call go#alternate#Switch(<bang>0, 'edit')
         \| command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
         \| command! -bang AS call go#alternate#Switch(<bang>0, 'split')
+        autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
+        autocmd FileType go nmap <leader>r <Plug>(go-run)
+        autocmd FileType go nmap <leader>t <Plug>(go-test)
+        autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
+        autocmd FileType go nmap <Leader>e <Plug>(go-rename)
+        autocmd FileType go nmap <Leader>d <Plug>(go-doc)
+        autocmd FileType go nmap <Leader>l :GoMetaLinter<CR>
+        autocmd Filetype go map <F1> :GoDoc<CR>
     augroup END
 
     highlight! link goSameId Search
@@ -237,7 +251,9 @@ endif
 if !empty(glob('~/.vim/plugged/neocomplete'))
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_camel_case = 1
+    let g:neocomplete#enable_camel_case = 0
+    let g:neocomplete#auto_complete_delay = 200
+    let g:neocomplete#enable_refresh_always = 1
     "let g:neocomplete#enable_auto_select = 1
     " Recommended key-mappings.
     " " <CR>: close popup and save indent.
@@ -267,11 +283,11 @@ if !empty(glob('~/.vim/plugged/deoplete-go'))
     inoremap <expr><C-g>     deoplete#undo_completion()
 endif
 
-if !empty(glob('~/.vim/plugged/sourcegraph-vim-beta'))
-    let g:SOURCEGRAPH_AUTO = "false"
-    let g:SOURCEGRAPH_LOG_FILE = "/tmp/sourcegraph-vim-beta.log"
-    autocmd FileType go nnoremap <F11> :GRAPH<CR>
-endif
+"if !empty(glob('~/.vim/plugged/sourcegraph-vim-beta'))
+"    let g:SOURCEGRAPH_AUTO = "true"
+"    let g:SOURCEGRAPH_LOG_FILE = "/tmp/sourcegraph-vim-beta.log"
+"    autocmd FileType go nnoremap <F11> :GRAPH<CR>
+"endif
 
 let g:UltiSnipsListSnippets = "<F12>"
 let g:ansible_options = {'ignore_blank_lines': 0}

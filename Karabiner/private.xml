@@ -1,6 +1,22 @@
 <?xml version="1.0"?>
 <root>
 <item>
+    <name>Remap Right Cmd to Ctrl-B in Terminal</name>
+    <appendix>TMUX helper</appendix>
+
+    <identifier>private.cmdr_to_ctrlb</identifier>
+
+    <only>TERMINAL</only>
+
+    <autogen>
+        --KeyToKey--
+        KeyCode::COMMAND_R,
+
+        KeyCode::B,
+        ModifierFlag::CONTROL_L
+    </autogen>
+</item>
+<item>
     <name>Remap Caps Lock to Hyper</name>
     <appendix>OS X doesn't have a Hyper. This maps Left Control to Control + Option + Command.</appendix>
 

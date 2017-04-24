@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+readonly min_pct=${1:-"5"}
+readonly min_time=${2:-"00:03:00"}
+# Parse "Battery 0: Discharging, 31%, 01:23:32 remaining" to ( Discharging 31 01:23:32 )
+readonly cur=( $(acpi -b | sed -E 's/^.+?\: (.+), ([0-9]+)%, ([0-9:]+).*$/\1 \2 \3/') )
+
+[[ ${cur[0]} == Discharging ]] || exit 0
+
+function seconds () {
+    local t=( $(echo $1 | sed -E 's/:/ /g; s/0([0-9])/\1/g') )
+    echo $(( ${t[0]}*3600 + ${t[1]}*60 + ${t[2]} ))
+}
+
+[[ $(seconds ${cur[2]}) -lt $(seconds ${min_time}) || ${cur[1]} -lt ${min_pct} ]] || exit 0
+
+echo systemctl hibernate

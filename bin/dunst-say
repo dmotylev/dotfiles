@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+alias say=$HOME/bin/say
+readonly appname=$1
+readonly summary=$2
+readonly body=$3
+readonly icon=$4
+readonly urgency=$5
+case $urgency in
+    CRITICAL)
+        say "Excuse me, Sir! $appname needs your attention. $body"
+        ;;
+    NORMAL)
+        say "$appname said $summary"
+        ;;
+    LOW)
+        ;;
+    *)
+        ;;
+esac

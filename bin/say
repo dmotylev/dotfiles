@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+mksound()
+{
+    readonly cachedir="$HOME/.cache/say"
+    local text="$*"
+    local sound="$cachedir/$(echo "$text" | sha1sum | cut -d\  -f1).mp3"
+    [[ -d $cachedir ]] || mkdir -p $cachedir
+    if [[ ! -f $sound ]]; then
+        gtts-cli -l en "$text" > $sound
+    fi
+    [[ -f $sound ]] && cat $sound
+}
+
+[[ $# -eq 0 ]] && exit
+mksound "$*" | play -t mp3 -q -

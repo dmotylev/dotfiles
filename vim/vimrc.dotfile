@@ -72,7 +72,8 @@ syntax sync minlines=256
 syntax sync maxlines=256
 set synmaxcol=80
 " Warning: Line numbers in gutter make vim slow
-nmap <C-N><C-N> :set invrelativenumber<CR>
+nmap <Leader>n :set invrelativenumber<CR>
+nmap <Leader>N :set invnumber<CR>
 
 """ Load plugins
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -170,7 +171,7 @@ set grepformat=%f:%l:%c:%m
 
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
+let g:netrw_browse_split = 0
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
 let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
@@ -182,7 +183,7 @@ let g:lightline = {
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"⭤":""}',
+      \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
       \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
       \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
       \ },
@@ -209,18 +210,18 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_fmt_command = "goimports"
     let g:go_fmt_autosave = 1
     let g:go_fmt_fail_silently = 1
-    let g:go_highlight_functions = 0
-    let g:go_highlight_methods = 0
-    let g:go_highlight_structs = 0
-    let g:go_highlight_operators = 0
+    let g:go_highlight_functions = 1
+    let g:go_highlight_methods = 1
+    let g:go_highlight_structs = 1
+    let g:go_highlight_operators = 1
     let g:go_highlight_build_constraints = 0
     let g:go_auto_type_info = 1
     let g:go_def_reuse_buffer = 1
     let g:go_highlight_types = 1
     let g:go_highlight_fields = 1
     let g:go_highlight_interfaces = 1
-    "let g:go_list_type = "quickfix"
-    let g:go_auto_sameids = 0
+    let g:go_list_type = "quickfix"
+    let g:go_auto_sameids = 1
 
     " run :GoBuild or :GoTestCompile based on the go file
     function! s:build_go_files()

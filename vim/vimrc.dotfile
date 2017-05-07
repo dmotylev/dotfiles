@@ -1,6 +1,6 @@
 ﻿""" GENERAL CONFIG
-set wrap
-set textwidth=80
+"set wrap
+"set textwidth=80
 set colorcolumn=-5
 set tabstop=4
 set shiftwidth=4

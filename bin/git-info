@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+print_git_info() {
+    [[ -z $(type -p git) ]] && return
+    local branch
+    if branch=$(git rev-parse --abbrev-ref HEAD 2> /dev/null); then
+        [[ "$branch" == "HEAD" ]] && branch='detached*'
+    else
+        return
+    fi
+
+    local commit=$(git describe --tags --always)
+
+    local status
+    [[ -n "$(git status --porcelain 2> /dev/null)" ]] && status="-dirty"
+
+    echo "${commit}${status} (${branch})"
+}
+
+print_git_info

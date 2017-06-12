@@ -69,9 +69,9 @@ set pumheight=15
 " Optimize rendering
 set nocursorline
 set nocursorcolumn
-syntax sync minlines=256
+syntax sync minlines=64
 syntax sync maxlines=256
-set synmaxcol=80
+set synmaxcol=256
 " Warning: Line numbers in gutter make vim slow
 nmap <Leader>n :set invrelativenumber<CR>
 nmap <Leader>N :set invnumber<CR>
@@ -83,8 +83,14 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 	autocmd VimEnter * PlugInstall | source $MYVIMRC
 endif
 
+if has('nvim')
+    let g:loaded_python_provider = 1
+endif
+
 call plug#begin()
-Plug 'tpope/vim-sensible'
+if !has('nvim')
+    Plug 'tpope/vim-sensible'
+endif
 Plug 'tpope/vim-vinegar'
 Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
 "Plug 'altercation/vim-colors-solarized', { 'do': ':colorscheme solarized' }
@@ -95,7 +101,12 @@ Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'roxma/vim-tmux-focus-events'
-Plug 'Shougo/neocomplete'
+if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+    Plug 'zchee/deoplete-go', { 'do': 'make'}
+else
+    Plug 'Shougo/neocomplete'
+endif
 Plug 'SirVer/ultisnips'
 Plug 'roxma/vim-paste-easy'
 Plug 'szw/vim-dict'
@@ -120,6 +131,11 @@ Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 call plug#end()
 
 """ PLUGINS' CONFIG
+if globpath(&rtp, 'plugin/deoplete-go.vim') != ""
+    let g:deoplete#sources#go#package_dot = 1
+    let g:deoplete#sources#go#pointer=1
+endif
+
 if globpath(&rtp, 'colors/solarized.vim') != ""
     let g:solarized_termtrans=1
     let g:solarized_contrast='high'

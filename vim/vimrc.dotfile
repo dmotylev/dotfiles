@@ -10,6 +10,8 @@ set wildchar=<Tab> wildmenu wildmode=full
 " List buffers
 set wildcharm=<C-Z>
 nnoremap <F10> :b <C-Z>
+" Save changes
+map <Esc><Esc> :update<CR>
 " These two options, when set together, will make /-style searches
 " case-sensitive only if there is a capital letter in the search expression.
 " *-style searches continue to be consistently case-sensitive.
@@ -51,6 +53,18 @@ function MyFoldText()
     let l = getline(v:foldstart)
     return  '▹···' . l . '····+' . (v:foldend - v:foldstart) . ' lines'
 endfunction
+
+" Copy to clipboard
+vnoremap  <leader>y  "+y
+nnoremap  <leader>Y  "+yg_
+nnoremap  <leader>y  "+y
+nnoremap  <leader>yy  "+yy
+
+" Paste from clipboard
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 
 nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
 nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
@@ -314,6 +328,8 @@ let g:UltiSnipsListSnippets = "<F12>"
 let g:ansible_options = {'ignore_blank_lines': 0}
 let g:terraform_fmt_on_save=1
 let g:previm_open_cmd = 'open -a Google\ Chrome'
+
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
 autocmd BufNewFile,BufRead *.json.tpl set ft=json

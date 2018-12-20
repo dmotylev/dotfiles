@@ -114,14 +114,14 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
-Plug 'roxma/vim-tmux-focus-events'
+Plug 'tmux-plugins/vim-tmux-focus-events'
 if has('nvim')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
     Plug 'zchee/deoplete-go', { 'do': 'make'}
 else
     Plug 'Shougo/neocomplete'
 endif
-Plug 'SirVer/ultisnips'
+"Plug 'SirVer/ultisnips'
 Plug 'roxma/vim-paste-easy'
 Plug 'szw/vim-dict'
 "Plug 'Shougo/deoplete.nvim'
@@ -142,6 +142,7 @@ Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'dagwieers/asciidoc-vim'
 "Plug 'cespare/vim-toml'
 "Plug 'tfnico/vim-gradle'
+Plug 'jparise/vim-graphql'
 call plug#end()
 
 """ PLUGINS' CONFIG
@@ -324,10 +325,10 @@ endif
 "    autocmd FileType go nnoremap <F11> :GRAPH<CR>
 "endif
 
-let g:UltiSnipsListSnippets = "<F12>"
+"let g:UltiSnipsListSnippets = "<F12>"
 let g:ansible_options = {'ignore_blank_lines': 0}
 let g:terraform_fmt_on_save=1
-let g:previm_open_cmd = 'open -a Google\ Chrome'
+"let g:previm_open_cmd = 'open -a Google\ Chrome'
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 

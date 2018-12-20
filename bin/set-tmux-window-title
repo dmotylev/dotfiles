@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+function find-project-label {
+    while [[ "$PWD" != "/" ]]; do
+        if [[ -f .label ]]; then
+            read -r label < .label
+            echo $label
+            return
+        fi
+        if [[ -d .git ]]; then
+            echo "${PWD##*/}"
+            return
+        fi
+        cd ..
+    done
+    echo "Console"
+}
+printf "\033k$(find-project-label)\033\\"

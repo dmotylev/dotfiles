@@ -1,6 +1,6 @@
 # vim: syntax=tmux
 
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-command "set-tmux-window-title; reattach-to-user-namespace -l zsh"
 
 set-option -g history-limit 10000
 set-option -g default-terminal "screen-256color" 
@@ -14,7 +14,7 @@ set-window-option -g monitor-activity off
 set-window-option -g mode-keys vi
 set-window-option -g alternate-screen on
 set-window-option -g aggressive-resize on
-set-window-option -g allow-rename off
+set-window-option -g allow-rename on
 set-window-option -g automatic-rename off
 
 set-option -g bell-action current
@@ -71,7 +71,7 @@ bind-key -T prefix -r L resize-pane -R 5
 bind-key -T prefix x kill-pane
 
 bind-key -T prefix C-s choose-session
-bind-key -T prefix C-n command-prompt -p "New session name?" -I "Pasta" "new-session -s '%%' -n Console"
+bind-key -T prefix C-n command-prompt -p "New session name?" -I "Console" "new-session -s '%%' -n Console"
 
 bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
 

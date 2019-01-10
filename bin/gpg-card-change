@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+readonly EMAIL="dmotylev@gmail.com"
+{
+    killall -9 ssh-agent gpg-agent
+    for keystub in $(/usr/local/MacGPG2/bin/gpg2 --with-keygrip --list-secret-keys $EMAIL | awk '/Keygrip/ {print $3}'); do 
+        rm $HOME/.gnupg/private-keys-v1.d/$keystub.key; 
+    done;
+    /usr/local/MacGPG2/bin/gpg2 --card-status
+    eval $(/usr/local/MacGPG2/bin/gpgconf --launch gpg-agent)
+    ssh-add -l
+} &> $HOME/bin/gpg-card-change-log.txt
+
+exit 0

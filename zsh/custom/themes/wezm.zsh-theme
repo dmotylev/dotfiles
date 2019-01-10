@@ -1,4 +1,7 @@
 function get_pwd(){
+  if [[ ! -z $TMUX ]]; then
+    set-tmux-window-title
+  fi
   git_root=$PWD
   while [[ $git_root != / && ! -e $git_root/.git ]]; do
     git_root=$git_root:h

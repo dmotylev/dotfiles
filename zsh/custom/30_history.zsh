@@ -3,12 +3,14 @@ hh() {
       history
       return
     fi
-    history | egrep "$@"
+    history | egrep "$*"
 }
 
 h() {
     hh "$@" | tail -10
 }
+
+alias \?='egrep'
 
 unsetopt share_history
 setopt histignorespace

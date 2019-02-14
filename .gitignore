@@ -5,7 +5,6 @@
 /vim/vim.dotfile/undo/
 /vim/vim.dotfile/view/
 /vim/vim.dotfile/.netrwhist
-/git/gitconfig.dotfile
 /bash/profile.dotfile
 /tmux/tmux-os.conf
 .*.installed_timestamp

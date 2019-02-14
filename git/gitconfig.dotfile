@@ -1,0 +1,49 @@
+[user]
+	name = Dmitry Motylev
+	email = dmitry@redsift.io
+[credential]
+	helper = osxkeychain
+[alias]
+	st = status
+	ci = commit
+	co = checkout
+	pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
+	vgo = !git log -1 --pretty='format:%H' | sed -E 's/^(.{1,12}).+$/\\1/'
+	gopath = "!git config --get remote.origin.url | sed -E 's/^(git@|.+::\\/)(.+).git$/\\2/; s/:/\\//;'"
+[color]
+	diff = auto
+	status = auto
+	branch = auto
+	ui = true
+[core]
+	excludesfile = ~/.gitignore_global
+	editor = vim
+	autocrlf = input
+[mergetool]
+	keepBackup = false
+	prompt = false
+[push]
+	default = simple
+[filter "media"]
+	required = true
+	clean = git media clean %f
+	smudge = git media smudge %f
+[difftool "Kaleidoscope"]
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustexitcode = true
+[merge]
+	tool = diffmerge
+[difftool]
+	prompt = false
+[diff]
+	tool = diffmerge
+[url "git@github.com:"]
+	insteadOf = https://github.com/
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true

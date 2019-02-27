@@ -239,7 +239,7 @@ let g:ctrlp_user_command = {
 
 if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_fmt_experimental = 1
-    let g:go_fmt_command = "goimports"
+    let g:go_fmt_command = "goreturns"
     let g:go_fmt_autosave = 1
     let g:go_fmt_fail_silently = 1
     let g:go_highlight_functions = 1
@@ -254,6 +254,7 @@ if !empty(glob('~/.vim/plugged/vim-go'))
     let g:go_highlight_interfaces = 1
     let g:go_list_type = "quickfix"
     let g:go_auto_sameids = 1
+    let g:go_metalinter_command = "golangci-lint run --out-format tab"
 
     " run :GoBuild or :GoTestCompile based on the go file
     function! s:build_go_files()

@@ -1,0 +1,5 @@
+# vim: ft=zsh:
+df_cat () { 
+    [[ -f $1 ]] && echo "$(< $1)" || return 1
+}
+

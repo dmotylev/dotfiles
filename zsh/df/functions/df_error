@@ -1,0 +1,4 @@
+# vim: ft=zsh:
+df_error() {
+    builtin printf "$_ti[fRed]$_ti[underline]ERROR$_ti[reset]\t$_ti[fRed]%b$_ti[reset]\n" "$*"
+}

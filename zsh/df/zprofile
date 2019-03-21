@@ -1,0 +1,8 @@
+# vim: ft=zsh
+[[ -f $DOTFILES/zsh/df/bootstrap ]] && 
+    source $DOTFILES/zsh/df/bootstrap
+
+[[ -d $DOTFILES/zsh/df/zprofile.d ]] && 
+    for f in $DOTFILES/zsh/df/zprofile.d/*(N); do
+        source $f
+    done

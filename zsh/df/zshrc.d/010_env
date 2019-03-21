@@ -1,0 +1,2 @@
+# vim: ft=zsh:
+[[ ${path[(ie)$HOME/bin]} -gt ${#path} ]] && path+=$HOME/bin

@@ -1,0 +1,4 @@
+# vim: ft=zsh:
+autoload -U promptinit
+promptinit
+prompt df_classic

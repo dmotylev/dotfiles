@@ -1,0 +1,14 @@
+# vim: ft=zsh:
+function ots {
+    if [[ "${$(whence -w onetime)##*: }" = "none" ]]; then
+        df_error "onetime not found"
+        df_info "Try to install onetime with next command:\n\t$_ti[bold]sudo gem install onetime"
+        df_info "More details on\n\t$_ti[bold]http://blog.onetimesecret.com/2013/02/12/copy-server-data-command-line/"
+        return 2
+    fi
+    [[ -f $HOME/.onetime ]] && source $HOME/.onetime
+    onetime $@
+    local rcode=$?
+    unset ONETIME_CUSTID ONETIME_APIKEY
+    return $rcode
+}

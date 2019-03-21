@@ -1,0 +1,26 @@
+# vim: ft=zsh:
+df_color_cube () {
+    if [[ -z $_ti ]]; then
+        return 1
+    fi
+    readonly keys=(
+        black red green yellow blue magenta cyan white \
+        Black Red Green Yellow Blue Magenta Cyan White
+    )
+    builtin printf "   │" 
+    for i in {1..${#keys}}; do 
+        builtin printf "%s%02d%s " "$_ti[f$keys[i]]" $i "$_ti[reset]"
+    done
+    builtin printf "\n───┼" 
+    for i in {1..${#keys}}; do 
+        builtin printf  "───"
+    done
+    builtin printf "\n" 
+    for i in {1..${#keys}}; do
+        builtin printf "%s%02d$_ti[reset] │" "$_ti[f$keys[i]]" $i
+        for j in {1..${#keys}}; do 
+            builtin printf "%s%s$_ti[underline]xX$_ti[reset] " "$_ti[f$keys[i]]" "$_ti[b$keys[j]]"
+        done
+        builtin printf "%07s$_ti[reset]\n" "$keys[i]"
+    done
+}

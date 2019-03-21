@@ -1,0 +1,38 @@
+# vim: ft=zsh:
+zmodload zsh/datetime # provides EPOCHSECONDS
+zmodload -F zsh/stat b:zstat # provides zstat
+zmodload -m -F zsh/files b:zf_\* # provides builtin mkdir, ln and other commands with prefix zf_
+  
+# setup the stub if brew is not installed
+if [[ "${$(whence -w brew)##*: }" = "none" ]]; then 
+    typeset -fU brew () { 
+        df_error "brew not found"
+        df_info "Try to install brew with next command:\n\t$_ti[bold]/usr/bin/ruby -e \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
+        return 2
+    }
+else
+    typeset -g BREW=$(whence brew)
+fi
+
+# "optimized" 'brew --prefix' will return prefix for any given formula and cache it for the next 24h
+typeset -fU brew--prefix () {
+	[[ -z $BREW ]] && return 2
+	[[ -z $1 ]] && return 1
+    local formula=$1 cache_dir="$HOME/.cache/brew--prefix" cache=${1}
+    builtin test -d $cache_dir || zf_mkdir -m 0700 -p $cache_dir
+    local age=$(($EPOCHSECONDS - $(zstat +ctime $cache_dir/$cache 2> /dev/null || echo 0)))
+    # Next condition will be also true if "no such file" error happened
+    if [[ $age -gt 86400 ]]; then
+        brew --prefix $formula | tee $cache_dir/$cache
+        brew_status=$pipestatus[1]
+        [[ $brew_status -ne 0 ]] && zf_rm -s $cache_dir/$cache
+        return $brew_status
+    fi
+    df_cat $cache_dir/$cache
+}
+
+typeset -fU brew--prefix-purge () { 
+    zf_rm -sfr $HOME/.cache/brew--prefix
+}
+
+unfunction df_homebrew

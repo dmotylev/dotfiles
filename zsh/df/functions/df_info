@@ -1,0 +1,5 @@
+# vim: ft=zsh:
+df_info() {
+    builtin printf "$_ti[fGreen]$_ti[underline]INFO$_ti[reset]\t$_ti[fGreen]%b$_ti[reset]\n" "$*"
+}
+

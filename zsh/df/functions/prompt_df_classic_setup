@@ -1,0 +1,124 @@
+# vim: ft=zsh:
+function df_prompt_pwd {
+    local git_root=$PWD
+    while [[ $git_root != / && ! -e $git_root/.git ]]; do
+        git_root=$git_root:h
+    done
+    if [[ $git_root = / ]] {
+        print -P '%~'
+    } else {
+        print -P '${PWD#${git_root%\/*}/}'
+    }
+    unset git_root
+}
+
+function calc_elapsed_time {
+    if [[ $timer_result -ge 3600 ]] {
+        let "timer_hours = $timer_result / 3600"
+        let "remainder = $timer_result % 3600"
+        let "timer_minutes = $remainder / 60"
+        let "timer_seconds = $remainder % 60"
+        print -P "%{$_ti[bold]$_ti[fred]%}... elapsed time ${timer_hours}h${timer_minutes}m${timer_seconds}s%{$_ti[reset]%}"
+    } elif [[ $timer_result -ge 60 ]] {
+        let "timer_minutes = $timer_result / 60"
+        let "timer_seconds = $timer_result % 60"
+        print -P "%{$_ti[bold]$_ti[fyellow]%}... elapsed time ${timer_minutes}m${timer_seconds}s%{$_ti[reset]%}"
+    } elif [[ $timer_result -gt 10 ]] {
+        print -P "%{$_ti[fyellow]%}... elapsed time ${timer_result}s%{$_ti[reset]%}"
+    }
+}
+
+function prompt_df_classic_preexec {
+    timer_start=${timer_start:-$SECONDS}
+}
+
+function prompt_df_classic_precmd {
+    setopt local_options
+    unsetopt xtrace ksh_arrays
+
+    [[ $timer_start -ne 0 ]] && timer_result=$(($SECONDS-$timer_start))
+    [[ $timer_result -gt 10 ]] && calc_elapsed_time
+    unset timer_start timer_result
+
+    df_vcs_info
+}
+
+function df_build_prompt {
+    print -Pn '%(?..%{$_ti[fyellow]%}... exit code %?%{$_ti[reset]%}$nl)'
+    print -Pn '%{$_ti[fgreen]%}$(df_prompt_pwd)%{$_ti[reset]%}${df_vcs_info_prompt}$nl'
+}
+
+function df_vcs_info {
+    setopt local_options
+
+    local staged=0 unstaged=0 untracked=0 branch="" oid=""
+    git status --porcelain=v2 --branch 2> /dev/null | while read l; do 
+        if [[ $l =~ '^(1|2|\?) (.)(.)?' ]] {
+            if [[ $match[1] == '?' ]] { 
+                ((untracked+=1))
+            } else {
+                if [[ $match[2] != '.' ]] { 
+                    ((staged+=1))
+                }
+                if [[ $match[3] != '.' ]] { 
+                    ((unstaged+=1))
+                }
+            }
+        }
+        if [[ $l =~ '^# branch\.head (.+)$' ]] {
+            branch=$match[1]
+        }
+        if [[ $l =~ '^# branch\.oid (.+)$' ]] {
+            oid=${match[1]:1:7}
+        }
+    done
+
+    if [[ -z $branch ]] {
+        df_vcs_info_prompt=""
+        return
+    }
+
+    df_vcs_info_prompt=" %{$_ti[fBlack]%}("
+    if [[ $staged -eq 0 && $unstaged -eq 0 && $untracked -eq 0 ]] {
+        df_vcs_info_prompt+="%{$_ti[fblue]%}${branch}"
+        df_vcs_info_prompt+=" %{$_ti[fmagenta]%}${oid}"
+    } else {
+        df_vcs_info_prompt+="%{$_ti[fred]%}${branch} "
+        df_vcs_info_prompt+="%{$_ti[fmagenta]%}${oid} "
+        if [[ $staged -eq 0 ]] {
+            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
+        } else {
+            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
+        }
+        if [[ $unstaged -eq 0 ]] {
+            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
+        } else {
+            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
+        }
+        if [[ $untracked -eq 0 ]] {
+            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
+        } else {
+            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
+        }
+    }
+    df_vcs_info_prompt+="%{$_ti[fBlack]%})"
+}
+
+function prompt_df_classic_setup {
+    setopt local_options
+    prompt_opts=(cr percent subst)
+
+    # Load required functions.
+    autoload -Uz add-zsh-hook
+
+    # Add hook for calling git-info before each command.
+    add-zsh-hook preexec prompt_df_classic_preexec
+    add-zsh-hook precmd prompt_df_classic_precmd
+
+    prompt_opts=(cr percent subst)
+
+    nl=$'\n'
+    PROMPT='$(df_build_prompt)$nl%(!.%{$_ti[fred]%}#%{$_ti[reset]%}.%{$_ti[fyellow]%}%%%{$_ti[reset]%}) '
+}
+
+prompt_df_classic_setup "$@"

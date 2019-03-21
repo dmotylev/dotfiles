@@ -1,0 +1,53 @@
+# vim: ft=zsh:
+if [[ -z $_ti && ( -t 1 || -t 2 ) ]]; then
+    zmodload zsh/terminfo
+    
+    typeset -Ag _ti
+
+    _ti=(
+        fblack		$(echoti setaf 0) 
+        fred		$(echoti setaf 1)
+        fgreen		$(echoti setaf 2)
+        fyellow		$(echoti setaf 3)
+        fblue		$(echoti setaf 4)
+        fmagenta	$(echoti setaf 5)
+        fcyan		$(echoti setaf 6)
+        fwhite		$(echoti setaf 7)
+
+        fBlack		$(echoti setaf 8) 
+        fRed		$(echoti setaf 9)
+        fGreen		$(echoti setaf 10)
+        fYellow		$(echoti setaf 11)
+        fBlue		$(echoti setaf 12)
+        fMagenta	$(echoti setaf 13)
+        fCyan		$(echoti setaf 14)
+        fWhite		$(echoti setaf 15)
+
+        bblack		$(echoti setab 0) 
+        bred		$(echoti setab 1)
+        bgreen		$(echoti setab 2)
+        byellow		$(echoti setab 3)
+        bblue		$(echoti setab 4)
+        bmagenta	$(echoti setab 5)
+        bcyan		$(echoti setab 6)
+        bwhite		$(echoti setab 7)
+
+        bBlack		$(echoti setab 8) 
+        bRed		$(echoti setab 9)
+        bGreen		$(echoti setab 10)
+        bYellow		$(echoti setab 11)
+        bBlue		$(echoti setab 12)
+        bMagenta	$(echoti setab 13)
+        bCyan		$(echoti setab 14)
+        bWhite		$(echoti setab 15)
+
+        underline   $(echoti smul)
+        bold        $(echoti bold)
+        blink       $(echoti blink)
+        reset		$(echoti sgr0)
+    )
+
+    autoload df_color_cube
+fi
+
+unfunction df_colors

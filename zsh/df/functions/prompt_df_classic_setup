@@ -80,26 +80,15 @@ function df_vcs_info {
 
     df_vcs_info_prompt=" %{$_ti[fBlack]%}("
     if [[ $staged -eq 0 && $unstaged -eq 0 && $untracked -eq 0 ]] {
-        df_vcs_info_prompt+="%{$_ti[fblue]%}${branch}"
-        df_vcs_info_prompt+=" %{$_ti[fmagenta]%}${oid}"
+        df_vcs_info_prompt+="%{$_ti[fmagenta]%}${oid}"
+        df_vcs_info_prompt+=" %{$_ti[fblue]%}${branch}"
     } else {
-        df_vcs_info_prompt+="%{$_ti[fred]%}${branch} "
         df_vcs_info_prompt+="%{$_ti[fmagenta]%}${oid} "
-        if [[ $staged -eq 0 ]] {
-            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
-        } else {
-            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
-        }
-        if [[ $unstaged -eq 0 ]] {
-            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
-        } else {
-            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
-        }
-        if [[ $untracked -eq 0 ]] {
-            df_vcs_info_prompt+="%{$_ti[fBlack]%}∙"
-        } else {
-            df_vcs_info_prompt+="%{$_ti[fYellow]%}•"
-        }
+        df_vcs_info_prompt+="%{$_ti[fred]%}${branch} "
+        local off="%{$_ti[fBlack]%}∙" on="%{$_ti[fYellow]%}•"
+        df_vcs_info_prompt+=$( [[ $staged -eq 0 ]]; print -Pn '%(?.${off}.${on})')
+        df_vcs_info_prompt+=$( [[ $unstaged -eq 0 ]]; print -Pn '%(?.${off}.${on})')
+        df_vcs_info_prompt+=$( [[ $untracked -eq 0 ]]; print -Pn '%(?.${off}.${on})')
     }
     df_vcs_info_prompt+="%{$_ti[fBlack]%})"
 }

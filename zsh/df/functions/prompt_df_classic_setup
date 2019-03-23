@@ -69,7 +69,7 @@ function df_vcs_info {
             branch=$match[1]
         }
         if [[ $l =~ '^# branch\.oid (.+)$' ]] {
-            oid=${match[1]:1:7}
+            oid=${match[1]:0:7}
         }
     done
 

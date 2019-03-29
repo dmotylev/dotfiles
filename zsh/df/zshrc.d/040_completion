@@ -9,8 +9,18 @@
 # - '.' matches "regular files"
 # - 'mh+24' matches files (or directories or whatever) that are older than 24 hours.
 autoload -Uz compinit 
-if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]] {
-	compinit
-} else {
-	compinit -C
+
+function df_completion_setup {
+    setopt local_options
+    setopt extended_glob
+
+    if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]] {
+        echo "------"
+        zf_rm ${HOME}/.zcompdump
+    }
+    compinit -C
 }
+
+df_completion_setup
+
+unfunction df_completion_setup

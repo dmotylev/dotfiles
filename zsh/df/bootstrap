@@ -1,6 +1,6 @@
 # vim: ft=zsh:
 [[ ${fpath[(ie)$DOTFILES/zsh/df/functions]} -gt ${#fpath} ]] && fpath+=$DOTFILES/zsh/df/functions      
 
-autoload -Uz df_error df_info df_cat df_colors df_homebrew
-df_colors
-df_homebrew
+autoload -Uz df_error df_info df_cat 
+autoload -Uz df_colors && df_colors
+autoload -Uz df_homebrew && df_homebrew

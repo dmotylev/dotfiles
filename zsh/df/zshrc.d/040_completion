@@ -15,7 +15,6 @@ function df_completion_setup {
     setopt extended_glob
 
     if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]] {
-        echo "------"
         zf_rm ${HOME}/.zcompdump
     }
 

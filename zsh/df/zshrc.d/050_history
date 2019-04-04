@@ -13,7 +13,7 @@ function df_history_setup {
 		df_error "peco not found; install it with $_ti[bold]brew install peco"
 	}
     if [[ -f $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh ]] {
-		ZSH_PECO_HISTORY_OPTS="--select-1 --rcfile $DF_ROOT/config/peco.json"
+		ZSH_PECO_HISTORY_OPTS="--rcfile $DF_ROOT/config/peco.json --select-1"
         source $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh
     } else {
 		df_error "zsh-peco-history not found; try $_ti[bold]cd \$DOTFILES && git submodule init && git submodule update"

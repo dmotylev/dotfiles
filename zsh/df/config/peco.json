@@ -1,0 +1,12 @@
+{
+    "InitialFilter": "Fuzzy",
+    "Layout": "bottom-up",
+    "Prompt": ">",
+    "Style": {
+        "Basic": ["on_default", "default"],
+        "Matched": ["bold", "red"],
+        "Query": ["default"],
+        "SavedSelection": ["bold", "on_default", "yellow"],
+        "Selected": ["on_yellow", "black"]
+    }
+}

@@ -2,14 +2,14 @@
 zmodload -m -F zsh/files b:zf_\* # provides builtin mkdir, ln and other commands with prefix zf_
   
 # setup the stub if brew is not installed
-if [[ "${$(whence -w brew)##*: }" = "none" ]] {
+if (( $+commands[brew] )) {
+    typeset -g BREW=$commands[brew]
+} else {
     typeset -fU brew () { 
         df_error "brew not found"
         df_info "Try to install brew with next command:\n\t$_ti[bold]/usr/bin/ruby -e \"\$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)\""
         return 2
     }
-} else {
-    typeset -g BREW=$(whence brew)
 }
 
 # "optimized" 'brew --prefix' will return prefix for any given formula and cache it for the next 24h

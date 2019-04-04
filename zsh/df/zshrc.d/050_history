@@ -1,0 +1,25 @@
+# vim: ft=zsh:
+
+function df_history_setup {
+	setopt HIST_EXPIRE_DUPS_FIRST
+	setopt HIST_IGNORE_DUPS
+	setopt HIST_IGNORE_ALL_DUPS
+	setopt HIST_FIND_NO_DUPS
+	setopt HIST_SAVE_NO_DUPS
+	setopt HISTIGNORESPACE
+	HISTFILE=$HOME/.zsh_history
+
+	if ! (( $+commands[peco] )) {
+		df_error "peco not found; install it with $_ti[bold]brew install peco"
+	}
+    if [[ -f $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh ]] {
+		ZSH_PECO_HISTORY_OPTS="--select-1 --rcfile $DF_ROOT/config/peco.json"
+        source $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh
+    } else {
+		df_error "zsh-peco-history not found; try $_ti[bold]cd \$DOTFILES && git submodule init && git submodule update"
+    }
+}
+
+df_history_setup
+
+unfunction df_history_setup

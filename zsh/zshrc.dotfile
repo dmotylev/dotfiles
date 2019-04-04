@@ -1,6 +1,1 @@
-# vim: ft=zsh
-
-### {{{ dotfiles ...
-[[ -z $DOTFILES && -h "$HOME/.config/dotfiles" ]] && readonly DOTFILES="$HOME/.config/dotfiles"
-[[ -n $DOTFILES && -f $DOTFILES/zsh/df/zshrc ]] && source $DOTFILES/zsh/df/zshrc
-### ... dotfiles }}}
+zprofile.dotfile

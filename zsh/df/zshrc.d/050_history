@@ -6,20 +6,26 @@ function df_history_setup {
 	setopt HIST_IGNORE_ALL_DUPS
 	setopt HIST_FIND_NO_DUPS
 	setopt HIST_SAVE_NO_DUPS
+    setopt HIST_REDUCE_BLANKS
+    setopt HIST_NO_FUNCTIONS
+    setopt SHARE_HISTORY
+    setopt HIST_FCNTL_LOCK
 	setopt HISTIGNORESPACE
+    setopt HIST_VERIFY
+    setopt HIST_SAVE_BY_COPY
 	HISTFILE=$HOME/.zsh_history
+    SAVEHIST=10000
+    HISTSIZE=100
 
-	if ! (( $+commands[peco] )) {
-		df_error "peco not found; install it with $_ti[bold]brew install peco"
-	}
-    if [[ -f $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh ]] {
-		ZSH_PECO_HISTORY_OPTS="--rcfile $DF_ROOT/config/peco.json --select-1"
-        source $DF_ROOT/plugins/zsh-peco-history/zsh-peco-history.zsh
+	if (( $+commands[fzf] )) {
+        autoload -Uz df_fzf_history_widget 
+        zle -N df_fzf_history_widget
+        bindkey '^R' df_fzf_history_widget
     } else {
-		df_error "zsh-peco-history not found; try $_ti[bold]cd \$DOTFILES && git submodule init && git submodule update"
+		df_error "fzf not found; install it with $_ti[bold]brew install fzf"
     }
+
+    unfunction df_history_setup
 }
 
 df_history_setup
-
-unfunction df_history_setup

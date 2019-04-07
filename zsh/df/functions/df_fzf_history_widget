@@ -1,0 +1,28 @@
+# vim: ft=zsh:
+function df_fzf_history_widget {
+    setopt localoptions noglobsubst noposixbuiltins pipefail
+    local min_height=10
+    local lines=$(echotc li)
+    local height=$(( lines - $(echo -ne "\033[6n" > /dev/tty; read -s -t 1 -d R p < /dev/tty; echo ${${p##*\[}%;*}; unset p) ))
+    [[ $((min_height - height)) > 0 ]] && height="$(( min_height*100/lines ))%"
+    local selected
+    [[ -d $HOME/.cache/fzf ]] || zf_mkdir -p $HOME/.cache/fzf
+    selected=($(fc -rl 1 | fzf +m \
+        --height="$height" \
+        --min-height="$min_height" \
+        --reverse \
+        --inline-info \
+        -n2..,.. \
+        --cycle \
+        --tiebreak=index \
+        --bind=ctrl-r:toggle-sort,tab:down,btab:up \
+        --query="${LBUFFER}" \
+        --history=$HOME/.cache/fzf/history \
+    ))
+    local rcode=$?
+    if [[ -n $selected[1] ]] {
+	    zle vi-fetch-history -n $selected[1]
+    }
+    zle reset-prompt
+    return $rcode
+}

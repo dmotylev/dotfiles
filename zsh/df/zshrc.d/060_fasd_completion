@@ -1,0 +1,21 @@
+# vim: ft=zsh:
+
+function fasd_completion_setup {
+    local fasd_cache="$HOME/.cache/fasd"
+    [[ -d $fasd_cache ]] || zf_mkdir -p $fasd_cache
+    fasd_cache+="/fasd_init.zsh"
+
+    if [[ $commands[fasd] -nt $fasd_cache || ! -s "$fasd_cache" ]] {
+        fasd --init \
+            zsh-hook \
+            zsh-ccomp \
+            zsh-ccomp-install \
+            zsh-wcomp \
+            zsh-wcomp-install \
+            posix-alias >| $fasd_cache
+    }
+    source "$fasd_cache"
+    unfunction fasd_completion_setup
+}
+
+fasd_completion_setup

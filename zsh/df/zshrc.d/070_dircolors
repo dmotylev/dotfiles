@@ -1,0 +1,28 @@
+# vim: ft=zsh:
+
+function df_dircolors_setup {
+    local theme=$HOME/.config/dircolors/jellybeans
+
+    if [[ ! -f $theme ]] {
+        df_info "Installing jellybeans dircolors theme..."
+        mkdir -p $(dirname $theme)
+        curl -s \
+            https://raw.githubusercontent.com/peterhellberg/dircolors-jellybeans/master/dircolors.jellybeans \
+            -o $theme
+    }
+
+    if ! (($+commands[gdircolors])) {
+        df_error "gdircolors not found; install it with $_ti[bold]brew install coreutils"
+    } elif [[ $theme -nt $HOME/.cache/dircolors ]] {
+        gdircolors $theme >| $HOME/.cache/dircolors
+    }
+
+    if [[ -f $HOME/.cache/dircolors ]] {
+        source $HOME/.cache/dircolors
+        export CLICOLOR=1
+    }
+
+    unfunction df_dircolors_setup
+}
+
+df_dircolors_setup

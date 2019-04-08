@@ -86,3 +86,18 @@ if-shell "test -f ~/Workshop/dotfiles/tmux/tmuxline.conf" "source ~/Workshop/dot
 if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
 
 set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'
+
+bind -T root    WheelUpPane \
+	if-shell -Ft= "#{?pane_active,0,1}" "select-pane -t=" \
+		"if-shell -Ft= \"#{mouse_any_flag}\" \
+			\"send-keys -M\" \
+			\"if-shell -Ft= '#{alternate_on}' \
+				'send-keys -N 3 Up' \
+				''\""
+bind -T root    WheelDownPane \
+	if-shell -Ft= "#{?pane_active,0,1}" "select-pane -t=" \
+		"if-shell -Ft= \"#{mouse_any_flag}\" \
+			\"send-keys -M\" \
+			\"if-shell -Ft= '#{alternate_on}' \
+				'send-keys -N 3 Down' \
+				''\""

@@ -1,0 +1,15 @@
+# vim: ft=zsh:
+function df_kubectl_setup {
+    local cached_code=$HOME/.cache/kubectl.zsh.inc
+    if ! (($+commands[kubectl])) {
+        df_error "kubectl not found; install it with $_ti[bold]brew install kubectl"
+        return
+    }
+    if [[ ! -f $cached_code || $commands[kubectl] -nt $cached_code ]] {
+        kubectl completion zsh >| $cached_code
+    }
+    source $cached_code
+    unfunction df_kubectl_setup
+}
+
+df_kubectl_setup

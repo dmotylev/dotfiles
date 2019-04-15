@@ -1,6 +1,7 @@
 [user]
 	name = Dmitry Motylev
 	email = dmitry@redsift.io
+	signingkey = B0920DF4735F2644
 [credential]
 	helper = osxkeychain
 [alias]

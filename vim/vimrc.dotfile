@@ -141,9 +141,14 @@ Plug 'hashivim/vim-terraform', {'for': ['terraform']}
 "Plug 'cakebaker/scss-syntax.vim'
 "Plug 'groenewege/vim-less'
 "Plug 'dagwieers/asciidoc-vim'
+Plug 'dahu/vimple', {'for': ['asciidoc']}
+Plug 'dahu/asif', {'for': ['asciidoc']}
+Plug 'raimondi/vimregstyle', {'for': ['asciidoc']}
+Plug 'vim-scripts/syntaxrange', {'for': ['asciidoc']}
+Plug 'dahu/vim-asciidoc', {'for': ['asciidoc']}
 "Plug 'cespare/vim-toml'
 "Plug 'tfnico/vim-gradle'
-Plug 'jparise/vim-graphql'
+Plug 'jparise/vim-graphql', {'for': ['graphql']}
 call plug#end()
 
 """ PLUGINS' CONFIG

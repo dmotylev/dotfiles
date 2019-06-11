@@ -3,7 +3,8 @@
 function df_google_cloud_sdk_setup {
     local google_cloud_sdk_home=/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk
     if [[ -d $google_cloud_sdk_home ]] {
-        source $google_cloud_sdk_home/*.zsh.inc
+        source $google_cloud_sdk_home/path.zsh.inc
+        source $google_cloud_sdk_home/completion.zsh.inc
     } else {
         df_error "google-cloud-sdk not found; install it with $_ti[bold]brew cask install google-cloud-sdk" 
     }

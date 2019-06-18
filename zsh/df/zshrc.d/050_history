@@ -13,9 +13,9 @@ function df_history_setup {
 	setopt HISTIGNORESPACE
     setopt HIST_VERIFY
     setopt HIST_SAVE_BY_COPY
-	HISTFILE=$HOME/.zsh_history
-    SAVEHIST=10000
-    HISTSIZE=100
+	export HISTFILE=$HOME/.zsh_history
+    export SAVEHIST=10000
+    export HISTSIZE=100
 
 	if (( $+commands[fzf] )) {
         autoload -Uz df_fzf_history_widget 

@@ -8,7 +8,8 @@ function df_history_setup {
 	setopt HIST_SAVE_NO_DUPS
     setopt HIST_REDUCE_BLANKS
     setopt HIST_NO_FUNCTIONS
-    setopt SHARE_HISTORY
+    setopt EXTENDED_HISTORY
+    setopt INC_APPEND_HISTORY_TIME
     setopt HIST_FCNTL_LOCK
 	setopt HISTIGNORESPACE
     setopt HIST_VERIFY

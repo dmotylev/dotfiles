@@ -134,7 +134,8 @@ Plug 'jodosha/vim-godebug', {'for': ['go']}
 " Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
 Plug 'kannokanno/previm', {'for': ['markdown']}
 Plug 'hashivim/vim-terraform', {'for': ['terraform']}
-"Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
+Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
+"Plug 'pearofducks/ansible-vim', {'for': ['ansible'], 'do': 'cd ./UltiSnips; ./generate.py'}
 "Plug 'chase/vim-ansible-yaml'
 "Plug 'Glench/Vim-Jinja2-Syntax'
 "Plug 'mattn/emmet-vim'
@@ -334,7 +335,8 @@ endif
 
 "let g:UltiSnipsListSnippets = "<F12>"
 let g:ansible_options = {'ignore_blank_lines': 0}
-let g:terraform_fmt_on_save=1
+let g:ansible_unindent_after_newline = 1
+let g:terraform_fmt_on_save = 1
 "let g:previm_open_cmd = 'open -a Google\ Chrome'
 
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab

@@ -1,7 +1,6 @@
 [user]
 	name = Dmitry Motylev
 	email = dmitry@redsift.io
-	signingkey = B0920DF4735F2644
 [credential]
 	helper = osxkeychain
 [alias]
@@ -10,8 +9,6 @@
 	co = checkout
 	pr-clean = "!git checkout master ; git for-each-ref refs/heads/pr/* --format=\"%(refname)\" | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
 	pr = "!f() { git fetch -fu ${2:-origin} refs/pull/$1/head:pr/$1 && git checkout pr/$1; }; f"
-	vgo = !git log -1 --pretty='format:%H' | sed -E 's/^(.{1,12}).+$/\\1/'
-	gopath = "!git config --get remote.origin.url | sed -E 's/^(git@|.+::\\/)(.+).git$/\\2/; s/:/\\//;'"
 [color]
 	diff = auto
 	status = auto
@@ -25,6 +22,7 @@
 	prompt = false
 [push]
 	default = simple
+	followTags = true
 [filter "media"]
 	required = true
 	clean = git media clean %f
@@ -47,3 +45,9 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[hub]
+	protocol = ssh
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
+[commit]
+	gpgsign = false

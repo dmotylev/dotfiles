@@ -95,7 +95,6 @@ function df_vcs_info {
 
 function prompt_df_classic_setup {
     setopt local_options
-    prompt_opts=(cr percent subst)
 
     # Load required functions.
     autoload -Uz add-zsh-hook
@@ -104,7 +103,7 @@ function prompt_df_classic_setup {
     add-zsh-hook preexec prompt_df_classic_preexec
     add-zsh-hook precmd prompt_df_classic_precmd
 
-    prompt_opts=(cr percent subst)
+    prompt_opts=(cr percent subst sp)
 
     nl=$'\n'
     PROMPT='$(df_build_prompt)$nl%(!.%{$_ti[fred]%}#%{$_ti[reset]%}.%{$_ti[fyellow]%}%%%{$_ti[reset]%}) '

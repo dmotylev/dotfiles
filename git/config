@@ -1,7 +1,6 @@
 [user]
-	name = Dmitry Motylev
-	email = dmitry@redsift.io
-	signingkey = B0920DF4735F2644
+    name = Dmitry Motylev
+    email = dmitry@redsift.io 
 [credential]
 	helper = osxkeychain
 [alias]
@@ -47,3 +46,7 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
+[gpg]
+	program = /usr/local/MacGPG2/bin/gpg2
+[commit]
+	gpgsign = false

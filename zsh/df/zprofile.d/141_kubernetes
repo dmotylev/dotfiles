@@ -1,0 +1,5 @@
+# vim: ft=zsh:
+KUBECONFIG=$HOME/.kube/config
+for f in $HOME/.kube/config.d/*; do KUBECONFIG+=":$f"; done
+export KUBECONFIG
+

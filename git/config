@@ -33,11 +33,11 @@
 	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
 	trustexitcode = true
 [merge]
-	tool = diffmerge
+	tool = Kaleidoscope
 [difftool]
 	prompt = false
 [diff]
-	tool = diffmerge
+	tool = Kaleidoscope
 [url "git@github.com:"]
 	insteadOf = https://github.com/
 [filter "lfs"]

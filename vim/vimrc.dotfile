@@ -116,10 +116,10 @@ Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-fugitive'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-    Plug 'zchee/deoplete-go', { 'do': 'make'}
+"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"    Plug 'zchee/deoplete-go', { 'do': 'make'}
 else
-    Plug 'Shougo/neocomplete'
+"    Plug 'Shougo/neocomplete'
 endif
 "Plug 'SirVer/ultisnips'
 Plug 'roxma/vim-paste-easy'

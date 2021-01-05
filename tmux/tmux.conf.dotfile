@@ -74,18 +74,16 @@ bind-key -T prefix -r L resize-pane -R 5
 bind-key -T prefix x kill-pane
 
 bind-key -T prefix C-s choose-session
-bind-key -T prefix C-n command-prompt -p "New session name?" -I "Console" "new-session -s '%%' -n Console"
+bind-key -T prefix C-n command-prompt -p "New session name?" -I "Shell" "new-session -s '%%' -n Shell"
 
-bind-key -T prefix r source-file ~/.tmux.conf \; display-message "Configuration reloaded"
+bind-key -T prefix r source-file ~/.config/tmux/tmux.conf \; display-message "Configuration reloaded"
 
-bind-key -T prefix c new-window -c "#{pane_current_path}" -n Console
+bind-key -T prefix c new-window -c "#{pane_current_path}" -n Shell
 
-if-shell "test -f ~/.config/dotfiles/tmux/tmux-os.conf" "source ~/.config/dotfiles/tmux/tmux-os.conf"
-if-shell "test -f ~/.config/dotfiles/tmux/tmuxline.conf" "source ~/.config/dotfiles/tmux/tmuxline.conf"
+source-file -q ~/.config/dotfiles/tmux/tmux-os.conf
+source-file -q ~/.config/dotfiles/tmux/tmuxline.conf
 
-if-shell "test -f .tmux.local.conf" "source .tmux.local.conf"
-
-set-hook -g after-new-session 'if-shell "test -f ~/.tmux/sessions/#{session_name}.conf" "source ~/.tmux/sessions/#{session_name}.conf"'
+set-hook -g session-created 'source-file -Fq $HOME/.config/dotfiles/tmux/sessions/#\{session_name\}.conf'
 
 bind -T root WheelUpPane \
     if-shell -Ft= "#{mouse_any_flag}" \

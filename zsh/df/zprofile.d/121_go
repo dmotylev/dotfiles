@@ -1,3 +1,4 @@
 # vim: ft=zsh:
 export GOPATH=$HOME/Workshop/go
 path+=$GOPATH/bin
+path+=/usr/local/go/bin

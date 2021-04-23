@@ -1,3 +1,4 @@
 # vim: ft=zsh:
 typeset -aU path
 path+=$HOME/bin
+path+=/usr/local/sbin

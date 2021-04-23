@@ -14,6 +14,10 @@ function df_completion_setup {
     setopt local_options
     setopt extended_glob
 
+    if type brew &>/dev/null; {
+        FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+    }
+
     if [[ -n ${HOME}/.zcompdump(#qN.mh+24) ]] {
         zf_rm ${HOME}/.zcompdump
     }

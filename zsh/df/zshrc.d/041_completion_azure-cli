@@ -1,0 +1,9 @@
+# vim: ft=zsh:
+
+function az_completion_setup {
+    autoload -U +X bashcompinit && bashcompinit
+    source /usr/local/etc/bash_completion.d/az
+    unfunction az_completion_setup
+}
+
+az_completion_setup

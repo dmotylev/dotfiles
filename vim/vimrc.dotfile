@@ -1,356 +1,98 @@
-﻿""" GENERAL CONFIG
-set nowrap
-set textwidth=0
-set wrapmargin=0
-set colorcolumn=-5
+""" Load plugins
+if empty(glob('~/.vim/autoload/plug.vim'))
+        silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+        autocmd VimEnter * PlugInstall | source $MYVIMRC
+endif
+
+call plug#begin()
+
+if has("gui_vimr")
+else
+    Plug 'tmux-plugins/vim-tmux-focus-events'
+endif
+
+Plug 'tpope/vim-sensible'
+Plug 'altercation/vim-colors-solarized'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'mhinz/vim-signify'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-obsession'
+Plug 'ctrlpvim/ctrlp.vim'
+
+Plug 'edkolev/tmuxline.vim'
+
+Plug 'fatih/vim-go', {'for': ['go']}
+Plug 'rust-lang/rust.vim', {'for': ['rust']}
+Plug 'hashivim/vim-terraform', {'for': ['terraform']}
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+function! SyncColorscheme()
+    if !has("gui_vimr")
+        set background=light
+    else
+        if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+            set background=dark   " for the dark version of the theme
+        else
+            set background=light  " for the light version of the theme
+        endif
+    endif
+
+    if globpath(&rtp, 'colors/solarized.vim') != ""
+        if has("gui_vimr")
+        else
+            let g:solarized_termtrans=1
+        endif
+
+        colorscheme solarized
+
+        highlight VertSplit ctermbg=NONE guibg=NONE
+        highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
+    endif
+endfunction
+
+call SyncColorscheme()
+
+if empty(glob('~/.vim/plugged/vim-signify'))
+    set updatetime=100
+endif
+
 set tabstop=4
 set shiftwidth=4
 set expandtab
-set wildchar=<Tab> wildmenu wildmode=full
-" List buffers
-set wildcharm=<C-Z>
-nnoremap <F10> :b <C-Z>
-" Save changes
-map <Esc><Esc> :update<CR>
+
 " These two options, when set together, will make /-style searches
 " case-sensitive only if there is a capital letter in the search expression.
 " *-style searches continue to be consistently case-sensitive.
 set ignorecase
 set smartcase
-set title
-set shortmess=atIO
-set visualbell
-set t_Co=256
-" Allow move the cursor left/right to move to the previous/next line when the
-" cursor is on the first/last character in the line.
-set whichwrap=<,>,[,]
-set mouse=a
-" Swap files and backups are annoying but can save you a lot of trouble.
-" Rather than spread them all around your filesystem,
-" isolate them to a single directory
-set backupdir=~/.vim/tmp//,/var/tmp//,/tmp//
-set directory=~/.vim/tmp//,/var/tmp//,/tmp//
-set wildignore+=*.o,*.obj,.git,*.6,*.out,*.a,_testmain.go
-set undofile
-set undodir=~/.vim/undo
-set undolevels=1000
-set undoreload=10000
-set noshowmode
-" Open new split panes to right and bottom, which feels more natural
-set splitbelow
-set splitright
-" Automatically read file if it was changed outside
-set autoread
-" Automatically write the file on make
-set autowrite
-set hlsearch
-set foldlevel=0
-set foldminlines=5
-set foldnestmax=2
-set foldtext=MyFoldText()
-set fillchars+=fold:·,vert:│
-function MyFoldText()
-    let l = getline(v:foldstart)
-    return  '▹···' . l . '····+' . (v:foldend - v:foldstart) . ' lines'
-endfunction
 
-" Copy to clipboard
-vnoremap  <leader>y  "+y
-nnoremap  <leader>Y  "+yg_
-nnoremap  <leader>y  "+y
-nnoremap  <leader>yy  "+yy
-
-" Paste from clipboard
-nnoremap <leader>p "+p
-nnoremap <leader>P "+P
-vnoremap <leader>p "+p
-vnoremap <leader>P "+P
-
-nmap * /\C\<<C-R>=expand('<cword>')<CR>\><CR>
-nmap # ?\C\<<C-R>=expand('<cword>')<CR>\><CR>
-nmap <Leader>s :%s/\C\<<C-R>=expand('<cword>')<CR>\>//g<Left><Left>
-
-" Tame quickfix list
-map <C-n> :cnext<CR>
-map <C-m> :cprevious<CR>
-nnoremap <leader>w :cclose<CR>
-
-" setup omnicomplete
-set omnifunc=syntaxcomplete#Complete
-set completeopt=menuone,longest
-set pumheight=15
-
-" Optimize rendering
-set nocursorline
-set nocursorcolumn
-syntax sync minlines=64
-syntax sync maxlines=256
-set synmaxcol=256
 " Warning: Line numbers in gutter make vim slow
 nmap <Leader>n :set invrelativenumber<CR>
 nmap <Leader>N :set invnumber<CR>
 
-""" Load plugins
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall | source $MYVIMRC
+if !empty(glob('~/.vim/plugged/ctrlp'))
+    let g:ctrlp_cmd='CtrlP'
+    let g:ctrlp_working_path_mode = 'ra'
+    let g:ctrlp_switch_buffer = 'Et'
+    let g:ctrlp_user_command = {
+            \ 'types': {
+            \   1:['.git', 'cd %s && git ls-files -co --exclude-standard']
+            \ },
+            \ 'fallback': 'ag %s -l --nocolor -g ""'
+            \ }
 endif
 
-if has('nvim')
-    let g:loaded_python_provider = 1
-endif
-
-call plug#begin()
-if !has('nvim')
-    Plug 'tpope/vim-sensible'
-endif
-Plug 'tpope/vim-vinegar'
-Plug 'nanotech/jellybeans.vim', { 'do': ':colorscheme jellybeans' }
-"Plug 'altercation/vim-colors-solarized', { 'do': ':colorscheme solarized' }
-Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-obsession'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'danro/rename.vim'
-Plug 'mhinz/vim-signify'
-Plug 'tpope/vim-fugitive'
-Plug 'tmux-plugins/vim-tmux-focus-events'
-if has('nvim')
-"    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"    Plug 'zchee/deoplete-go', { 'do': 'make'}
-else
-"    Plug 'Shougo/neocomplete'
-endif
-"Plug 'SirVer/ultisnips'
-Plug 'roxma/vim-paste-easy'
-Plug 'szw/vim-dict'
-"Plug 'Shougo/deoplete.nvim'
-"Plug 'scrooloose/nerdtree'
-"" language specific
-"Plug 'zchee/deoplete-go', { 'do': 'make'}
-Plug 'fatih/vim-go', {'for': ['go']}
-Plug 'rust-lang/rust.vim', {'for': ['rust']}
-Plug 'jodosha/vim-godebug', {'for': ['go']}
-" Plug 'git@github.com:sourcegraph-beta/sourcegraph-vim-beta.git', {'for': ['go']}
-Plug 'kannokanno/previm', {'for': ['markdown']}
-Plug 'hashivim/vim-terraform', {'for': ['terraform']}
-Plug 'pearofducks/ansible-vim', {'for': ['ansible']}
-"Plug 'pearofducks/ansible-vim', {'for': ['ansible'], 'do': 'cd ./UltiSnips; ./generate.py'}
-"Plug 'chase/vim-ansible-yaml'
-"Plug 'Glench/Vim-Jinja2-Syntax'
-"Plug 'mattn/emmet-vim'
-"Plug 'cakebaker/scss-syntax.vim'
-"Plug 'groenewege/vim-less'
-"Plug 'dagwieers/asciidoc-vim'
-Plug 'dahu/vimple', {'for': ['asciidoc']}
-Plug 'dahu/asif', {'for': ['asciidoc']}
-Plug 'raimondi/vimregstyle', {'for': ['asciidoc']}
-Plug 'vim-scripts/syntaxrange', {'for': ['asciidoc']}
-Plug 'dahu/vim-asciidoc', {'for': ['asciidoc']}
-"Plug 'cespare/vim-toml'
-"Plug 'tfnico/vim-gradle'
-Plug 'jparise/vim-graphql', {'for': ['graphql']}
-call plug#end()
-
-""" PLUGINS' CONFIG
-if globpath(&rtp, 'plugin/deoplete-go.vim') != ""
-    let g:deoplete#sources#go#package_dot = 1
-    let g:deoplete#sources#go#pointer=1
-endif
-
-if globpath(&rtp, 'colors/solarized.vim') != ""
-    let g:solarized_termtrans=1
-    let g:solarized_contrast='high'
-    set background=dark
-    colorscheme solarized
-    if &t_Co == 256 && g:colors_name =~ "solarized"
-        highlight VertSplit ctermbg=none ctermfg=24
-        highlight DiffAdd ctermbg=none
-        highlight DiffDelete ctermbg=none
-        highlight DiffChange ctermbg=none
-        highlight CursorLineNr ctermfg=7
-        highlight LineNr ctermbg=none
-        highlight! link SignColumn LineNr
-        highlight ColorColumn ctermbg=none ctermfg=133
-        highlight MatchParen cterm=none ctermbg=none ctermfg=5
-"        highlight OverLength ctermbg=none ctermfg=236 
-"        match OverLength /\%81v.*/
+if !empty(glob('~/.vim/plugged/vim-airline'))
+    if has("gui_vimr")
+        let g:airline_powerline_fonts = 1
     endif
+
+    let g:airline#extensions#tmuxline#enabled = 0
+    let g:airline#extensions#tabline#enabled = 1
+    let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 endif
 
-if globpath(&rtp, 'colors/jellybeans.vim') != ""
-    let g:jellybeans_overrides = {
-    \   'background': { '256ctermbg': 'none' },
-    \   'VertSplit': { '256ctermfg': '237', '256ctermbg': 'none' },
-    \   'ColorColumn': { '256ctermfg': '133', '256ctermbg': 'none' },
-    \   'CursorLineNr': { '256ctermfg': '244', '256ctermbg': 'none' },
-    \   'SignColumn': { '256ctermbg': 'none' },
-    \   'Visual': { '256ctermfg': '16', '256ctermbg': '133' },
-    \   'MatchParen': { 'attr': 'none', '256ctermfg': '5', '256ctermbg': 'none' },
-    \   'Search': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
-    \   'DiffAdd': { 'attr': 'none', '256ctermfg': '34', '256ctermbg': '22' },
-    \   'DiffChange': { 'attr': 'none', '256ctermfg': '32', '256ctermbg': '24' },
-    \   'DiffDelete': { 'attr': 'none', '256ctermfg': '160', '256ctermbg': '088' },
-    \   'TODO': { 'attr': 'none', '256ctermfg': '226', '256ctermbg': '21' },
-    \   'Folded': { 'attr': 'none', '256ctermfg': '237', '256ctermbg': 'none' },
-    \   'StatusLine': { 'attr': 'none', '256ctermfg': '237', '256ctermbg': 'none' },
-    \   'WildMenu': { 'attr': 'none', '256ctermfg': '172', '256ctermbg': '237' },
-    \}
-	colorscheme jellybeans
-    if &t_Co == 256 && g:colors_name =~ "jellybeans"
-        highlight! link NonText LineNr
-        highlight! link SpecialKey LineNr
-    endif
-endif
-
-" point grep command to ag
-set grepprg=ag\ --skip-vcs-ignores\ --vimgrep\ $*
-" and adjust grep format
-set grepformat=%f:%l:%c:%m
-
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 0
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
-let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'
-
-let g:lightline = {
-      \ 'colorscheme': g:colors_name,
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"x":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ }
-      \ }
-
-" CtrlP
-let g:ctrlp_cmd='CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_switch_buffer = 'Et'
-let g:ctrlp_user_command = {
-	\ 'types': {
-	\   1:['.git', 'cd %s && git ls-files -co --exclude-standard']
-	\ },
-	\ 'fallback': 'ag %s -l --nocolor -g ""'
-	\ }
-
-if !empty(glob('~/.vim/plugged/vim-go'))
-    let g:go_fmt_experimental = 1
-    let g:go_fmt_command = "goreturns"
-    let g:go_fmt_autosave = 1
-    let g:go_fmt_fail_silently = 1
-    let g:go_highlight_functions = 1
-    let g:go_highlight_methods = 1
-    let g:go_highlight_structs = 1
-    let g:go_highlight_operators = 1
-    let g:go_highlight_build_constraints = 0
-    let g:go_auto_type_info = 1
-    let g:go_def_reuse_buffer = 1
-    let g:go_highlight_types = 1
-    let g:go_highlight_fields = 1
-    let g:go_highlight_interfaces = 1
-    let g:go_list_type = "quickfix"
-    let g:go_auto_sameids = 1
-    let g:go_metalinter_command = "golangci-lint run --out-format tab"
-
-    " run :GoBuild or :GoTestCompile based on the go file
-    function! s:build_go_files()
-        let l:file = expand('%')
-        if l:file =~# '^\f\+_test\.go$'
-            call go#cmd#Test(0, 1)
-        elseif l:file =~# '^\f\+\.go$'
-            call go#cmd#Build(0)
-        endif
-    endfunction
-
-    augroup go
-        autocmd!
-        autocmd Filetype go
-        \  command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-        \| command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-        \| command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-        autocmd FileType go nmap <leader>b :<C-u>call <SID>build_go_files()<CR>
-        autocmd FileType go nmap <leader>r <Plug>(go-run)
-        autocmd FileType go nmap <leader>t <Plug>(go-test)
-        autocmd FileType go nmap <leader>c <Plug>(go-coverage-toggle)
-        autocmd FileType go nmap <Leader>e <Plug>(go-rename)
-        autocmd FileType go nmap <Leader>d <Plug>(go-doc)
-        autocmd FileType go nmap <Leader>l :GoMetaLinter<CR>
-        autocmd Filetype go map <F1> :GoDoc<CR>
-    augroup END
-
-    highlight! link goSameId Search
-endif
-
-if !empty(glob('~/.vim/plugged/neocomplete'))
-    let g:neocomplete#enable_at_startup = 1
-    let g:neocomplete#enable_smart_case = 1
-    let g:neocomplete#enable_camel_case = 0
-    let g:neocomplete#auto_complete_delay = 200
-    let g:neocomplete#enable_refresh_always = 1
-    "let g:neocomplete#enable_auto_select = 1
-    " Recommended key-mappings.
-    " " <CR>: close popup and save indent.
-    inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-    function! s:my_cr_function()
-        return pumvisible() ? "\<C-y>" : "\<CR>"
-    endfunction
-    " Close popup by <.>.
-    inoremap <expr>. (pumvisible() ? "\<C-y>" : "") . "\."
-    " Close popup by <Space>.
-    inoremap <expr><Space> (pumvisible() ? "\<C-y>" : "") . "\<Space>"
-    " <TAB>: completion.
-    inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-    " <C-h>, <BS>: close popup and delete backword char.
-    inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
-    inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
-endif
-
-if !empty(glob('~/.vim/plugged/deoplete-go'))
-    set completeopt+=noinsert
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#enable_camel_case = 1
-    let g:deoplete#sources#go#gocode_binary = $GOPATH.'/bin/gocode'
-    let g:deoplete#sources#go#pointer = 1
-    let g:deoplete#sources#go#use_cache = 0
-    let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/darwin_amd64'
-    inoremap <expr><C-g>     deoplete#undo_completion()
-endif
-
-"if !empty(glob('~/.vim/plugged/sourcegraph-vim-beta'))
-"    let g:SOURCEGRAPH_AUTO = "true"
-"    let g:SOURCEGRAPH_LOG_FILE = "/tmp/sourcegraph-vim-beta.log"
-"    autocmd FileType go nnoremap <F11> :GRAPH<CR>
-"endif
-
-"let g:UltiSnipsListSnippets = "<F12>"
-let g:ansible_options = {'ignore_blank_lines': 0}
-let g:ansible_unindent_after_newline = 1
-let g:terraform_fmt_on_save = 1
-"let g:previm_open_cmd = 'open -a Google\ Chrome'
-
-autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
-
-autocmd BufRead,BufNewFile Vagrantfile set filetype=ruby
-autocmd BufNewFile,BufRead *.json.tpl set ft=json
-autocmd BufNewFile,BufRead *.tfstate set ft=json
-
-function! RestoreSessionIfExist()
-    if argc()==0 && filereadable(getcwd() . '/Session.vim')
-        execute 'source Session.vim'
-        " fix minor defect: no filetype for current buffer after 'execute...'
-        filetype detect
-    endif
-endfunction
-
-autocmd VimEnter * call RestoreSessionIfExist()

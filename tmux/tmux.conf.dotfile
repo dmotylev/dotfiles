@@ -3,8 +3,6 @@
 set-option -g default-command "reattach-to-user-namespace -l zsh"
 
 set-option -g history-limit 10000
-set-option -g default-terminal "screen-256color" 
-#set-option -g default-terminal "nsterm" 
 set-option -g escape-time 0
 
 set-option -g renumber-windows on
@@ -81,7 +79,6 @@ bind-key -T prefix r source-file ~/.config/tmux/tmux.conf \; display-message "Co
 bind-key -T prefix c new-window -c "#{pane_current_path}" -n Shell
 
 source-file -q ~/.config/dotfiles/tmux/tmux-os.conf
-source-file -q ~/.config/dotfiles/tmux/tmuxline.conf
 
 set-hook -g session-created 'source-file -Fq $HOME/.config/dotfiles/tmux/sessions/#\{session_name\}.conf'
 
@@ -105,3 +102,16 @@ bind -T root WheelDownPane \
                 \"send-keys -N 3 -t= down\" \
                 \"send-keys -M\" \
         "
+
+
+#
+# https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
+#
+#set-option default-terminal "alacritty-direct"
+#set-option -a terminal-overrides ",alacritty-direct:RGB"
+set-option default-terminal "xterm-256color"
+set-option -a terminal-overrides ",xterm-256color:RGB"
+
+source-file -q ~/.config/dotfiles/tmux/tmuxline-solarized-light.conf
+#source-file -q ~/.config/dotfiles/tmux/tmuxline-solarized-dark.conf
+

@@ -85,7 +85,7 @@ function df_vcs_info {
     } else {
         df_vcs_info_prompt+="%{$_ti[fmagenta]%}${oid} "
         df_vcs_info_prompt+="%{$_ti[fred]%}${branch} "
-        local off="%{$_ti[fBlack]%}∙" on="%{$_ti[fYellow]%}•"
+        local off="%{$_ti[fBlack]%}∙" on="%{$_ti[fYellow]%}+"
         df_vcs_info_prompt+=$( [[ $staged -eq 0 ]]; print -Pn '%(?.${off}.${on})')
         df_vcs_info_prompt+=$( [[ $unstaged -eq 0 ]]; print -Pn '%(?.${off}.${on})')
         df_vcs_info_prompt+=$( [[ $untracked -eq 0 ]]; print -Pn '%(?.${off}.${on})')

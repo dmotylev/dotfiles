@@ -112,6 +112,7 @@ bind -T root WheelDownPane \
 set-option default-terminal "xterm-256color"
 set-option -a terminal-overrides ",xterm-256color:RGB"
 
-source-file -q ~/.config/dotfiles/tmux/tmuxline-solarized-light.conf
+source-file -q ~/.config/dotfiles/tmux/tmuxline.conf
+#source-file -q ~/.config/dotfiles/tmux/tmuxline-solarized-light.conf
 #source-file -q ~/.config/dotfiles/tmux/tmuxline-solarized-dark.conf
 

@@ -13,7 +13,8 @@ else
 endif
 
 Plug 'tpope/vim-sensible'
-Plug 'altercation/vim-colors-solarized'
+" Plug 'altercation/vim-colors-solarized'
+Plug 'NLKNguyen/papercolor-theme'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'mhinz/vim-signify'
@@ -52,6 +53,7 @@ function! SyncColorscheme()
         highlight VertSplit ctermbg=NONE guibg=NONE
         highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
     endif
+    colorscheme PaperColor
 endfunction
 
 call SyncColorscheme()
@@ -87,12 +89,12 @@ if !empty(glob('~/.vim/plugged/ctrlp'))
 endif
 
 if !empty(glob('~/.vim/plugged/vim-airline'))
-    if has("gui_vimr")
-        let g:airline_powerline_fonts = 1
-    endif
+    let g:airline_powerline_fonts = 1
 
     let g:airline#extensions#tmuxline#enabled = 0
     let g:airline#extensions#tabline#enabled = 1
     let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+
+    let g:airline_theme='papercolor'
 endif
 

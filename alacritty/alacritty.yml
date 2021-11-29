@@ -191,5 +191,5 @@ themes:
       duration: 50
       color: '#fdf6e3'
 
-colors: *papercolor-colors-theme-light
-bell: *papercolor-bell-theme-light
+colors: *papercolor-colors-theme-dark
+bell: *papercolor-bell-theme-dark

@@ -1,6 +1,7 @@
 # vim: syntax=tmux
 
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-shell $SHELL
+set-option -g default-command "reattach-to-user-namespace -l ${SHELL}"
 
 set-option -g history-limit 10000
 set-option -g escape-time 0
@@ -9,15 +10,17 @@ set-option -g renumber-windows on
 set-option -g base-index 1
 set-window-option -g pane-base-index 1
 
-set-window-option -g monitor-activity off
-set-window-option -g mode-keys vi
-set-window-option -g alternate-screen on
-set-window-option -g aggressive-resize on
-set-window-option -g allow-rename on
-set-window-option -g automatic-rename off
+set-option -g monitor-activity off
+set-option -g mode-keys vi
+set-option -g alternate-screen on
+set-option -g aggressive-resize on
+set-option -g allow-rename on
+set-option -g automatic-rename on
+set-option -g status-interval 15
+set-option -g automatic-rename-format "#{?#{==:#{pane_current_command},zsh},#{b:pane_current_path},#{pane_current_command}}"
+
 
 set-option -g bell-action current
-# obsolete: set-option -g bell-on-alert on
 set-option -g visual-bell off
 
 set-option -g focus-events on
@@ -76,7 +79,7 @@ bind-key -T prefix C-n command-prompt -p "New session name?" -I "Shell" "new-ses
 
 bind-key -T prefix r source-file ~/.config/tmux/tmux.conf \; display-message "Configuration reloaded"
 
-bind-key -T prefix c new-window -c "#{pane_current_path}" -n Shell
+bind-key -T prefix c new-window -c "#{pane_current_path}" # -n Shell
 
 source-file -q ~/.config/dotfiles/tmux/tmux-os.conf
 
@@ -107,8 +110,6 @@ bind -T root WheelDownPane \
 #
 # https://gist.github.com/bbqtd/a4ac060d6f6b9ea6fe3aabe735aa9d95
 #
-#set-option default-terminal "alacritty-direct"
-#set-option -a terminal-overrides ",alacritty-direct:RGB"
 set-option default-terminal "xterm-256color"
 set-option -a terminal-overrides ",xterm-256color:RGB"
 

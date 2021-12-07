@@ -6,8 +6,8 @@ function df_google_cloud_sdk_setup {
     if [[ -d $google_cloud_sdk_home ]] {
         source $google_cloud_sdk_home/path.zsh.inc
         source $google_cloud_sdk_home/completion.zsh.inc
-    } else {
-        df_error "google-cloud-sdk not found; install it with $_ti[bold]brew cask install google-cloud-sdk" 
+    #} else {
+    #    df_error "google-cloud-sdk not found; install it with $_ti[bold]brew cask install google-cloud-sdk" 
     }
     unfunction df_google_cloud_sdk_setup
 }

@@ -32,14 +32,10 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
 
 function! SyncColorscheme()
-    if !has("gui_vimr")
-        set background=light
+   if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
+        set background=dark   " for the dark version of the theme
     else
-        if system("defaults read -g AppleInterfaceStyle") =~ '^Dark'
-            set background=dark   " for the dark version of the theme
-        else
-            set background=light  " for the light version of the theme
-        endif
+        set background=light  " for the light version of the theme
     endif
 
     if globpath(&rtp, 'colors/solarized.vim') != ""
@@ -53,6 +49,7 @@ function! SyncColorscheme()
         highlight VertSplit ctermbg=NONE guibg=NONE
         highlight SignColumn ctermbg=NONE cterm=NONE guibg=NONE gui=NONE
     endif
+
     colorscheme PaperColor
 endfunction
 

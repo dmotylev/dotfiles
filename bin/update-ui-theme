@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+if [[ $(defaults read -g AppleInterfaceStyle 2> /dev/null) == Dark ]]; then
+    sed -i -E 's#^(colors|bell): (\*.*-theme)-(.*)#\1: \2-dark#g' $(realpath ~/.config/alacritty/alacritty.yml)
+    tmux source $(realpath ~/.config/dotfiles/tmux/tmuxline-papercolor-dark.conf)
+else
+    sed -i -E 's#^(colors|bell): (\*.*-theme)-(.*)#\1: \2-light#g' $(realpath ~/.config/alacritty/alacritty.yml)
+    tmux source $(realpath ~/.config/dotfiles/tmux/tmuxline-papercolor-light.conf)
+fi

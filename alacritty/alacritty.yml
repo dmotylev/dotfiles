@@ -11,7 +11,7 @@ shell:
   args:
     - -l
     - -c
-    - "tmux attach || tmux"
+    - "tmux attach || tmux new-session -s Pasta"
 
 window:
   title: Terminal
@@ -78,7 +78,7 @@ font:
     style: Light
   bold_italic:
     style: Light Italic
-  size: 13.0
+  size: 14.0
 
 themes:
   papercolor_dark:

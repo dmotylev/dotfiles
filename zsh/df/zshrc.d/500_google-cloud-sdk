@@ -1,8 +1,8 @@
 # vim: ft=zsh:
 
 function df_google_cloud_sdk_setup {
-    export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-    local google_cloud_sdk_home=/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk
+    #export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+    local google_cloud_sdk_home=/usr/local/opt/google-cloud-sdk
     if [[ -d $google_cloud_sdk_home ]] {
         source $google_cloud_sdk_home/path.zsh.inc
         source $google_cloud_sdk_home/completion.zsh.inc

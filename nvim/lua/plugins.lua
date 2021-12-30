@@ -12,7 +12,7 @@ return require('packer').startup {
     use 'wbthomason/packer.nvim'
     use 'lewis6991/impatient.nvim'
     use 'NLKNguyen/papercolor-theme'
-
+    use 'mhinz/vim-sayonara'
     use 'neovim/nvim-lspconfig'
 
     use {
@@ -71,7 +71,16 @@ return require('packer').startup {
     }
 
     use {
+      'akinsho/bufferline.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
+      config = function()
+        require('bufferline').setup({})
+      end,
+    }
+
+    use {
       'tamton-aquib/staline.nvim',
+      requires = 'kyazdani42/nvim-web-devicons',
       config = function()
         require('staline').setup()
       end,

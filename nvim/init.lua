@@ -51,4 +51,5 @@ opt("smartindent", true, buffer)
 -- *-style searches continue to be consistently case-sensitive.
 opt("ignorecase", true)
 opt("smartcase", true)
+opt("mouse","a")
 

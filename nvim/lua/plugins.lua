@@ -57,6 +57,11 @@ return require('packer').startup {
       tag = 'release', -- To use the latest release
       config = [[require('gitsigns').setup()]],
     }
+
+    use {
+      'chentau/marks.nvim',
+      config = [[require('marks').setup({})]],
+    }
   end,
 
   config = {

@@ -1,7 +1,7 @@
 pcall(require,"impatient")
 
 -- Turn off builtin plugins I do not use.
-require "config.disable_builtins"
+require "config.disable_unused_builtin"
 
 if require "config.install_packer"() then
   return

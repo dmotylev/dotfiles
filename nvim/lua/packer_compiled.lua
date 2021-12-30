@@ -70,6 +70,7 @@ time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
   ["gitsigns.nvim"] = {
+    config = { "require('gitsigns').setup()" },
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
@@ -78,6 +79,12 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
+  },
+  ["marks.nvim"] = {
+    config = { "require('marks').setup({})" },
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/marks.nvim",
+    url = "https://github.com/chentau/marks.nvim"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -128,13 +135,21 @@ _G.packer_plugins = {
   ["telescope.nvim"] = {
     config = { "require('config.telescope')" },
     loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    needs_bufread = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim",
     wants = { "popup.nvim", "plenary.nvim", "telescope-frecency.nvim", "telescope-fzf-native.nvim" }
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Setup for: telescope.nvim
+time([[Setup for telescope.nvim]], true)
+require('config.telescope_setup')
+time([[Setup for telescope.nvim]], false)
+time([[packadd for telescope.nvim]], true)
+vim.cmd [[packadd telescope.nvim]]
+time([[packadd for telescope.nvim]], false)
 -- Config for: telescope-frecency.nvim
 time([[Config for telescope-frecency.nvim]], true)
 require"telescope".load_extension("frecency")
@@ -143,6 +158,14 @@ time([[Config for telescope-frecency.nvim]], false)
 time([[Config for telescope.nvim]], true)
 require('config.telescope')
 time([[Config for telescope.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require('gitsigns').setup()
+time([[Config for gitsigns.nvim]], false)
+-- Config for: marks.nvim
+time([[Config for marks.nvim]], true)
+require('marks').setup({})
+time([[Config for marks.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

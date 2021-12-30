@@ -22,10 +22,7 @@ local g = vim.g
 -- leader.
 g.mapleader = ","
 
-require "plugins"
-
--- workaround for packer not running telescope setup
-require "config.telescope_setup"
+pcall(require,"packer_compiled")
 
 -- Colorscheme
 opt('termguicolors', true)
@@ -35,14 +32,20 @@ opt("background",
   or "light")
 cmd [[colorscheme PaperColor]]
 
--- Defaults
+-- Commands
+-- You can install all packages from CLI with:
+-- nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
 
+-- Settings
+local buffer = { o, bo }
+local window = { o, wo }
 -- Tame tab settings; thanks https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
-opt("tabstop", 4)
-opt("shiftwidth", 4)
-opt("softtabstop", 4)
-opt("expandtab", true)
-
+opt("tabstop", 4, buffer)
+opt("shiftwidth", 4, buffer)
+opt("softtabstop", 4, buffer)
+opt("expandtab", true, buffer)
+opt("smartindent", true, buffer)
 -- These two options, when set together, will make /-style searches
 -- case-sensitive only if there is a capital letter in the search expression.
 -- *-style searches continue to be consistently case-sensitive.

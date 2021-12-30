@@ -36,7 +36,7 @@ return require('packer').startup {
           'telescope-fzf-native.nvim',
         },
         config = [[require('config.telescope')]],
-        -- setup = [[require('config.telescope_setup')]], -- packer supposed to load run setup by itself, but not
+        setup = [[require('config.telescope_setup')]], 
       },
       {
         'nvim-telescope/telescope-frecency.nvim',
@@ -52,11 +52,13 @@ return require('packer').startup {
     use {
       'lewis6991/gitsigns.nvim',
       requires = {
-      'nvim-lua/plenary.nvim'
+        'nvim-lua/plenary.nvim'
       },
-      tag = 'release' -- To use the latest release
+      tag = 'release', -- To use the latest release
+      config = [[require('gitsigns').setup()]],
     }
   end,
+
   config = {
     -- Move to lua dir so impatient.nvim can cache it
     compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'

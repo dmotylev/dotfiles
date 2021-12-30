@@ -73,7 +73,7 @@ return require('packer').startup {
     use {
       'tamton-aquib/staline.nvim',
       config = function()
-        require('staline').setup{}
+        require('staline').setup()
       end,
     }
   end,

@@ -68,16 +68,27 @@ cursor:
   # from `0.0` to `1.0`.
   thickness: 0.3
 
+#font:
+#  normal:
+#    family: JetBrains Mono
+#    style: ExtraLight
+#  italic:
+#    style: ExtraLight Italic
+#  bold:
+#    style: Light
+#  bold_italic:
+#    style: Light Italic
+#  size: 14.0
 font:
   normal:
-    family: JetBrains Mono
-    style: ExtraLight
+    family: JetBrainsMono Nerd Font Mono
+    style: Regular
   italic:
-    style: ExtraLight Italic
+    style: Italic
   bold:
-    style: Light
+    style: Bold
   bold_italic:
-    style: Light Italic
+    style: Bold Italic
   size: 14.0
 
 themes:

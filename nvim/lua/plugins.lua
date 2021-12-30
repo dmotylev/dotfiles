@@ -21,6 +21,13 @@ return require('packer').startup {
     }
 
     use {
+      'kyazdani42/nvim-web-devicons',
+      config = function()
+        require'nvim-web-devicons'.setup()
+      end,
+    }
+
+    use {
       {
         'nvim-telescope/telescope.nvim',
         requires = {
@@ -61,6 +68,13 @@ return require('packer').startup {
     use {
       'chentau/marks.nvim',
       config = [[require('marks').setup({})]],
+    }
+
+    use {
+      'tamton-aquib/staline.nvim',
+      config = function()
+        require('staline').setup{}
+      end,
     }
   end,
 

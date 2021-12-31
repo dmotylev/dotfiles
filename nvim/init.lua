@@ -54,3 +54,4 @@ opt("ignorecase", true)
 opt("smartcase", true)
 opt("mouse","a")
 
+opt("statusline","2")

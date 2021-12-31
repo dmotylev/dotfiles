@@ -82,7 +82,16 @@ return require('packer').startup {
       'tamton-aquib/staline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function()
-        require('staline').setup()
+        vim.cmd('highlight MidSep guifg=#ff0000 guibg=none')
+        vim.cmd('highlight DoubleSep guifg=#00ff00 guibg=none')
+        require('staline').setup({
+          defaults = {
+            fg = "#e4e4e4",
+	        },
+          mode_colors = {
+            n = "#0087af",
+	        },
+        })
       end,
     }
 

@@ -141,7 +141,7 @@ _G.packer_plugins = {
     url = "https://github.com/tami5/sqlite.lua"
   },
   ["staline.nvim"] = {
-    config = { "\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstaline\frequire\0" },
+    config = { "\27LJ\2\nû\1\0\0\4\0\f\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\4\0'\2\5\0B\0\2\0029\0\6\0005\2\b\0005\3\a\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\16mode_colors\1\0\1\6n\f#0087af\rdefaults\1\0\0\1\0\1\afg\f#e4e4e4\nsetup\fstaline\frequire1highlight DoubleSep guifg=#00ff00 guibg=none.highlight MidSep guifg=#ff0000 guibg=none\bcmd\bvim\0" },
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/staline.nvim",
     url = "https://github.com/tamton-aquib/staline.nvim"
@@ -191,34 +191,34 @@ time([[packadd for telescope.nvim]], false)
 time([[Config for nvim-tree.lua]], true)
 try_loadstring("\27LJ\2\nj\0\0\3\0\6\0\v6\0\0\0009\0\1\0)\1\1\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\29nvim_tree_indent_markers\6g\bvim\0", "config", "nvim-tree.lua")
 time([[Config for nvim-tree.lua]], false)
+-- Config for: marks.nvim
+time([[Config for marks.nvim]], true)
+require('marks').setup({})
+time([[Config for marks.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+require('gitsigns').setup()
+time([[Config for gitsigns.nvim]], false)
+-- Config for: telescope-frecency.nvim
+time([[Config for telescope-frecency.nvim]], true)
+require"telescope".load_extension("frecency")
+time([[Config for telescope-frecency.nvim]], false)
+-- Config for: telescope.nvim
+time([[Config for telescope.nvim]], true)
+require('config.telescope')
+time([[Config for telescope.nvim]], false)
+-- Config for: nvim-web-devicons
+time([[Config for nvim-web-devicons]], true)
+try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
+time([[Config for nvim-web-devicons]], false)
 -- Config for: bufferline.nvim
 time([[Config for bufferline.nvim]], true)
 try_loadstring("\27LJ\2\n<\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
 time([[Config for bufferline.nvim]], false)
 -- Config for: staline.nvim
 time([[Config for staline.nvim]], true)
-try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fstaline\frequire\0", "config", "staline.nvim")
+try_loadstring("\27LJ\2\nû\1\0\0\4\0\f\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\4\0'\2\5\0B\0\2\0029\0\6\0005\2\b\0005\3\a\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\16mode_colors\1\0\1\6n\f#0087af\rdefaults\1\0\0\1\0\1\afg\f#e4e4e4\nsetup\fstaline\frequire1highlight DoubleSep guifg=#00ff00 guibg=none.highlight MidSep guifg=#ff0000 guibg=none\bcmd\bvim\0", "config", "staline.nvim")
 time([[Config for staline.nvim]], false)
--- Config for: telescope-frecency.nvim
-time([[Config for telescope-frecency.nvim]], true)
-require"telescope".load_extension("frecency")
-time([[Config for telescope-frecency.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require('gitsigns').setup()
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
-time([[Config for nvim-web-devicons]], false)
--- Config for: marks.nvim
-time([[Config for marks.nvim]], true)
-require('marks').setup({})
-time([[Config for marks.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('config.telescope')
-time([[Config for telescope.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

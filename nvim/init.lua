@@ -36,6 +36,7 @@ cmd [[colorscheme PaperColor]]
 -- You can install all packages from CLI with:
 -- nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 cmd [[command! PackerSync packadd packer.nvim | lua require('plugins').sync()]]
+cmd [[command! PackerCompile packadd packer.nvim | lua require('plugins').compile()]]
 
 -- Settings
 local buffer = { o, bo }

@@ -85,6 +85,21 @@ return require('packer').startup {
         require('staline').setup()
       end,
     }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
+      config = function() 
+        vim.g.nvim_tree_indent_markers = 1
+        require'nvim-tree'.setup {} 
+      end,
+      setup = function()
+        require('config.utils').map(
+         'n', '<leader>e', [[<cmd>NvimTreeToggle<cr>]], silent)
+      end,
+    }
   end,
 
   config = {

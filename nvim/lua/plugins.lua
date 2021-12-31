@@ -74,7 +74,28 @@ return require('packer').startup {
       'akinsho/bufferline.nvim',
       requires = 'kyazdani42/nvim-web-devicons',
       config = function()
-        require('bufferline').setup({})
+        require('bufferline').setup({
+          options = {
+            offsets = {
+              {filetype = "NvimTree", text = "File Explorer" , text_align = "center"},
+            },
+          }
+        })
+      end,
+    }
+
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      },
+      config = function() 
+        vim.g.nvim_tree_indent_markers = 1
+        require'nvim-tree'.setup({})
+      end,
+      setup = function()
+        require('config.utils').map(
+         'n', '<leader>e', [[<cmd>NvimTreeToggle<cr>]], silent)
       end,
     }
 
@@ -95,20 +116,6 @@ return require('packer').startup {
       end,
     }
 
-    use {
-      'kyazdani42/nvim-tree.lua',
-      requires = {
-        'kyazdani42/nvim-web-devicons',
-      },
-      config = function() 
-        vim.g.nvim_tree_indent_markers = 1
-        require'nvim-tree'.setup {} 
-      end,
-      setup = function()
-        require('config.utils').map(
-         'n', '<leader>e', [[<cmd>NvimTreeToggle<cr>]], silent)
-      end,
-    }
   end,
 
   config = {

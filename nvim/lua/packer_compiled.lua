@@ -69,14 +69,22 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["bufferline.nvim"] = {
-    config = { "\27LJ\2\n¤\1\0\0\6\0\b\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0004\4\3\0005\5\3\0>\5\1\4=\4\5\3=\3\a\2B\0\2\1K\0\1\0\foptions\1\0\0\foffsets\1\0\0\1\0\3\rfiletype\rNvimTree\15text_align\vcenter\ttext\18File Explorer\nsetup\15bufferline\frequire\0" },
+  LuaSnip = {
     loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/bufferline.nvim",
-    url = "https://github.com/akinsho/bufferline.nvim"
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/LuaSnip",
+    url = "https://github.com/L3MON4D3/LuaSnip"
+  },
+  ["cmp-nvim-lsp"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
+    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+  },
+  cmp_luasnip = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/cmp_luasnip",
+    url = "https://github.com/saadparwaiz1/cmp_luasnip"
   },
   ["gitsigns.nvim"] = {
-    config = { "require('gitsigns').setup()" },
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
     url = "https://github.com/lewis6991/gitsigns.nvim"
@@ -86,139 +94,79 @@ _G.packer_plugins = {
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/impatient.nvim",
     url = "https://github.com/lewis6991/impatient.nvim"
   },
-  ["marks.nvim"] = {
-    config = { "require('marks').setup({})" },
+  ["indent-blankline.nvim"] = {
     loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/marks.nvim",
-    url = "https://github.com/chentau/marks.nvim"
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lightline.vim"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/lightline.vim",
+    url = "https://github.com/itchyny/lightline.vim"
+  },
+  ["nvim-cmp"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/nvim-cmp",
+    url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/nvim-lspconfig",
     url = "https://github.com/neovim/nvim-lspconfig"
   },
-  ["nvim-tree.lua"] = {
-    config = { "\27LJ\2\nj\0\0\3\0\6\0\v6\0\0\0009\0\1\0)\1\1\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\29nvim_tree_indent_markers\6g\bvim\0" },
-    loaded = true,
-    needs_bufread = false,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/opt/nvim-tree.lua",
-    url = "https://github.com/kyazdani42/nvim-tree.lua"
-  },
   ["nvim-treesitter"] = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
-  ["nvim-web-devicons"] = {
-    config = { "\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22nvim-web-devicons\frequire\0" },
+  ["nvim-treesitter-textobjects"] = {
     loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
-    url = "https://github.com/kyazdani42/nvim-web-devicons"
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/nvim-treesitter-textobjects",
+    url = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects"
+  },
+  ["onedark.vim"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/onedark.vim",
+    url = "https://github.com/joshdick/onedark.vim"
   },
   ["packer.nvim"] = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/packer.nvim",
     url = "https://github.com/wbthomason/packer.nvim"
   },
-  ["papercolor-theme"] = {
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/papercolor-theme",
-    url = "https://github.com/NLKNguyen/papercolor-theme"
-  },
   ["plenary.nvim"] = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/plenary.nvim",
     url = "https://github.com/nvim-lua/plenary.nvim"
   },
-  ["popup.nvim"] = {
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/popup.nvim",
-    url = "https://github.com/nvim-lua/popup.nvim"
-  },
-  ["sqlite.lua"] = {
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/sqlite.lua",
-    url = "https://github.com/tami5/sqlite.lua"
-  },
-  ["staline.nvim"] = {
-    config = { "\27LJ\2\nû\1\0\0\4\0\f\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\4\0'\2\5\0B\0\2\0029\0\6\0005\2\b\0005\3\a\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\16mode_colors\1\0\1\6n\f#0087af\rdefaults\1\0\0\1\0\1\afg\f#e4e4e4\nsetup\fstaline\frequire1highlight DoubleSep guifg=#00ff00 guibg=none.highlight MidSep guifg=#ff0000 guibg=none\bcmd\bvim\0" },
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/staline.nvim",
-    url = "https://github.com/tamton-aquib/staline.nvim"
-  },
-  ["telescope-frecency.nvim"] = {
-    config = { 'require"telescope".load_extension("frecency")' },
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/telescope-frecency.nvim",
-    url = "https://github.com/nvim-telescope/telescope-frecency.nvim"
-  },
-  ["telescope-fzf-native.nvim"] = {
-    loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/telescope-fzf-native.nvim",
-    url = "https://github.com/nvim-telescope/telescope-fzf-native.nvim"
-  },
   ["telescope.nvim"] = {
-    config = { "require('config.telescope')" },
     loaded = true,
-    needs_bufread = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/opt/telescope.nvim",
-    url = "https://github.com/nvim-telescope/telescope.nvim",
-    wants = { "popup.nvim", "plenary.nvim", "telescope-frecency.nvim", "telescope-fzf-native.nvim" }
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/telescope.nvim",
+    url = "https://github.com/nvim-telescope/telescope.nvim"
   },
-  ["vim-sayonara"] = {
+  ["vim-commentary"] = {
     loaded = true,
-    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-sayonara",
-    url = "https://github.com/mhinz/vim-sayonara"
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-commentary",
+    url = "https://github.com/tpope/vim-commentary"
+  },
+  ["vim-fugitive"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-fugitive",
+    url = "https://github.com/tpope/vim-fugitive"
+  },
+  ["vim-gutentags"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-gutentags",
+    url = "https://github.com/ludovicchabant/vim-gutentags"
+  },
+  ["vim-rhubarb"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-rhubarb",
+    url = "https://github.com/tpope/vim-rhubarb"
   }
 }
 
 time([[Defining packer_plugins]], false)
--- Setup for: nvim-tree.lua
-time([[Setup for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\ns\0\0\6\0\a\0\n6\0\0\0'\2\1\0B\0\2\0029\0\2\0'\2\3\0'\3\4\0'\4\5\0006\5\6\0B\0\5\1K\0\1\0\vsilent\28<cmd>NvimTreeToggle<cr>\14<leader>e\6n\bmap\17config.utils\frequire\0", "setup", "nvim-tree.lua")
-time([[Setup for nvim-tree.lua]], false)
-time([[packadd for nvim-tree.lua]], true)
-vim.cmd [[packadd nvim-tree.lua]]
-time([[packadd for nvim-tree.lua]], false)
--- Setup for: telescope.nvim
-time([[Setup for telescope.nvim]], true)
-require('config.telescope_setup')
-time([[Setup for telescope.nvim]], false)
-time([[packadd for telescope.nvim]], true)
-vim.cmd [[packadd telescope.nvim]]
-time([[packadd for telescope.nvim]], false)
--- Config for: bufferline.nvim
-time([[Config for bufferline.nvim]], true)
-try_loadstring("\27LJ\2\n¤\1\0\0\6\0\b\0\r6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\6\0005\3\4\0004\4\3\0005\5\3\0>\5\1\4=\4\5\3=\3\a\2B\0\2\1K\0\1\0\foptions\1\0\0\foffsets\1\0\0\1\0\3\rfiletype\rNvimTree\15text_align\vcenter\ttext\18File Explorer\nsetup\15bufferline\frequire\0", "config", "bufferline.nvim")
-time([[Config for bufferline.nvim]], false)
--- Config for: staline.nvim
-time([[Config for staline.nvim]], true)
-try_loadstring("\27LJ\2\nû\1\0\0\4\0\f\0\0196\0\0\0009\0\1\0'\2\2\0B\0\2\0016\0\0\0009\0\1\0'\2\3\0B\0\2\0016\0\4\0'\2\5\0B\0\2\0029\0\6\0005\2\b\0005\3\a\0=\3\t\0025\3\n\0=\3\v\2B\0\2\1K\0\1\0\16mode_colors\1\0\1\6n\f#0087af\rdefaults\1\0\0\1\0\1\afg\f#e4e4e4\nsetup\fstaline\frequire1highlight DoubleSep guifg=#00ff00 guibg=none.highlight MidSep guifg=#ff0000 guibg=none\bcmd\bvim\0", "config", "staline.nvim")
-time([[Config for staline.nvim]], false)
--- Config for: nvim-tree.lua
-time([[Config for nvim-tree.lua]], true)
-try_loadstring("\27LJ\2\nj\0\0\3\0\6\0\v6\0\0\0009\0\1\0)\1\1\0=\1\2\0006\0\3\0'\2\4\0B\0\2\0029\0\5\0004\2\0\0B\0\2\1K\0\1\0\nsetup\14nvim-tree\frequire\29nvim_tree_indent_markers\6g\bvim\0", "config", "nvim-tree.lua")
-time([[Config for nvim-tree.lua]], false)
--- Config for: marks.nvim
-time([[Config for marks.nvim]], true)
-require('marks').setup({})
-time([[Config for marks.nvim]], false)
--- Config for: gitsigns.nvim
-time([[Config for gitsigns.nvim]], true)
-require('gitsigns').setup()
-time([[Config for gitsigns.nvim]], false)
--- Config for: nvim-web-devicons
-time([[Config for nvim-web-devicons]], true)
-try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\22nvim-web-devicons\frequire\0", "config", "nvim-web-devicons")
-time([[Config for nvim-web-devicons]], false)
--- Config for: telescope-frecency.nvim
-time([[Config for telescope-frecency.nvim]], true)
-require"telescope".load_extension("frecency")
-time([[Config for telescope-frecency.nvim]], false)
--- Config for: telescope.nvim
-time([[Config for telescope.nvim]], true)
-require('config.telescope')
-time([[Config for telescope.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

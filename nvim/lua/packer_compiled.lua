@@ -171,6 +171,11 @@ _G.packer_plugins = {
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-commentary",
     url = "https://github.com/tpope/vim-commentary"
   },
+  ["vim-for-ansible"] = {
+    loaded = true,
+    path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-for-ansible",
+    url = "https://github.com/sharadchhetri/vim-for-ansible"
+  },
   ["vim-fugitive"] = {
     loaded = true,
     path = "/Users/dmotylev/.local/share/nvim/site/pack/packer/start/vim-fugitive",

@@ -60,6 +60,7 @@ require('packer').startup{
     use 'hrsh7th/cmp-nvim-lsp'
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    use 'sharadchhetri/vim-for-ansible' -- Ansible plugin
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it

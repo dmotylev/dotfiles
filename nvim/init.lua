@@ -22,9 +22,29 @@ require('packer').startup{
     use 'tpope/vim-fugitive' -- Git commands in nvim
     use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
     use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
-    use 'ludovicchabant/vim-gutentags' -- Automatic tags management
+    use 'kyazdani42/nvim-web-devicons' -- Pretty symbols
     -- UI to select things (files, grep results, open buffers...)
-    use { 'nvim-telescope/telescope.nvim', requires = { 'nvim-lua/plenary.nvim' } }
+    use { 'nvim-telescope/telescope.nvim',
+      requires = {
+        'nvim-lua/plenary.nvim',
+        'telescope-frecency.nvim',
+        'telescope-fzf-native.nvim',
+      },
+    }
+    use {
+      'nvim-telescope/telescope-frecency.nvim',
+      requires = 'tami5/sqlite.lua',
+      config = function()
+        require("telescope").load_extension("frecency")
+      end,
+    }
+    use {
+      'nvim-telescope/telescope-fzf-native.nvim',
+      run = 'make',
+      config = function()
+        require("telescope").load_extension("fzf")
+      end,
+    }
     use 'joshdick/onedark.vim' -- Theme inspired by Atom
     use 'itchyny/lightline.vim' -- Fancier statusline
     -- Add indentation guides even on blank lines
@@ -112,6 +132,8 @@ vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
+require('nvim-web-devicons').setup {}
+
 -- Gitsigns
 require('gitsigns').setup {
   signs = {
@@ -133,7 +155,22 @@ require('telescope').setup {
       },
     },
   },
+  extensions = {
+    frecency = {
+      workspaces = {
+        dot = '/Users/dmotylev/Workshop/dotfiles',
+        rs = '/Users/dmotylev/Workshop/redsift',
+      }
+    },
+    fzf = {
+      fuzzy = true,
+      override_generic_sorter = true,
+      override_file_sorter = true,
+      case_mode = 'smart_case',
+    },
+  }
 }
+
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
@@ -143,7 +180,8 @@ vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin
 vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+--vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>?', [[<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>]], { noremap = true, silent = true })
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall

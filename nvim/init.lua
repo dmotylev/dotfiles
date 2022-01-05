@@ -75,10 +75,10 @@ vim.o.expandtab=true
 vim.o.smartindent=true
 
 --Set highlight on search
-vim.o.hlsearch = false
+vim.o.hlsearch = true
 
 --Make line numbers default
-vim.wo.number = false
+vim.wo.number = true
 
 --Enable mouse mode
 vim.o.mouse = 'a'

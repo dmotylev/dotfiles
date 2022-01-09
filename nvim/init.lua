@@ -61,6 +61,12 @@ require('packer').startup{
     use 'saadparwaiz1/cmp_luasnip'
     use 'L3MON4D3/LuaSnip' -- Snippets plugin
     use 'sharadchhetri/vim-for-ansible' -- Ansible plugin
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = {
+        'kyazdani42/nvim-web-devicons',
+      }
+    }
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it
@@ -68,12 +74,33 @@ require('packer').startup{
   }
 }
 
+vim.cmd([[
+  " Put these in an autocmd group, so that you can revert them with:
+  " ":augroup vimStartup | au! | augroup END"
+  augroup vimStartup
+    au!
+
+    " When editing a file, always jump to the last known cursor position.
+    " Don't do it when the position is invalid, when inside an event handler
+    " (happens when dropping a file on gvim) and for a commit message (it's
+    " likely a different one than last time).
+    autocmd BufReadPost *
+      \ if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit'
+      \ |   exe "normal! g`\""
+      \ | endif
+
+  augroup END
+]])
+
 -- Tame tab settings; thanks https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
 vim.o.tabstop=4
 vim.o.shiftwidth=4
 vim.o.softtabstop=4
 vim.o.expandtab=true
 vim.o.smartindent=true
+
+-- Show a few lines of context around the cursor.  Note that this makes the text scroll if you mouse-click near the start or end of the window.
+vim.opt.scrolloff=5
 
 --Set highlight on search
 vim.o.hlsearch = true
@@ -138,6 +165,7 @@ require('nvim-web-devicons').setup {}
 -- Gitsigns
 require('gitsigns').setup {
   signs = {
+
     add = { hl = 'GitGutterAdd', text = '+' },
     change = { hl = 'GitGutterChange', text = '~' },
     delete = { hl = 'GitGutterDelete', text = '_' },
@@ -145,6 +173,16 @@ require('gitsigns').setup {
     changedelete = { hl = 'GitGutterChange', text = '~' },
   },
 }
+
+-- Nvim-tree
+vim.g.nvim_tree_indent_markers = 1
+
+require('nvim-tree').setup {
+  git = { enable = false }
+}
+
+--Add leader shortcuts
+vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]], { noremap = true, silent = true })
 
 -- Telescope
 require('telescope').setup {
@@ -169,7 +207,17 @@ require('telescope').setup {
       override_file_sorter = true,
       case_mode = 'smart_case',
     },
-  }
+  },
+  pickers = {
+    lsp_references = { theme = 'dropdown' },
+    lsp_code_actions = { theme = 'dropdown' },
+    lsp_definitions = { theme = 'dropdown' },
+    lsp_implementations = { theme = 'dropdown' },
+    buffers = {
+      sort_lastused = true,
+      previewer = false,
+    },
+  },
 }
 
 --Add leader shortcuts
@@ -177,11 +225,9 @@ vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.bu
 vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>st', [[<cmd>lua require('telescope.builtin').tags()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
---vim.api.nvim_set_keymap('n', '<leader>?', [[<cmd>lua require('telescope.builtin').oldfiles()<CR>]], { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>?', [[<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>]], { noremap = true, silent = true })
 
 -- Treesitter configuration

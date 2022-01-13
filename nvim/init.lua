@@ -67,6 +67,18 @@ require('packer').startup{
         'kyazdani42/nvim-web-devicons',
       }
     }
+    use {
+      'ray-x/go.nvim',
+      config = function()
+        require("go").setup {}
+      end
+    }
+    use {
+      'ray-x/navigator.lua',
+      requires = {
+        'ray-x/guihua.lua', run = 'cd lua/fzy && make'
+      }
+    }
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it
@@ -283,6 +295,13 @@ require('nvim-treesitter.configs').setup {
   },
 }
 
+require('navigator').setup()
+
+-- nvim-cmp supports additional completion capabilities
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
+--[=[
 -- LSP settings
 local lspconfig = require 'lspconfig'
 local on_attach = function(_, bufnr)
@@ -308,10 +327,6 @@ local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
-
--- nvim-cmp supports additional completion capabilities
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 -- Enable the following language servers
 local servers = { 'rust_analyzer' }
@@ -355,7 +370,7 @@ lspconfig.sumneko_lua.setup {
     },
  },
 }
-
+]=]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'

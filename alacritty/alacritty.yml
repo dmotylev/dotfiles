@@ -210,5 +210,40 @@ themes:
       duration: 50
       color: '#fdf6e3'
 
-colors: *papercolor-colors-theme-dark
-bell: *papercolor-bell-theme-dark
+  one-dark:
+    colors: &one-dark-colors-theme-dark
+      # Default colors
+      primary:
+        background: '#282c34'
+        foreground: '#abb2bf'
+
+      # Normal colors
+      normal:
+        # NOTE: Use '#131613' for the `black` color if you'd like to see
+        # black text on the background.
+        black:   '#282c34'
+        red:     '#e06c75'
+        green:   '#98c379'
+        yellow:  '#d19a66'
+        blue:    '#61afef'
+        magenta: '#c678dd'
+        cyan:    '#56b6c2'
+        white:   '#abb2bf'
+
+      # Bright colors
+      bright:
+        black:   '#5c6370'
+        red:     '#e06c75'
+        green:   '#98c379'
+        yellow:  '#d19a66'
+        blue:    '#61afef'
+        magenta: '#c678dd'
+        cyan:    '#56b6c2'
+        white:   '#ffffff'
+    bell: &one-dark-bell-theme-dark
+      animation: EaseOutExpo
+      duration: 50
+      color: '#1c1c1c'
+
+colors: *one-dark-colors-theme-dark
+bell: *one-dark-bell-theme-dark

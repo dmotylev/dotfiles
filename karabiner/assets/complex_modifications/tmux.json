@@ -1,0 +1,29 @@
+{
+    "title": "TMux",
+    "rules": [
+        {
+            "description": "Use right Command as Control+b",
+            "manipulators": [
+                {
+                    "type": "basic",
+                    "from": {
+                        "key_code": "right_command",
+                        "modifiers": {
+                            "optional": [
+                                "any"
+                            ]
+                        }
+                    },
+                    "to": [
+                        {
+                            "key_code": "b",
+                            "modifiers": [
+                                "right_control"
+                            ]
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

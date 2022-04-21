@@ -2,7 +2,7 @@
 
 function df_google_cloud_sdk_setup {
     #export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-    local google_cloud_sdk_home=/usr/local/opt/google-cloud-sdk
+    local google_cloud_sdk_home=/opt/google-cloud-sdk/latest
     if [[ -d $google_cloud_sdk_home ]] {
         source $google_cloud_sdk_home/path.zsh.inc
         source $google_cloud_sdk_home/completion.zsh.inc

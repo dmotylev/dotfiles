@@ -7,15 +7,15 @@ if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
   vim.fn.execute('!git clone --depth 1 https://github.com/wbthomason/packer.nvim ' .. install_path)
 end
 
-vim.cmd [[
+vim.cmd([[
   augroup Packer
     autocmd!
     autocmd BufWritePost init.lua PackerCompile
   augroup end
-]]
+]])
 
 -- local use = require('packer').use
-require('packer').startup{
+require('packer').startup({
   function(use)
     use 'wbthomason/packer.nvim' -- Package manager
     use 'lewis6991/impatient.nvim'
@@ -70,7 +70,7 @@ require('packer').startup{
     use {
       'ray-x/go.nvim',
       config = function()
-        require("go").setup {}
+        require("go").setup({})
       end
     }
     use {
@@ -79,12 +79,19 @@ require('packer').startup{
         'ray-x/guihua.lua', run = 'cd lua/fzy && make'
       }
     }
+    use {
+      'tzachar/cmp-tabnine',
+      run='./install.sh',
+      requires = {
+        'hrsh7th/nvim-cmp'
+      }
+    }
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it
     compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
   }
-}
+})
 
 vim.cmd([[
   " Put these in an autocmd group, so that you can revert them with:
@@ -172,10 +179,10 @@ vim.g.indent_blankline_filetype_exclude = { 'help', 'packer' }
 vim.g.indent_blankline_buftype_exclude = { 'terminal', 'nofile' }
 vim.g.indent_blankline_show_trailing_blankline_indent = false
 
-require('nvim-web-devicons').setup {}
+require('nvim-web-devicons').setup({})
 
 -- Gitsigns
-require('gitsigns').setup {
+require('gitsigns').setup({
   signs = {
 
     add = { hl = 'GitGutterAdd', text = '+' },
@@ -184,20 +191,20 @@ require('gitsigns').setup {
     topdelete = { hl = 'GitGutterDelete', text = '‾' },
     changedelete = { hl = 'GitGutterChange', text = '~' },
   },
-}
+})
 
 -- Nvim-tree
 vim.g.nvim_tree_indent_markers = 1
 
-require('nvim-tree').setup {
+require('nvim-tree').setup({
   git = { enable = false }
-}
+})
 
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]], { noremap = true, silent = true })
 
 -- Telescope
-require('telescope').setup {
+require('telescope').setup({
   defaults = {
     mappings = {
       i = {
@@ -230,7 +237,7 @@ require('telescope').setup {
       previewer = false,
     },
   },
-}
+})
 
 --Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
@@ -244,7 +251,7 @@ vim.api.nvim_set_keymap('n', '<leader>?', [[<Cmd>lua require('telescope').extens
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   highlight = {
     enable = true, -- false will disable the whole extension
   },
@@ -293,9 +300,9 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
-require('navigator').setup()
+require('navigator').setup({})
 
 -- nvim-cmp supports additional completion capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -380,7 +387,7 @@ local luasnip = require 'luasnip'
 
 -- nvim-cmp setup
 local cmp = require 'cmp'
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
@@ -419,5 +426,22 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    -- { name = 'cmp_tabnine' },
   },
-}
+})
+
+-- tabnine setup
+--[=[
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({
+  max_lines = 1000;
+  max_num_results = 20;
+  sort = true;
+  run_on_every_keystroke = true;
+  snippet_placeholder = '..';
+  ignored_file_types = { -- default is not to ignore
+    -- uncomment to ignore in lua:
+    -- lua = true
+  };
+})
+]=]

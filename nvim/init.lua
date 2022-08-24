@@ -1,4 +1,4 @@
-pcall(require,"impatient")
+pcall(require, "impatient")
 
 -- Install packer
 local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
@@ -79,17 +79,11 @@ require('packer').startup({
         'ray-x/guihua.lua', run = 'cd lua/fzy && make'
       }
     }
-    use {
-      'tzachar/cmp-tabnine',
-      run='./install.sh',
-      requires = {
-        'hrsh7th/nvim-cmp'
-      }
-    }
+    use { 'github/copilot.vim' }
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it
-    compile_path = vim.fn.stdpath('config')..'/lua/packer_compiled.lua'
+    compile_path = vim.fn.stdpath('config') .. '/lua/packer_compiled.lua'
   }
 })
 
@@ -112,14 +106,14 @@ vim.cmd([[
 ]])
 
 -- Tame tab settings; thanks https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
-vim.o.tabstop=4
-vim.o.shiftwidth=4
-vim.o.softtabstop=4
-vim.o.expandtab=true
-vim.o.smartindent=true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.softtabstop = 4
+vim.o.expandtab = true
+vim.o.smartindent = true
 
 -- Show a few lines of context around the cursor.  Note that this makes the text scroll if you mouse-click near the start or end of the window.
-vim.opt.scrolloff=5
+vim.opt.scrolloff = 5
 
 --Set highlight on search
 vim.o.hlsearch = true
@@ -193,15 +187,16 @@ require('gitsigns').setup({
   },
 })
 
--- Nvim-tree
-vim.g.nvim_tree_indent_markers = 1
-
 require('nvim-tree').setup({
-  git = { enable = false }
+  git = { enable = false },
+  renderer = {
+    indent_markers = { enable = true },
+  },
 })
 
 --Add leader shortcuts
-vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]],
+  { noremap = true, silent = true })
 
 -- Telescope
 require('telescope').setup({
@@ -240,14 +235,22 @@ require('telescope').setup({
 })
 
 --Add leader shortcuts
-vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>so', [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>?', [[<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]]
+  , { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sd', [[<cmd>lua require('telescope.builtin').grep_string()<CR>]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>sp', [[<cmd>lua require('telescope.builtin').live_grep()<CR>]],
+  { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>so',
+  [[<cmd>lua require('telescope.builtin').tags{ only_current_buffer = true }<CR>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>?', [[<Cmd>lua require('telescope').extensions.frecency.frecency()<CR>]],
+  { noremap = true, silent = true })
 
 -- Treesitter configuration
 -- Parsers must be installed manually via :TSInstall
@@ -426,22 +429,6 @@ cmp.setup({
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    -- { name = 'cmp_tabnine' },
   },
 })
 
--- tabnine setup
---[=[
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({
-  max_lines = 1000;
-  max_num_results = 20;
-  sort = true;
-  run_on_every_keystroke = true;
-  snippet_placeholder = '..';
-  ignored_file_types = { -- default is not to ignore
-    -- uncomment to ignore in lua:
-    -- lua = true
-  };
-})
-]=]

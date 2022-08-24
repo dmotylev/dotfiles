@@ -12,3 +12,5 @@ function df_google_cloud_sdk_setup {
     unfunction df_google_cloud_sdk_setup
 }
 df_google_cloud_sdk_setup
+
+export USE_GKE_GCLOUD_AUTH_PLUGIN=True

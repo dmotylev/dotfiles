@@ -1,2 +1,4 @@
 # vim: ft=zsh:
-path+=$(brew--prefix terraform@0.11)/bin
+path+=$(brew --prefix terraform)/bin
+
+

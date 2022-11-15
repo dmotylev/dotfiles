@@ -4,3 +4,5 @@
 [[ -z $DOTFILES && -h "$HOME/.config/dotfiles" ]] && readonly DOTFILES="$HOME/.config/dotfiles"
 [[ -n $DOTFILES && -f $DOTFILES/zsh/df/bootstrap ]] && source $DOTFILES/zsh/df/bootstrap
 ### ... dotfiles }}}
+
+export PATH="$PATH:/Users/dmotylev/.bin"

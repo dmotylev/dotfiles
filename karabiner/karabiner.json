@@ -2,7 +2,8 @@
     "global": {
         "check_for_updates_on_startup": true,
         "show_in_menu_bar": true,
-        "show_profile_name_in_menu_bar": false
+        "show_profile_name_in_menu_bar": false,
+        "unsafe_ui": false
     },
     "profiles": [
         {
@@ -39,287 +40,6 @@
                                 "to_if_held_down": [
                                     {
                                         "key_code": "mission_control"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
-                        "description": "Use F1, F2. etc. keys on Apple Internal Keyboard as special keys",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f1"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "display_brightness_decrement"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f2"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "display_brightness_increment"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f3"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "mission_control"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f4"
-                                },
-                                "to": [
-                                    {
-                                        "apple_vendor_keyboard_key_code": "spotlight"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f5"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "f5"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f6"
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "f6"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f7"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "rewind"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f8"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "play_or_pause"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f9"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "fastforward"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f10"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "mute"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f11"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "volume_decrement"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "identifiers": [
-                                            {
-                                                "description": "Apple Internal Keyboard / Trackpad",
-                                                "product_id": 834,
-                                                "vendor_id": 1452
-                                            }
-                                        ],
-                                        "type": "device_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "f12"
-                                },
-                                "to": [
-                                    {
-                                        "consumer_key_code": "volume_increment"
                                     }
                                 ],
                                 "type": "basic"
@@ -390,7 +110,8 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -403,7 +124,8 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -437,7 +159,8 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -481,7 +204,8 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -525,7 +249,8 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -559,7 +284,8 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -572,7 +298,8 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -585,7 +312,8 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -619,7 +347,8 @@
                                 }
                             ]
                         }
-                    ]
+                    ],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -632,7 +361,8 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 },
                 {
                     "disable_built_in_keyboard_if_exists": false,
@@ -645,7 +375,8 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": true,
-                    "simple_modifications": []
+                    "simple_modifications": [],
+                    "treat_as_built_in_keyboard": false
                 }
             ],
             "fn_function_keys": [
@@ -655,7 +386,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_decrement"
+                            "key_code": "apple_display_brightness_decrement"
                         }
                     ]
                 },
@@ -665,7 +396,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "display_brightness_increment"
+                            "key_code": "apple_display_brightness_increment"
                         }
                     ]
                 },
@@ -695,7 +426,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "f5"
+                            "consumer_key_code": "dictation"
                         }
                     ]
                 },
@@ -705,7 +436,7 @@
                     },
                     "to": [
                         {
-                            "key_code": "f6"
+                            "key_code": "vk_none"
                         }
                     ]
                 },
@@ -715,7 +446,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "rewind"
+                            "key_code": "rewind"
                         }
                     ]
                 },
@@ -725,7 +456,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "play_or_pause"
+                            "key_code": "play_or_pause"
                         }
                     ]
                 },
@@ -735,7 +466,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "fastforward"
+                            "key_code": "fastforward"
                         }
                     ]
                 },
@@ -745,7 +476,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "mute"
+                            "key_code": "mute"
                         }
                     ]
                 },
@@ -755,7 +486,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_decrement"
+                            "key_code": "volume_decrement"
                         }
                     ]
                 },
@@ -765,7 +496,7 @@
                     },
                     "to": [
                         {
-                            "consumer_key_code": "volume_increment"
+                            "key_code": "volume_increment"
                         }
                     ]
                 }

@@ -17,11 +17,11 @@ vim.cmd([[
 -- local use = require('packer').use
 require('packer').startup({
   function(use)
-    use 'wbthomason/packer.nvim' -- Package manager
+    use 'wbthomason/packer.nvim'       -- Package manager
     use 'lewis6991/impatient.nvim'
-    use 'tpope/vim-fugitive' -- Git commands in nvim
-    use 'tpope/vim-rhubarb' -- Fugitive-companion to interact with github
-    use 'tpope/vim-commentary' -- "gc" to comment visual regions/lines
+    use 'tpope/vim-fugitive'           -- Git commands in nvim
+    use 'tpope/vim-rhubarb'            -- Fugitive-companion to interact with github
+    use 'tpope/vim-commentary'         -- "gc" to comment visual regions/lines
     use 'kyazdani42/nvim-web-devicons' -- Pretty symbols
     -- UI to select things (files, grep results, open buffers...)
     use { 'nvim-telescope/telescope.nvim',
@@ -45,7 +45,7 @@ require('packer').startup({
         require("telescope").load_extension("fzf")
       end,
     }
-    use 'joshdick/onedark.vim' -- Theme inspired by Atom
+    use 'navarasu/onedark.nvim'
     use 'itchyny/lightline.vim' -- Fancier statusline
     -- Add indentation guides even on blank lines
     use 'lukas-reineke/indent-blankline.nvim'
@@ -56,10 +56,10 @@ require('packer').startup({
     -- Additional textobjects for treesitter
     use 'nvim-treesitter/nvim-treesitter-textobjects'
     use 'neovim/nvim-lspconfig' -- Collection of configurations for built-in LSP client
-    use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+    use 'hrsh7th/nvim-cmp'      -- Autocompletion plugin
     use 'hrsh7th/cmp-nvim-lsp'
     use 'saadparwaiz1/cmp_luasnip'
-    use 'L3MON4D3/LuaSnip' -- Snippets plugin
+    use 'L3MON4D3/LuaSnip'              -- Snippets plugin
     use 'sharadchhetri/vim-for-ansible' -- Ansible plugin
     use {
       'kyazdani42/nvim-tree.lua',
@@ -80,6 +80,7 @@ require('packer').startup({
       }
     }
     use { 'github/copilot.vim' }
+    use { 'ziglang/zig.vim' }
   end,
   config = {
     -- Move to lua dir so impatient.nvim can cache it
@@ -139,13 +140,13 @@ vim.o.updatetime = 250
 vim.wo.signcolumn = 'yes'
 
 --Set colorscheme (order is important here)
-vim.o.termguicolors = true
-vim.g.onedark_terminal_italics = 2
-vim.cmd [[colorscheme onedark]]
+-- vim.o.termguicolors = true
+-- vim.g.onedark_terminal_italics = 2
+-- vim.cmd [[colorscheme onedark]]
 
 --Set statusbar
 vim.g.lightline = {
-  colorscheme = 'onedark',
+  colorscheme = 'one',
   active = { left = { { 'mode', 'paste' }, { 'gitbranch', 'readonly', 'filename', 'modified' } } },
   component_function = { gitbranch = 'fugitive#head' },
 }
@@ -194,7 +195,19 @@ require('nvim-tree').setup({
   },
 })
 
---Add leader shortcuts
+require('onedark').setup {
+  style = 'cool',
+  code_style = {
+    comments = 'italic',
+    keywords = 'bold',
+    functions = 'none',
+    strings = 'none',
+    variables = 'none'
+  },
+}
+require('onedark').load()
+
+-- Add leader shortcuts
 vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]],
   { noremap = true, silent = true })
 
@@ -238,7 +251,7 @@ require('telescope').setup({
 vim.api.nvim_set_keymap('n', '<leader><space>', [[<cmd>lua require('telescope.builtin').buffers()<CR>]],
   { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sf', [[<cmd>lua require('telescope.builtin').find_files({previewer = false})<CR>]]
-  , { noremap = true, silent = true })
+, { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sb', [[<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<CR>]],
   { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>sh', [[<cmd>lua require('telescope.builtin').help_tags()<CR>]],

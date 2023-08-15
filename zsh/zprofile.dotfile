@@ -6,3 +6,5 @@
 ### ... dotfiles }}}
 
 export PATH="$PATH:/Users/dmotylev/.bin"
+
+source /Users/dmotylev/.docker/init-zsh.sh || true # Added by Docker Desktop

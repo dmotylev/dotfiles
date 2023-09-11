@@ -14,6 +14,13 @@ vim.cmd([[
   augroup end
 ]])
 
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.o.termguicolors = true
+
 -- local use = require('packer').use
 require('packer').startup({
   function(use)
@@ -62,9 +69,9 @@ require('packer').startup({
     use 'L3MON4D3/LuaSnip'              -- Snippets plugin
     use 'sharadchhetri/vim-for-ansible' -- Ansible plugin
     use {
-      'kyazdani42/nvim-tree.lua',
+      'nvim-tree/nvim-tree.lua',
       requires = {
-        'kyazdani42/nvim-web-devicons',
+        'nvim-tree/nvim-web-devicons',
       }
     }
     use {
@@ -105,6 +112,13 @@ vim.cmd([[
 
   augroup END
 ]])
+
+vim.o.hidden = true -- Enable modified buffers in background
+vim.o.list = true   -- Show some invisible characters
+-- Set some invisible characters
+vim.opt.listchars = { tab = '›·', trail = '·', extends = '…', precedes = '…', nbsp = '␣' }
+-- Customize session options. Namely, I don't want to save hidden and unloaded buffers or empty windows.
+vim.o.sessionoptions = "curdir,folds,help,options,tabpages,winsize"
 
 -- Tame tab settings; thanks https://arisweedler.medium.com/tab-settings-in-vim-1ea0863c5990
 vim.o.tabstop = 4
@@ -151,12 +165,16 @@ vim.g.lightline = {
   component_function = { gitbranch = 'fugitive#head' },
 }
 
---Remap space as leader key
+-- Remap space as leader key
 vim.api.nvim_set_keymap('', '<Space>', '<Nop>', { noremap = true, silent = true })
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
---Remap for dealing with word wrap
+-- Shortcut to yanking to the system clipboard
+vim.api.nvim_set_keymap('', '<leader>y', '"+y', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('', '<leader>p', '"+p', { noremap = true, silent = true })
+
+-- Remap for dealing with word wrap
 vim.api.nvim_set_keymap('n', 'k', "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
 vim.api.nvim_set_keymap('n', 'j', "v:count == 0 ? 'gj' : 'j'", { noremap = true, expr = true, silent = true })
 
@@ -208,7 +226,7 @@ require('onedark').setup {
 require('onedark').load()
 
 -- Add leader shortcuts
-vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>lua require('nvim-tree').toggle()<CR>]],
+vim.api.nvim_set_keymap('n', '<leader>ee', [[<Cmd>NvimTreeToggle<CR>]],
   { noremap = true, silent = true })
 
 -- Telescope
@@ -410,17 +428,23 @@ cmp.setup({
     end,
   },
   mapping = {
-    ['<C-p>'] = cmp.mapping.select_prev_item(),
-    ['<C-n>'] = cmp.mapping.select_next_item(),
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
     ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-Down>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-Up>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm {
-      behavior = cmp.ConfirmBehavior.Replace,
-      select = true,
-    },
-    ['<Tab>'] = function(fallback)
+    ['<Esc>'] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping({
+      i = function(fallback)
+        if cmp.visible() and cmp.get_active_entry() then
+          cmp.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = false })
+        else
+          fallback()
+        end
+      end,
+      s = cmp.mapping.confirm({ select = true }),
+      c = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
+    }),
+    ['<Down>'] = function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -429,7 +453,7 @@ cmp.setup({
         fallback()
       end
     end,
-    ['<S-Tab>'] = function(fallback)
+    ['<Up>'] = function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then

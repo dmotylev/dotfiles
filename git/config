@@ -1,6 +1,6 @@
 [user]
     name = Dmitry Motylev
-    email = dmitry@redsift.io 
+	email = 156671+dmotylev@users.noreply.github.com
 [credential]
 	helper = osxkeychain
 [alias]
@@ -58,7 +58,7 @@
 [init]
 	defaultBranch = main
 [interactive]
-	diffFilter = diff-so-fancy --patch
+	diffFilter = riff
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -72,3 +72,7 @@
 	old = red bold
 	new = green bold
 	whitespace = red reverse
+[pager]
+	diff = riff
+	show = riff
+	log = riff

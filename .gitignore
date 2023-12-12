@@ -9,3 +9,4 @@
 /tmux/tmux-os.conf
 .*.installed_timestamp
 Session.vim
+fish/fish_variables

@@ -4,13 +4,13 @@ format = """
 [](fg:color_orange)\
 $directory\
 [](bg:color_yellow fg:color_orange)\
-$git_commit\
 $git_branch\
 [](fg:color_yellow bg:color_aqua)\
-$git_status\
+$git_commit\
 [](fg:color_aqua bg:color_blue)\
-$kubernetes\
+$git_status\
 [](fg:color_blue bg:color_bg3)\
+$kubernetes\
 $docker_context\
 [](fg:color_bg3 bg:color_bg1)\
 $battery\
@@ -49,21 +49,21 @@ truncation_symbol = "…/"
 "Pictures" = " "
 "Developer" = "󰲋 "
 
+[git_branch]
+symbol = ""
+style = "fg:color_fg0 bg:color_yellow"
+format = '[ $symbol $branch ]($style)'
+
 [git_commit]
 format = '[  $hash$tag ]($style)'
-style = "fg:color_fg0 bg:color_yellow"
+style = "fg:color_fg0 bg:color_aqua"
 tag_disabled = false
 tag_symbol = " 🏷️ "
 only_detached = false
 
-[git_branch]
-symbol = ""
-style = "fg:color_fg0 bg:color_yellow"
-format = '[$symbol $branch ]($style)'
-
 [git_status]
-style = "bg:color_aqua"
-format = '[[ ($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+style = "bg:color_blue"
+format = '[[ ($all_status$ahead_behind )](fg:color_fg0 bg:color_blue)]($style)'
 stashed = "💾"
 
 [battery]
@@ -81,8 +81,8 @@ style = 'bg:color_bg1 fg:color_fg0'
 [kubernetes]
 disabled = false
 format = '[ $symbol$context ]($style)'
-style = 'fg:color_fg0 bg:color_blue'
-symbol = "⛑️ "
+style = 'fg:color_fg0 bg:color_bg3'
+symbol = "⚙️"
 
 [docker_context]
 symbol = "🐳"

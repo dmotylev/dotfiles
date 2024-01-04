@@ -5,6 +5,8 @@
 [[ -n $DOTFILES && -f $DOTFILES/zsh/df/bootstrap ]] && source $DOTFILES/zsh/df/bootstrap
 ### ... dotfiles }}}
 
+eval "$(starship init zsh)"
+
 export PATH="$PATH:/Users/dmotylev/.bin"
 
 source /Users/dmotylev/.docker/init-zsh.sh || true # Added by Docker Desktop

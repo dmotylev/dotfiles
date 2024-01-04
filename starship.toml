@@ -67,12 +67,12 @@ format = '[[ ($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
 stashed = "💾"
 
 [battery]
-format = '[$symbol$percentage]($style)'
-unknown_symbol = " ⚡️"
-charging_symbol = " 🔌"
-discharging_symbol = " 🔋"
-full_symbol = " 🔋"
-empty_symbol = " 🪫"
+format = '[ $symbol$percentage]($style)'
+unknown_symbol = "⚡️"
+charging_symbol = "🔌"
+discharging_symbol = "🔋"
+full_symbol = "🔋"
+empty_symbol = "🪫"
 
 [[battery.display]]
 threshold = 100

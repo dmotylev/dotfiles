@@ -15,7 +15,7 @@
 [core]
 	editor = vim
 	autocrlf = input
-	pager = diff-so-fancy | less --tabs=4 -RFX
+	pager = diff-so-fancy | less --tabs=4 -RF
 [mergetool]
 	keepBackup = false
 	prompt = false
@@ -58,7 +58,7 @@
 [init]
 	defaultBranch = main
 [interactive]
-	diffFilter = riff
+	diffFilter = diff-so-fancy --patch
 [color "diff-highlight"]
 	oldNormal = red bold
 	oldHighlight = red bold 52
@@ -73,6 +73,6 @@
 	new = green bold
 	whitespace = red reverse
 [pager]
-	diff = riff
+#	diff = riff
 	show = riff
 	log = riff

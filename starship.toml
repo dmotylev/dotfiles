@@ -1,0 +1,115 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+format = """
+[](fg:color_orange)\
+$directory\
+[](bg:color_yellow fg:color_orange)\
+$git_commit\
+$git_branch\
+[](fg:color_yellow bg:color_aqua)\
+$git_status\
+[](fg:color_aqua bg:color_blue)\
+$kubernetes\
+[](fg:color_blue bg:color_bg3)\
+$docker_context\
+[](fg:color_bg3 bg:color_bg1)\
+$battery\
+$time\
+[ ](fg:color_bg1)\
+$line_break$cmd_duration\
+$line_break$character"""
+
+palette = 'gruvbox_dark'
+
+[palettes.gruvbox_dark]
+color_fg0 = '#fbf1c7'
+color_bg1 = '#3c3836'
+color_bg3 = '#665c54'
+color_blue = '#458588'
+color_aqua = '#689d6a'
+#color_green = '#98971a'
+color_green = '#1a971a'
+color_orange = '#d65d0e'
+color_purple = '#b16286'
+color_red = '#cc241d'
+#color_yellow = '#d79921'
+#color_yellow = '#b77901'
+color_yellow = '#c77901'
+
+[directory]
+style = "fg:color_fg0 bg:color_orange"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = "󰝚 "
+"Pictures" = " "
+"Developer" = "󰲋 "
+
+[git_commit]
+format = '[  $hash$tag ]($style)'
+style = "fg:color_fg0 bg:color_yellow"
+tag_disabled = false
+tag_symbol = " 🏷️ "
+only_detached = false
+
+[git_branch]
+symbol = ""
+style = "fg:color_fg0 bg:color_yellow"
+format = '[$symbol $branch ]($style)'
+
+[git_status]
+style = "bg:color_aqua"
+format = '[[ ($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+stashed = "💾"
+
+[battery]
+format = '[$symbol$percentage]($style)'
+unknown_symbol = " ⚡️"
+charging_symbol = " 🔌"
+discharging_symbol = " 🔋"
+full_symbol = " 🔋"
+empty_symbol = " 🪫"
+
+[[battery.display]]
+threshold = 100
+style = 'bg:color_bg1 fg:color_fg0'
+
+[kubernetes]
+disabled = false
+format = '[ $symbol$context ]($style)'
+style = 'fg:color_fg0 bg:color_blue'
+symbol = "⛑️ "
+
+[docker_context]
+symbol = "🐳"
+style = "bg:color_bg3"
+format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:color_bg1"
+format = '[[ 🕙$time ](fg:color_fg0 bg:color_bg1)]($style)'
+
+[cmd_duration]
+disabled = false
+min_time = 2000
+show_milliseconds = true
+format = '[…took $duration ]($style)'
+style = "fg:yellow"
+
+[line_break]
+disabled = false
+
+[character]
+disabled = false
+success_symbol = '[❯](bold fg:color_green)'
+error_symbol = '[❯](bold fg:color_red)'
+vimcmd_symbol = '[ⁿ❯](bold fg:color_green)'
+vimcmd_replace_one_symbol = '[ʳ❯](bold fg:color_yellow)'
+vimcmd_replace_symbol = '[ʳ❯](bold fg:color_yellow)'
+vimcmd_visual_symbol = '[ᵛ❯](bold fg:color_purple)'

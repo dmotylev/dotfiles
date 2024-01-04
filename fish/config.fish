@@ -5,9 +5,11 @@ if status is-interactive
 	set fish_cursor_insert line
 	set fish_cursor_visual block
 	set --universal tide_right_prompt_items
-	fzf_configure_bindings --directory=\ef
+    fzf_configure_bindings --directory=\ef
 	# enable grapheme clustering in ghostty
 	printf "\033[?2027h"
+
+    starship init fish | source
 end
 
 source /Users/dmotylev/.docker/init-fish.sh || true # Added by Docker Desktop

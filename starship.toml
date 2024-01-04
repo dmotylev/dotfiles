@@ -7,8 +7,8 @@ $directory\
 $git_branch\
 [](fg:color_yellow bg:color_aqua)\
 $git_commit\
-[](fg:color_aqua bg:color_blue)\
 $git_status\
+[](fg:color_aqua bg:color_blue)\
 [](fg:color_blue bg:color_bg3)\
 $kubernetes\
 $docker_context\
@@ -53,6 +53,7 @@ truncation_symbol = "…/"
 symbol = ""
 style = "fg:color_fg0 bg:color_yellow"
 format = '[ $symbol $branch ]($style)'
+ignore_branches = ['master', 'main']
 
 [git_commit]
 format = '[  $hash$tag ]($style)'
@@ -62,9 +63,20 @@ tag_symbol = " 🏷️ "
 only_detached = false
 
 [git_status]
-style = "bg:color_blue"
-format = '[[ ($all_status$ahead_behind) ](fg:color_fg0 bg:color_blue)]($style)'
-stashed = "💾"
+style = "fg:color_fg0 bg:color_aqua"
+format = '[ $all_status$ahead_behind ]($style)'
+conflicted = '🏳️$count'
+ahead = '📤$count'
+behind = '📥$count'
+diverged = ''
+up_to_date = ''
+untracked = '💲$count'
+stashed = '📦$count'
+modified = '➗$count'
+staged = '➕$count'
+renamed = '🟰$count'
+deleted = '➖$count'
+
 
 [battery]
 format = '[ $symbol$percentage]($style)'

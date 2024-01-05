@@ -65,7 +65,7 @@ only_detached = false
 
 [git_status]
 style = "fg:color_fg0 bg:color_aqua1"
-format = '[](fg:color_aqua bg:color_aqua1)[$all_status$ahead_behind]($style)[](fg:color_aqua bg:color_aqua1)'
+format = '([](fg:color_aqua bg:color_aqua1)[$all_status$ahead_behind]($style)[](fg:color_aqua bg:color_aqua1))'
 conflicted = '🏳️$count'
 ahead = '⬆️$count'
 behind = '⬇️$count'

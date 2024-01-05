@@ -5,6 +5,7 @@ format = """
 $directory\
 [](bg:color_yellow fg:color_orange)\
 $git_branch\
+$git_state\
 [](fg:color_yellow bg:color_aqua)\
 $git_commit\
 $git_status\
@@ -36,6 +37,7 @@ color_red = '#cc241d'
 #color_yellow = '#d79921'
 #color_yellow = '#b77901'
 color_yellow = '#c77901'
+color_yellow1 = '#b76901'
 
 [directory]
 style = "fg:color_fg0 bg:color_orange"
@@ -49,6 +51,10 @@ truncation_symbol = "…/"
 "Music" = "󰝚 "
 "Pictures" = " "
 "Developer" = "󰲋 "
+
+[git_state]
+format = '[](fg:color_yellow bg:color_yellow1)[$state( $progress_current/$progress_total)]($style)[█](fg:color_yellow bg:color_yellow1)'
+style = "fg:color_fg0 bg:color_yellow1"
 
 [git_branch]
 symbol = ""

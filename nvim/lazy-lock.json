@@ -28,6 +28,6 @@
   "vim-fugitive": { "branch": "master", "commit": "ec8f7eed103c6d5b75eac69196bb87db0825629a" },
   "vim-rhubarb": { "branch": "master", "commit": "ee69335de176d9325267b0fd2597a22901d927b1" },
   "vim-terraform": { "branch": "master", "commit": "d37ae7e7828aa167877e338dea5d4e1653ed3eb1" },
-  "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
+  "wf.nvim": { "branch": "main", "commit": "f645ba2ec4cbb7ce9c9747fe500f0084a20fc360" },
   "zig.vim": { "branch": "master", "commit": "54c216e5306a5c3878a60596aacb94dca8652ab9" }
 }

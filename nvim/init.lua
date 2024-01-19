@@ -200,13 +200,38 @@ require("lazy").setup({
   { 'tpope/vim-rhubarb' },
 
   {
-    "folke/which-key.nvim",
-    event = "VeryLazy",
-    init = function()
-      vim.o.timeout = true
-      vim.o.timeoutlen = 300
-    end,
-    config = true
+    'Cassin01/wf.nvim',
+    dependencies = {
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require("wf").setup({
+        theme = 'chad',
+      })
+
+      local which_key = require("wf.builtin.which_key")
+      local mark = require("wf.builtin.mark")
+
+      -- Mark
+      vim.keymap.set(
+        "n",
+        "'",
+        -- mark(opts?: table) -> function
+        -- opts?: option
+        mark(),
+        { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] mark" }
+      )
+
+      -- Which Key
+      vim.keymap.set(
+        "n",
+        "<Leader>",
+        -- mark(opts?: table) -> function
+        -- opts?: option
+        which_key({ text_insert_in_advance = "<Leader>" }),
+        { noremap = true, silent = true, desc = "[wf.nvim] which-key", }
+      )
+    end
   },
 
   -- UI to select things (files, grep results, open buffers...)

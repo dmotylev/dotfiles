@@ -369,8 +369,9 @@ require("lazy").setup({
       },
     },
     keys = {
-      { '<leader>ee', '<Cmd>NvimTreeToggle<CR>',         desc = 'Open or close the tree' },
+      { '<leader>ec', '<Cmd>NvimTreeToggle<CR>',         desc = 'Open or close the tree' },
       { '<leader>ef', '<Cmd>NvimTreeFindFileToggle<CR>', desc = 'Open the tree for the current buffer' },
+      { '<leader>ee', '<Cmd>NvimTreeFocus<CR>',          desc = 'Focus on the tree' },
     },
   },
 

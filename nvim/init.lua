@@ -37,7 +37,7 @@ vim.cmd([[
 vim.o.hidden = true -- Enable modified buffers in background
 vim.o.list = true   -- Show some invisible characters
 -- Set some invisible characters
-vim.opt.listchars = { tab = '┝━', trail = '·', extends = '…', precedes = '…', nbsp = '␣' }
+vim.opt.listchars = { tab = '› ', trail = '·', extends = '…', precedes = '…', nbsp = '␣' }
 -- Customize session options. Namely, I don't want to save hidden and unloaded buffers or empty windows.
 vim.o.sessionoptions = "curdir,folds,help,options,tabpages,winsize"
 
@@ -131,7 +131,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  {
+  --[[ {
     'navarasu/onedark.nvim',
     lazy = false,
     priority = 1000, -- make sure we load this during startup as it is the main colorscheme
@@ -145,10 +145,60 @@ require("lazy").setup({
         variables = 'none'
       },
     },
-    config = function() -- make sure to load this before all the other start plugins
+    init = function() -- make sure to load this before all the other start plugins
       require('onedark').load()
     end
+  }, ]]
+
+  {
+    'folke/tokyonight.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    init = function()
+      vim.cmd 'colorscheme tokyonight-storm'
+    end
   },
+
+  --[[ { -- Light color scheme for Vim with comfortable contrast
+    'kkga/vim-envy',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      vim.cmd 'colorscheme envy'
+    end
+  }, ]]
+
+  --[[ {
+    'shaunsingh/nord.nvim',
+    lazy = false,
+    priority = 1000,
+    opts = {},
+    config = function()
+      vim.g.nord_contrast = true
+      vim.g.nord_borders = false
+      vim.g.nord_disable_background = false
+      vim.g.nord_italic = false
+      vim.g.nord_uniform_diff_background = true
+      vim.g.nord_bold = false
+
+      require('nord').set()
+    end
+  }, ]]
+
+  --[[ {
+    -- 'ntk148v/komau.vim',
+    -- 'pbrisbin/vim-colors-off',
+    -- 'girishji/declutter.nvim',
+    'oahlen/iceberg.nvim',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      -- vim.g.colors_off_a_little = 1
+      vim.cmd.colorscheme 'iceberg'
+    end
+  }, ]]
 
   {
     'nvim-tree/nvim-web-devicons',
@@ -181,10 +231,10 @@ require("lazy").setup({
 
       ibl.setup({
         indent = {
-          char = '│',
+          char = '⠅',
         },
         scope = {
-          char = '│',
+          char = '⠅',
           enabled = true,
           show_start = false,
           show_end = false,
@@ -200,38 +250,13 @@ require("lazy").setup({
   { 'tpope/vim-rhubarb' },
 
   {
-    'Cassin01/wf.nvim',
-    dependencies = {
-      'nvim-tree/nvim-web-devicons',
-    },
-    config = function()
-      require("wf").setup({
-        theme = 'chad',
-      })
-
-      local which_key = require("wf.builtin.which_key")
-      local mark = require("wf.builtin.mark")
-
-      -- Mark
-      vim.keymap.set(
-        "n",
-        "'",
-        -- mark(opts?: table) -> function
-        -- opts?: option
-        mark(),
-        { nowait = true, noremap = true, silent = true, desc = "[wf.nvim] mark" }
-      )
-
-      -- Which Key
-      vim.keymap.set(
-        "n",
-        "<Leader>",
-        -- mark(opts?: table) -> function
-        -- opts?: option
-        which_key({ text_insert_in_advance = "<Leader>" }),
-        { noremap = true, silent = true, desc = "[wf.nvim] which-key", }
-      )
-    end
+    "folke/which-key.nvim",
+    event = "VeryLazy",
+    init = function()
+      vim.o.timeout = true
+      vim.o.timeoutlen = 300
+    end,
+    config = true,
   },
 
   -- UI to select things (files, grep results, open buffers...)
@@ -363,9 +388,13 @@ require("lazy").setup({
       'nvim-tree/nvim-web-devicons',
     },
     opts = {
-      git = { enable = false },
+      git = {
+        enable = false,
+      },
       renderer = {
-        indent_markers = { enable = true },
+        indent_markers = {
+          enable = true,
+        },
       },
     },
     keys = {
@@ -464,7 +493,9 @@ require("lazy").setup({
     dependencies = {
       { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' }
     },
-    config = true,
+    opts = {
+      transparency = 100,
+    },
   },
 
   {
@@ -484,27 +515,6 @@ require("lazy").setup({
 
   {
     'github/copilot.vim'
-  },
-
-  {
-    'ray-x/go.nvim',
-    ft = 'go',
-    config = true,
-  },
-
-  {
-    'ziglang/zig.vim',
-    ft = 'zig',
-    config = true,
-  },
-
-  {
-    'hashivim/vim-terraform',
-    ft = { 'terraform', 'tf', 'tfvars', 'hcl' },
-    config = function()
-      vim.g.terraform_align = 1
-      vim.g.terraform_fmt_on_save = 1
-    end,
   },
 
   {
@@ -586,5 +596,55 @@ require("lazy").setup({
 
       require('cmp_nvim_lsp').default_capabilities(capabilities)
     end, ]]
+  },
+
+  {
+    'ziglang/zig.vim',
+    ft = 'zig',
+    config = true,
+  },
+
+  {
+    'hashivim/vim-terraform',
+    ft = { 'terraform', 'tf', 'tfvars', 'hcl' },
+    init = function()
+      vim.g.terraform_align = 1
+      vim.g.terraform_fmt_on_save = 1
+    end,
+  },
+
+  {
+    "folke/neodev.nvim",
+    config = true,
+  },
+
+  {
+    'ray-x/go.nvim',
+    dependencies = {
+      "ray-x/guihua.lua",
+      "neovim/nvim-lspconfig",
+      "nvim-treesitter/nvim-treesitter",
+    },
+    ft = { 'go', 'gomod' },
+    event = { "CmdlineEnter" },
+    build = ':lua require("go.install").update_all_sync()',
+    config = true,
+  },
+
+  {
+    'leoluz/nvim-dap-go',
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'rcarriga/nvim-dap-ui',
+      'theHamsta/nvim-dap-virtual-text',
+      --[[ {
+        'nvim-telescope/telescope-dap.nvim',
+        init = function()
+          require('telescope').load_extension('dap')
+        end,
+      }, ]]
+    },
+    ft = 'go',
+    config = true
   },
 })

@@ -73,16 +73,16 @@ only_detached = false
 style = "fg:color_fg0 bg:color_aqua1"
 format = '([](fg:color_aqua bg:color_aqua1)[$all_status$ahead_behind]($style)[█](fg:color_aqua bg:color_aqua1))'
 conflicted = '🏳️$count'
-ahead = '⬆️$count'
-behind = '⬇️$count'
-diverged = '🔀'
+ahead = '↑$count'
+behind = '↓$count'
+diverged = '↑↓'
 up_to_date = ''
-untracked = '💲$count'
-stashed = '📦$count'
-modified = '➗$count'
-staged = '➕$count'
-renamed = '🟰$count'
-deleted = '➖$count'
+stashed = '\[$count\]'
+untracked = '${count}•'
+modified = '${count}*'
+staged = '${count}+'
+renamed = '${count}='
+deleted = '${count}-'
 
 
 [battery]

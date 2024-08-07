@@ -170,36 +170,6 @@ require("lazy").setup({
     end
   }, ]]
 
-  --[[ {
-    'shaunsingh/nord.nvim',
-    lazy = false,
-    priority = 1000,
-    opts = {},
-    config = function()
-      vim.g.nord_contrast = true
-      vim.g.nord_borders = false
-      vim.g.nord_disable_background = false
-      vim.g.nord_italic = false
-      vim.g.nord_uniform_diff_background = true
-      vim.g.nord_bold = false
-
-      require('nord').set()
-    end
-  }, ]]
-
-  --[[ {
-    -- 'ntk148v/komau.vim',
-    -- 'pbrisbin/vim-colors-off',
-    -- 'girishji/declutter.nvim',
-    'oahlen/iceberg.nvim',
-    lazy = false,
-    priority = 1000,
-    config = function()
-      -- vim.g.colors_off_a_little = 1
-      vim.cmd.colorscheme 'iceberg'
-    end
-  }, ]]
-
   {
     'nvim-tree/nvim-web-devicons',
     lazy = true,
@@ -243,11 +213,11 @@ require("lazy").setup({
     end,
   },
 
-  -- Git commands in nvim
-  { 'tpope/vim-fugitive' },
+  -- -- Git commands in nvim
+  -- { 'tpope/vim-fugitive' },
 
-  -- Fugitive-companion to interact with github
-  { 'tpope/vim-rhubarb' },
+  -- -- Fugitive-companion to interact with github
+  -- { 'tpope/vim-rhubarb' },
 
   {
     "folke/which-key.nvim",
@@ -601,7 +571,9 @@ require("lazy").setup({
   {
     'ziglang/zig.vim',
     ft = 'zig',
-    config = true,
+    init = function()
+      vim.g.zig_fmt_autosave = 1
+    end,
   },
 
   {
@@ -623,12 +595,23 @@ require("lazy").setup({
     dependencies = {
       "ray-x/guihua.lua",
       "neovim/nvim-lspconfig",
-      "nvim-treesitter/nvim-treesitter",
+      {
+        "nvim-treesitter/nvim-treesitter",
+        config = function()
+        end,
+      },
     },
     ft = { 'go', 'gomod' },
     event = { "CmdlineEnter" },
     build = ':lua require("go.install").update_all_sync()',
-    config = true,
+    opts = {
+      icons = { breakpoint = '🔴', currentpos = '✋' },
+      gofmt = 'gofumpt',
+      lsp_cfg = true,
+      lsp_gofumpt = true,
+      lsp_on_attach = true,
+      dap_debug = true,
+    }
   },
 
   {
@@ -637,14 +620,108 @@ require("lazy").setup({
       'mfussenegger/nvim-dap',
       'rcarriga/nvim-dap-ui',
       'theHamsta/nvim-dap-virtual-text',
-      --[[ {
+      --[=[ {
         'nvim-telescope/telescope-dap.nvim',
         init = function()
           require('telescope').load_extension('dap')
         end,
-      }, ]]
+      }, ]=]
     },
     ft = 'go',
     config = true
+  },
+})
+
+require('nvim-treesitter.configs').setup({
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      -- mappings for incremental selection (visual mappings)
+      init_selection = "gnn",    -- maps in normal mode to init the node/scope selection
+      node_incremental = "grn",  -- increment to the upper named parent
+      scope_incremental = "grc", -- increment to the upper scope (as defined in locals.scm)
+      node_decremental = "grm"   -- decrement to the previous node
+    }
+  },
+
+  textobjects = {
+    -- syntax-aware textobjects
+    enable = true,
+    lsp_interop = {
+      enable = true,
+      peek_definition_code = {
+        ["Df"] = "@function.outer",
+        ["DF"] = "@class.outer"
+      }
+    },
+    keymaps = {
+      ["iL"] = {
+        -- you can define your own textobjects directly here
+        go = "(function_definition) @function",
+      },
+      -- or you use the queries from supported languages with textobjects.scm
+      ["af"] = "@function.outer",
+      ["if"] = "@function.inner",
+      ["aC"] = "@class.outer",
+      ["iC"] = "@class.inner",
+      ["ac"] = "@conditional.outer",
+      ["ic"] = "@conditional.inner",
+      ["ae"] = "@block.outer",
+      ["ie"] = "@block.inner",
+      ["al"] = "@loop.outer",
+      ["il"] = "@loop.inner",
+      ["is"] = "@statement.inner",
+      ["as"] = "@statement.outer",
+      ["ad"] = "@comment.outer",
+      ["am"] = "@call.outer",
+      ["im"] = "@call.inner"
+    },
+    move = {
+      enable = true,
+      set_jumps = true, -- whether to set jumps in the jumplist
+      goto_next_start = {
+        ["]m"] = "@function.outer",
+        ["]]"] = "@class.outer"
+      },
+      goto_next_end = {
+        ["]M"] = "@function.outer",
+        ["]["] = "@class.outer"
+      },
+      goto_previous_start = {
+        ["[m"] = "@function.outer",
+        ["[["] = "@class.outer"
+      },
+      goto_previous_end = {
+        ["[M"] = "@function.outer",
+        ["[]"] = "@class.outer"
+      }
+    },
+    select = {
+      enable = true,
+      keymaps = {
+        -- You can use the capture groups defined in textobjects.scm
+        ["af"] = "@function.outer",
+        ["if"] = "@function.inner",
+        ["ac"] = "@class.outer",
+        ["ic"] = "@class.inner",
+        -- Or you can define your own textobjects like this
+        ["iF"] = {
+          python = "(function_definition) @function",
+          cpp = "(function_definition) @function",
+          c = "(function_definition) @function",
+          java = "(method_declaration) @function",
+          go = "(method_declaration) @function"
+        }
+      }
+    },
+    swap = {
+      enable = true,
+      swap_next = {
+        ["<leader>a"] = "@parameter.inner"
+      },
+      swap_previous = {
+        ["<leader>A"] = "@parameter.inner"
+      }
+    }
   },
 })

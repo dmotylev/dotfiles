@@ -19,21 +19,24 @@ window-new-tab-position = end
 unfocused-split-opacity = 0.7
 unfocused-split-fill = 424F57
 
-background-opacity = 0.85
-background-blur-radius = 20
+#background-opacity = 0.85
+#background-blur-radius = 20
 
 # BUG: cursor stay hidden after opening a second terminal window
 mouse-hide-while-typing = false
 
-window-step-resize = true
+window-step-resize = false
 
 #custom-shader = /Users/dmotylev/.config/ghostty/crt.frag
 
 # Following themes have a distinctive major colors, yellow and green specifically
-theme = Cobalt2
-theme = deep
-#theme = Monokai Vivid
+#theme = catppuccin-macchiato
 #theme = ENCOM
+#theme = tokyonight
+#theme = farmhouse-dark
+#theme = deep
+#theme = Monokai Vivid
+theme = Cobalt2
 
 minimum-contrast = 1.0
 
@@ -46,3 +49,7 @@ keybind = cmd+ctrl+left=resize_split:left,20
 keybind = cmd+ctrl+right=resize_split:right,20
 keybind = cmd+ctrl+up=resize_split:up,20
 keybind = cmd+ctrl+down=resize_split:down,20
+
+quick-terminal-screen = mouse
+quick-terminal-position = bottom
+keybind = global:cmd+`=toggle_quick_terminal

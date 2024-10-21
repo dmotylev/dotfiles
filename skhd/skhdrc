@@ -1,0 +1,32 @@
+cmd + ctrl + shift + alt - z : yabai -m space --layout float
+cmd + ctrl + shift + alt - x : yabai -m space --layout bsp
+cmd + ctrl + shift + alt - c : yabai -m space --layout stack
+
+cmd + ctrl + shift + alt - 1 : yabai -m window --ratio abs:0.1
+cmd + ctrl + shift + alt - 2 : yabai -m window --ratio abs:0.2
+cmd + ctrl + shift + alt - 3 : yabai -m window --ratio abs:0.3
+cmd + ctrl + shift + alt - 4 : yabai -m window --ratio abs:0.4
+cmd + ctrl + shift + alt - 5 : yabai -m window --ratio abs:0.5
+cmd + ctrl + shift + alt - 6 : yabai -m window --ratio abs:0.6
+cmd + ctrl + shift + alt - 7 : yabai -m window --ratio abs:0.7
+cmd + ctrl + shift + alt - 8 : yabai -m window --ratio abs:0.8
+cmd + ctrl + shift + alt - 9 : yabai -m window --ratio abs:0.9
+
+cmd + ctrl + shift + alt - q : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.05" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - w : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.1" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - e : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.15" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - r : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.2" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - t : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.25" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - y : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
+                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.3" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
+                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"

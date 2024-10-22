@@ -2,6 +2,8 @@ cmd + ctrl + shift + alt - z : yabai -m space --layout float
 cmd + ctrl + shift + alt - x : yabai -m space --layout bsp
 cmd + ctrl + shift + alt - c : yabai -m space --layout stack
 
+cmd + ctrl + shift + alt - 0 : yabai -m window --toggle float
+
 cmd + ctrl + shift + alt - 1 : yabai -m window --ratio abs:0.1
 cmd + ctrl + shift + alt - 2 : yabai -m window --ratio abs:0.2
 cmd + ctrl + shift + alt - 3 : yabai -m window --ratio abs:0.3

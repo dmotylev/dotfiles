@@ -16,8 +16,8 @@ macos-option-as-alt = true
 window-save-state = always
 window-new-tab-position = end
 
-unfocused-split-opacity = 0.7
-unfocused-split-fill = 424F57
+#unfocused-split-opacity = 0.7
+unfocused-split-fill = 000000
 
 #background-opacity = 0.85
 #background-blur-radius = 20

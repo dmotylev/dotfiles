@@ -36,7 +36,8 @@ window-step-resize = false
 #theme = farmhouse-dark
 #theme = deep
 #theme = Monokai Vivid
-theme = Cobalt2
+#theme = Cobalt2
+theme = Smyck
 
 minimum-contrast = 1.0
 
@@ -51,5 +52,5 @@ keybind = cmd+ctrl+up=resize_split:up,20
 keybind = cmd+ctrl+down=resize_split:down,20
 
 quick-terminal-screen = mouse
-quick-terminal-position = bottom
+quick-terminal-position = top
 keybind = global:cmd+`=toggle_quick_terminal

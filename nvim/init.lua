@@ -213,11 +213,25 @@ require("lazy").setup({
     end,
   },
 
-  -- -- Git commands in nvim
-  -- { 'tpope/vim-fugitive' },
+  -- Git commands in nvim
+  {
+    'tpope/vim-fugitive',
+    lazy = true,
+  },
 
   -- -- Fugitive-companion to interact with github
   -- { 'tpope/vim-rhubarb' },
+  {
+    "rbong/vim-flog",
+    lazy = true,
+    cmd = { "Flog", "Flogsplit", "Floggit" },
+    dependencies = {
+      "tpope/vim-fugitive",
+    },
+    init = function()
+      vim.g.flog_enable_extended_chars = true
+    end,
+  },
 
   {
     "folke/which-key.nvim",

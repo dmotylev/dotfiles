@@ -14,21 +14,33 @@ cmd + ctrl + shift + alt - 7 : yabai -m window --ratio abs:0.7
 cmd + ctrl + shift + alt - 8 : yabai -m window --ratio abs:0.8
 cmd + ctrl + shift + alt - 9 : yabai -m window --ratio abs:0.9
 
-cmd + ctrl + shift + alt - q : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.05" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
-cmd + ctrl + shift + alt - w : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.1" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
-cmd + ctrl + shift + alt - e : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.15" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
-cmd + ctrl + shift + alt - r : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.2" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
-cmd + ctrl + shift + alt - t : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.25" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
-cmd + ctrl + shift + alt - y : read rows cols < <(yabai -m query --displays --display mouse | jq -r '"\((.frame.h / 100) | ceil) \((.frame.w / 100) | ceil)"') && \
-                               read rgap cgap < <(awk -v rows="$rows" -v cols="$cols" -v padd="0.3" 'BEGIN {print int(rows * padd + 0.5), int(cols * padd + 0.5)}') && \
-                               yabai -m window --toggle float --grid "${rows}:${cols}:${cgap}:${rgap}:$((cols - cgap * 2)):$((rows - rgap * 2))"
+cmd + ctrl + shift + alt - p : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.95 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - o : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.90 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - i : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.85 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - u : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.80 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - y : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.75 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - t : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.70 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - r : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.65 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - e : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.60 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - w : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.55 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h
+cmd + ctrl + shift + alt - q : read x y w h < <(yabai -m query --displays --display mouse | jq -r '.frame | 0.50 as $d | (.w*$d) as $w | (.h*$d) as $h | ((.w - $w) / 2 + .x) as $x | ((.h - $h) / 2 + .y) as $y | [$x,$y,$w,$h] | @sh') && \
+                               yabai -m window --move abs:$x:$y && \
+                               yabai -m window --resize abs:$w:$h

@@ -2,9 +2,9 @@
 
 format = """
 $directory\
+$git_commit\
 $git_branch\
 $git_state\
-$git_commit\
 $git_status\
 $kubernetes\
 $time\
@@ -40,11 +40,11 @@ style = "fg:green-t9"
 [git_branch]
 symbol = ""
 style = "fg:green-t3"
-format = '[▏$symbol $branch ]($style)'
+format = '[$symbol $branch ]($style)'
 ignore_branches = ['master', 'main']
 
 [git_commit]
-format = '[ $hash$tag ]($style)'
+format = '[▏ $hash$tag ]($style)'
 style = "fg:green"
 tag_disabled = false
 tag_symbol = ' 🏷️'
@@ -52,18 +52,18 @@ only_detached = false
 
 [git_status]
 style = "fg:green-t6"
-format = '[$all_status$ahead_behind ]($style)'
-conflicted = '🚩$count'
+format = '([$all_status$ahead_behind ]($style))'
+#conflicted = '🚩$count'
 ahead = '↑$count'
 behind = '↓$count'
 diverged = '↑↓'
 up_to_date = ''
-stashed = '\[$count\]'
-untracked = '${count}•'
-modified = '${count}*'
-staged = '${count}+'
-renamed = '${count}='
-deleted = '${count}-'
+stashed = '\$${count}'
+untracked = '?${count}'
+modified = '!${count}'
+staged = '+${count}'
+renamed = '=${count}'
+deleted = '-${count}'
 
 [kubernetes]
 disabled = false

@@ -1,42 +1,26 @@
 command = /opt/homebrew/bin/fish
 shell-integration-features = cursor,sudo
 
-font-size = 15
+font-size = 17
 font-family = JetBrainsMono Nerd Font Mono
-#font-family = Pixel Code
-#font-style = extralight
 
 copy-on-select = clipboard
 clipboard-paste-protection = true
 clipboard-trim-trailing-spaces = true
 
 macos-option-as-alt = true
-#macos-non-native-fullscreen = visible-menu
-#macos-titlebar-tabs = true
 window-save-state = always
 window-new-tab-position = end
 
-#unfocused-split-opacity = 0.7
 unfocused-split-fill = 000000
 
-#background-opacity = 0.85
-#background-blur-radius = 20
-
-# BUG: cursor stay hidden after opening a second terminal window
-mouse-hide-while-typing = false
+mouse-hide-while-typing = true
 
 window-step-resize = false
 
-#custom-shader = /Users/dmotylev/.config/ghostty/crt.frag
+#custom-shader = /Users/dmotylev/Workshop/local/ghostty-shaders/bloom.glsl
+#custom-shader-animation = false
 
-# Following themes have a distinctive major colors, yellow and green specifically
-#theme = catppuccin-macchiato
-#theme = ENCOM
-#theme = tokyonight
-#theme = farmhouse-dark
-#theme = deep
-#theme = Monokai Vivid
-#theme = Cobalt2
 theme = Smyck
 
 minimum-contrast = 1.0
@@ -44,8 +28,6 @@ minimum-contrast = 1.0
 keybind = opt+up=jump_to_prompt:-1
 keybind = opt+down=jump_to_prompt:+1
 
-#keybind = ctrl+tab=goto_split:next
-#keybind = ctrl+shift+tab=goto_split:previous
 keybind = cmd+ctrl+left=resize_split:left,20
 keybind = cmd+ctrl+right=resize_split:right,20
 keybind = cmd+ctrl+up=resize_split:up,20
